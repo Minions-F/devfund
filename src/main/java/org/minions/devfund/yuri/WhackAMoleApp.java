@@ -20,7 +20,7 @@ final class WhackAMoleApp {
      * @param args arguments.
      */
     public static void main(final String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         WhackAMole whackAMoleGame = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
         boolean givingUp = false;
         while (!givingUp && !whackAMoleGame.playerWin() && !whackAMoleGame.playerLose()) {

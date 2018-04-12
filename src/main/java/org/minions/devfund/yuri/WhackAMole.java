@@ -10,7 +10,7 @@ public final class WhackAMole {
   public static final char MOLE = 'M';
   public static final char WACKED = 'W';
   public static final char EMPTYCELL = '*';
-  public static final int MOLES_AMOUNT = 1;
+  public static final int MOLES_AMOUNT = 10;
   public static final int INITIAL_SCORE = 0;
   public static final int ONE = 1;
   private int score;
@@ -22,7 +22,7 @@ public final class WhackAMole {
   /**
    * Constructor Method.
    * @param numAttempts number of attempts for the player.
-   * @param gridDimension the size of the grid.
+   * @param gridDimension the size of the moleGrid.
    */
   public WhackAMole(final int numAttempts, final int gridDimension) {
     dimension = gridDimension;
@@ -52,7 +52,7 @@ public final class WhackAMole {
   }
 
   /**
-   * It is in charge to insert Moles to grid.
+   * It is in charge to insert Moles to moleGrid.
     */
   public void insertMoles() {
     int accumulator = 0;
@@ -65,8 +65,8 @@ public final class WhackAMole {
 
   /**
    * It is charge to perform Whack in a specific position.
-   * @param posX coordinate X on grid.
-   * @param posY coordinate Y on grid.
+   * @param posX coordinate X on moleGrid.
+   * @param posY coordinate Y on moleGrid.
    */
   public void whack(final int posX, final int posY) {
     if (isMole(posX, posY)) {
@@ -81,8 +81,8 @@ public final class WhackAMole {
 
   /**
    * It is in charge to verify if the cell is empty.
-   * @param posX coordinate X on grid.
-   * @param posY coordinate Y on grid.
+   * @param posX coordinate X on moleGrid.
+   * @param posY coordinate Y on moleGrid.
    * @return <code>true</code> if it is an empty cell;
    *         <code>false</code> if it is not.
    */
@@ -92,8 +92,8 @@ public final class WhackAMole {
 
   /**
    * It is in charge to verify if the cell has a mole.
-   * @param posX coordinate X on grid.
-   * @param posY coordinate Y on grid.
+   * @param posX coordinate X on moleGrid.
+   * @param posY coordinate Y on moleGrid.
    * @return <code>true</code> if there is a mole ;
    *         <code>false</code> if it is not.
    */
@@ -102,7 +102,7 @@ public final class WhackAMole {
   }
 
   /**
-   * This method initialize the grid with empty values.
+   * This method initialize the moleGrid with empty values.
    */
   public void fillGrid() {
     for (int row = 0; row < grid.length; row++) {
@@ -138,23 +138,24 @@ public final class WhackAMole {
   }
 
   /**
-   * It is in charge to get the grid dimension.
-   * @return  grid dimension.
+   * It is in charge to get the moleGrid dimension.
+   * @return  moleGrid dimension.
    */
   public int getDimension() {
     return dimension;
   }
 
   /**
-   * It ins charge to get the grid.
-   * @return the grid matrix.
+   * It ins charge to get the moleGrid.
+   * @return the moleGrid matrix.
    */
   public char[][] getGrid() {
-    return grid;
+    char[][] gridGame = this.grid;
+    return gridGame;
   }
 
   /**
-   * Prints the grid completely.
+   * Prints the moleGrid completely.
    */
   public void printGrid() {
     for (int row = 0; row < grid.length; row++) {
