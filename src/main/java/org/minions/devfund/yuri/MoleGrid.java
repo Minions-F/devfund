@@ -34,8 +34,7 @@ public class MoleGrid {
     }
 
     public int getRandomNumber() {
-        Random r = new Random();
-        return r.nextInt(dimension);
+        return new Random().nextInt(dimension);
     }
 
     public void printGridToUser() {
