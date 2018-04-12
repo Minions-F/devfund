@@ -112,7 +112,8 @@ public class WhackAMole {
      * @param molesNumber moles number value.
      */
     public void fillGrid(final int molesNumber) {
-        for (int i = 0; i < molesNumber; i++) {
+        int totalMoles = molesNumber;
+        while (totalMoles-- > 0) {
             int row;
             int column;
             do {
