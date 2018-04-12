@@ -57,7 +57,7 @@ public final class Main {
         if (whackAMole.getAttempts() == 0) {
             logger.info("Game over");
         }
-        
+
         logger.info("Score: " + whackAMole.getScore());
     }
 }
