@@ -21,6 +21,8 @@ public final class Main {
      */
     public static void main(final String[] args) {
         final Logger logger = Logger.getLogger(Main.class.getName());
+        final Scanner scanner = new Scanner(System.in, "UTF-8");
+
         final int numAttempts = 50;
         final int gridDimension = 10;
         final int molesQuantity = 10;
@@ -35,7 +37,6 @@ public final class Main {
 
         while (whackAMole.getAttempts() > 0 && whackAMole.getMolesLeft() != 0) {
             logger.info("Where do you want to whack?");
-            final Scanner scanner = new Scanner(System.in, "UTF-8");
             logger.info("X:");
             int x = scanner.nextInt();
             logger.info("Y:");

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -63,6 +64,16 @@ public class WhackAMoleTest {
     @Test
     public void testPlace() {
         assertTrue("Error placing.", whackAMole.place(1, 1));
+        assertEquals(1, whackAMole.getMolesLeft());
+    }
+
+    /**
+     * Verify test place.
+     */
+    @Test
+    public void testErrorPlace() {
+        whackAMole.place(1, 1);
+        assertFalse("Placing shouldn't be allowed.", whackAMole.place(1, 1));
         assertEquals(1, whackAMole.getMolesLeft());
     }
 
