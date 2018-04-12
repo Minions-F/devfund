@@ -5,7 +5,7 @@ package org.minions.devfund.reinaldo;
  */
 public class WhackAMole {
 
-    public static final int SCORE = 10;
+    public static final int USERSCORE = 10;
     private int attemptsLeft;
     private int gridDimension;
     private int score;
@@ -63,7 +63,7 @@ public class WhackAMole {
      */
     public void whack(int postX, int postY) {
         if (moleGrid[postX][postY] == 'M') {
-            score += SCORE;
+            score += USERSCORE;
             attemptsLeft--;
             molesLeft--;
             moleGrid[postX][postY] = 'W';
