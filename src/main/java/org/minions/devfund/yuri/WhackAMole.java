@@ -1,10 +1,9 @@
 package org.minions.devfund.yuri;
 
 import java.util.Random;
-import java.util.Scanner;
 
 /**
- * This class represents the wackamole game.
+ * This class represents the WackAMole game.
  */
 public final class WhackAMole {
 
@@ -14,13 +13,17 @@ public final class WhackAMole {
   public static final int MOLES_AMOUNT = 1;
   public static final int INITIAL_SCORE = 0;
   public static final int ONE = 1;
-  public static final int EXIT_GAME = -1;
   private int score;
   private int molesLeft;
   private int attemptsLeft;
   private int dimension;
   private char[][] grid;
 
+  /**
+   * Constructor Method.
+   * @param numAttempts number of attempts for the player.
+   * @param gridDimension the size of the grid.
+   */
   public WhackAMole(final int numAttempts, final int gridDimension) {
     dimension = gridDimension;
     attemptsLeft = numAttempts;
@@ -36,7 +39,8 @@ public final class WhackAMole {
    *
    * @param posX position X.
    * @param posY position Y.
-   * @return
+   * @return <code>true</code> if it is possible to place the mole;
+   *         <code>false</code> if it is not.
    */
   public boolean place(final int posX, final int posY) {
     boolean flag = false;
@@ -47,6 +51,9 @@ public final class WhackAMole {
     return flag;
   }
 
+  /**
+   * It is in charge to insert Moles to grid.
+    */
   public void insertMoles() {
     int accumulator = 0;
     while (accumulator < MOLES_AMOUNT) {
@@ -56,8 +63,12 @@ public final class WhackAMole {
     }
   }
 
+  /**
+   * It is charge to perform Whack in a specific position.
+   * @param posX coordinate X on grid.
+   * @param posY coordinate Y on grid.
+   */
   public void whack(final int posX, final int posY) {
-    grid[posX][posY] = WACKED;
     if (isMole(posX, posY)) {
       increaseScore();
       decreaseAttemptsLeft();
@@ -65,21 +76,26 @@ public final class WhackAMole {
     } else {
       decreaseAttemptsLeft();
     }
+    grid[posX][posY] = WACKED;
   }
 
   /**
-   * @param posX
-   * @param posY
-   * @return
+   * It is in charge to verify if the cell is empty.
+   * @param posX coordinate X on grid.
+   * @param posY coordinate Y on grid.
+   * @return <code>true</code> if it is an empty cell;
+   *         <code>false</code> if it is not.
    */
   public boolean isEmptyCell(final int posX, final int posY) {
     return grid[posX][posY] == EMPTYCELL;
   }
 
   /**
-   * @param posX
-   * @param posY
-   * @return
+   * It is in charge to verify if the cell has a mole.
+   * @param posX coordinate X on grid.
+   * @param posY coordinate Y on grid.
+   * @return <code>true</code> if there is a mole ;
+   *         <code>false</code> if it is not.
    */
   public boolean isMole(final int posX, final int posY) {
     return grid[posX][posY] == MOLE;
@@ -106,12 +122,12 @@ public final class WhackAMole {
   }
 
   /**
-   * Print the Grid without showing where the moles are.
+   * Prints the Grid without showing where the moles are.
    */
   public void printGridToUser() {
     for (int row = 0; row < grid.length; row++) {
       for (int column = 0; column < grid[row].length; column++) {
-        if (grid[row][column] == 'M') {
+        if (grid[row][column] == MOLE) {
           System.out.print(String.format("%c ", EMPTYCELL));
         } else {
           System.out.print(String.format("%c ", grid[row][column]));
@@ -121,10 +137,18 @@ public final class WhackAMole {
     }
   }
 
+  /**
+   * It is in charge to get the grid dimension.
+   * @return  grid dimension.
+   */
   public int getDimension() {
     return dimension;
   }
 
+  /**
+   * It ins charge to get the grid.
+   * @return the grid matrix.
+   */
   public char[][] getGrid() {
     return grid;
   }
@@ -141,63 +165,66 @@ public final class WhackAMole {
     }
   }
 
+  /**
+   * It is in charge to get player score.
+   * @return the player score.
+   */
   public int getScore() {
     return score;
   }
 
+  /**
+   * It is in charge to increase the player score.
+   */
   public void increaseScore() {
     score = score + ONE;
   }
 
+  /**
+   * It is in charge to get the moles left amount.
+   * @return moles left amount.
+   */
   public int getMolesLeft() {
     return molesLeft;
   }
 
+  /**
+   * It is in charge to decrease the moles left amount.
+   */
   public void decreaseMolesLeft() {
     molesLeft = molesLeft - ONE;
   }
 
+  /**
+   * It is in charge to get the player attempts left amount.
+   * @return player attempts left amount.
+   */
   public int getAttemptsLeft() {
     return attemptsLeft;
   }
 
+  /**
+   * It is in charge to decrease the player attempts left amount.
+   */
   public void decreaseAttemptsLeft() {
     attemptsLeft = attemptsLeft - ONE;
   }
 
-  public boolean isGivingUp(int posX, int posY) {
-    return posX == -1 || posY == -1;
-  }
-
+  /**
+   * It is in charge to verify if the player won.
+   * @return <code>true</code> if the player won ;
+   *         <code>false</code> if it is not.
+   */
   public boolean playerWin() {
     return molesLeft == 0;
   }
 
+  /**
+   * It is in charge to verify if the player lose.
+   * @return <code>true</code> if the player lose ;
+   *         <code>false</code> if it is not.
+   */
   public boolean playerLose() {
     return attemptsLeft == 0;
-  }
-
-
-  public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-    WhackAMole game = new WhackAMole(50, 10);
-    boolean givingUp = false;
-    while (!givingUp && !game.playerWin() && !game.playerLose()) {
-      game.printGrid();
-      System.out.println("==================================================");
-      System.out.println("Type X = -1 and Y = -1 to exit of WackAMole Game");
-      System.out.println(String.format("Type the position X , between 0 - %d :", game.dimension - 1));
-      int posX = scanner.nextInt();
-      System.out.println(String.format("Type the position Y , between 0 - %d :", game.dimension - 1));
-      int posY = scanner.nextInt();
-      if (posX == -1 || posY == -1) {
-        givingUp = true;
-      } else {
-        game.whack(posX, posY);
-        System.out.println("==================================================");
-        game.printGridToUser();
-        System.out.println("==================================================");
-      }
-    }
   }
 }
