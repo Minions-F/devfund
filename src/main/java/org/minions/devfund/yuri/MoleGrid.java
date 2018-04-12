@@ -21,10 +21,19 @@ public class MoleGrid {
         return true;
     }
 
-    public boolean isEmpty(final int posX, final int posY) {
-        return true;
+    /**
+     * 
+     * @param posX
+     * @param posY
+     * @return
+     */
+    public boolean isEmptyCell(final int posX, final int posY) {
+        return grid[posX][posY]== EMPTYCELL;
     }
 
+    /**
+     * This method initialize the grid with empty values.
+     */
     public void fillGrid() {
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
@@ -33,10 +42,17 @@ public class MoleGrid {
         }
     }
 
+    /**
+     * Get a a random value in range from 0 to dimension value configured.
+     * @return the random value.
+     */
     public int getRandomNumber() {
         return new Random().nextInt(dimension);
     }
 
+    /**
+     * Print the Grid without showing where the moles are.
+     */
     public void printGridToUser() {
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
@@ -48,6 +64,9 @@ public class MoleGrid {
         }
     }
 
+    /**
+     * Prints the grid completely.
+     */
     public void printGrid() {
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
