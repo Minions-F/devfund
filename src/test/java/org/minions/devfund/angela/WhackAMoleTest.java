@@ -29,6 +29,8 @@ public class WhackAMoleTest {
 
     /**
      * Verify attempts reduced method.
+     *
+     * @throws FileNotFoundException {@link FileNotFoundException}.
      */
     @Test
     public void main() throws FileNotFoundException {
@@ -41,7 +43,7 @@ public class WhackAMoleTest {
      */
     @Test
     public void testAttemptsReduced() {
-        whackAMole.whack(0,0);
+        whackAMole.whack(0, 0);
         assertEquals(1, whackAMole.getAttempts());
     }
 
@@ -50,8 +52,8 @@ public class WhackAMoleTest {
      */
     @Test
     public void testScoreIncreased() {
-        whackAMole.place(0,0);
-        whackAMole.whack(0,0);
+        whackAMole.place(0, 0);
+        whackAMole.whack(0, 0);
         assertEquals(1, whackAMole.getScore());
     }
 
@@ -60,15 +62,15 @@ public class WhackAMoleTest {
      */
     @Test
     public void testPlace() {
-        assertTrue("Error placing.", whackAMole.place(1,1));
+        assertTrue("Error placing.", whackAMole.place(1, 1));
         assertEquals(1, whackAMole.getMolesLeft());
     }
-    
+
     /**
      * Verify test place.
      */
     @Test
-    public void prints(){
+    public void prints() {
         whackAMole.printGrid();
         whackAMole.printGridToUser();
     }
