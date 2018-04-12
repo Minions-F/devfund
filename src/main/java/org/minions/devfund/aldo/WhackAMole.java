@@ -4,7 +4,7 @@ package org.minions.devfund.aldo;
  * This class handle the WhackAMole game.
  */
 class WhackAMole {
-    private static final int SCORE = 10;
+    private static final int SCORE_POINT = 10;
     private int score;
     private int molesLeft;
     private int attemptsLeft;
@@ -91,7 +91,7 @@ class WhackAMole {
      */
     void whack(final int x, final int y) {
         if (moleGrid[x][y] == 'M') {
-            score += SCORE;
+            score += SCORE_POINT;
             attemptsLeft--;
             molesLeft--;
             moleGrid[x][y] = 'W';
