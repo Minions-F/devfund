@@ -2,12 +2,12 @@ package org.minions.devfund.angela;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Manages execution.
  */
 public final class Main {
-
     /**
      * Avoid constructor.
      */
@@ -20,40 +20,44 @@ public final class Main {
      * @param args arguments to execute main.
      */
     public static void main(final String[] args) {
+        final Logger logger = Logger.getLogger(Main.class.getName());
         final int numAttempts = 50;
         final int gridDimension = 10;
-        final WhackAMole whackAMole = new WhackAMole(numAttempts, gridDimension);
-        Random randomI = new Random();
-        Random randomJ = new Random();
         final int molesQuantity = 10;
-        for (int i = 0; i < molesQuantity; i++) {
-            if (!whackAMole.place(randomI.nextInt(gridDimension), randomJ.nextInt(gridDimension))) {
-                i--;
-            }
+
+        final WhackAMole whackAMole = new WhackAMole(numAttempts, gridDimension);
+        final Random randomX = new Random();
+        final Random randomY = new Random();
+
+        while (whackAMole.getMolesLeft() < molesQuantity) {
+            whackAMole.place(randomX.nextInt(gridDimension), randomY.nextInt(gridDimension));
         }
-        for (int i = 0; i < numAttempts; i++) {
-            System.out.println("Where do you want to whack?");
+
+        while (whackAMole.getAttempts() > 0 && whackAMole.getMolesLeft() != 0) {
+            logger.info("Where do you want to whack?");
             final Scanner scanner = new Scanner(System.in, "UTF-8");
-            System.out.println("X:");
+            logger.info("X:");
             int x = scanner.nextInt();
-            System.out.println("Y:");
+            logger.info("Y:");
             int y = scanner.nextInt();
             if (x == -1 && y == -1) {
                 whackAMole.printGridToUser();
-                System.out.println("Game over");
+                logger.info("Game over");
                 break;
             }
             whackAMole.whack(x, y);
-            System.out.println(String.format("You have %s attempts", whackAMole.getAttempts()));
-            if (whackAMole.getMolesLeft() == 0) {
-                System.out.println("You won");
-                whackAMole.printGrid();
-                break;
-            }
+            logger.info("You have " + whackAMole.getAttempts() + " attempts");
         }
+
+        if (whackAMole.getMolesLeft() == 0) {
+            logger.info("You won!");
+            whackAMole.printGrid();
+        }
+
         if (whackAMole.getAttempts() == 0) {
-            System.out.println("Game over");
+            logger.info("Game over");
         }
-        System.out.println("Score: " + whackAMole.getScore());
+        
+        logger.info("Score: " + whackAMole.getScore());
     }
 }
