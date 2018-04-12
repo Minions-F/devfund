@@ -3,66 +3,110 @@ package org.minions.devfund.aldo;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * WhackAMole Test.
+ */
 public class WhackAMoleTest {
-    WhackAMole whackAMole;
+    private WhackAMole whackAMole;
 
+    /**
+     * Constructor.
+     */
     public WhackAMoleTest() {
-        whackAMole = new WhackAMole(2, 3);
+        final int numAttempts = 2;
+        final int gridDimension = 3;
+        whackAMole = new WhackAMole(numAttempts, gridDimension);
+        final int positionX = 0;
+        final int positionY = 0;
+        final int positionX1 = 1;
+        final int positionY1 = 1;
+        final int positionX2 = 2;
+        final int positionY2 = 2;
+        whackAMole.place(positionX, positionY);
+        whackAMole.place(positionX1, positionY1);
+        whackAMole.place(positionX2, positionY2);
     }
 
+    /**
+     * printGridTest.
+     */
     @Test
     public void printGridTest() {
-        whackAMole.place(0, 0);
-        whackAMole.place(1, 1);
-        whackAMole.place(2, 2);
-        whackAMole.whack(0, 0);
-        whackAMole.whack(1, 1);
+        final int positionX = 0;
+        final int positionY = 0;
+        final int positionX1 = 1;
+        final int positionY1 = 1;
+        whackAMole.whack(positionX, positionY);
+        whackAMole.whack(positionX1, positionY1);
         whackAMole.printGrid();
     }
 
+    /**
+     * printGridToUser.
+     */
     @Test
-    public void printGridToUser(){
-        whackAMole.place(0, 0);
-        whackAMole.place(1, 1);
-        whackAMole.place(2, 2);
-        whackAMole.whack(0, 0);
-        whackAMole.whack(1, 1);
+    public void printGridToUser() {
+        final int positionX = 0;
+        final int positionY = 0;
+        final int positionX1 = 1;
+        final int positionY1 = 1;
+        whackAMole.whack(positionX, positionY);
+        whackAMole.whack(positionX1, positionY1);
         whackAMole.printGridToUser();
     }
 
+    /**
+     * placeTest.
+     */
     @Test
     public void placeTest() {
-        Assert.assertTrue(whackAMole.place(0, 0));
-        Assert.assertFalse(whackAMole.place(0, 0));
+        final int positionX = 0;
+        final int positionY = 0;
+        Assert.assertFalse(whackAMole.place(positionX, positionY));
     }
 
+    /**
+     * placeMoleDecrement.
+     */
     @Test
     public void placeMoleDecrement() {
-        whackAMole.place(0, 0);
-        whackAMole.place(1, 1);
-        whackAMole.place(2, 2);
-        Assert.assertFalse(whackAMole.place(1, 0));
+        final int positionX = 1;
+        final int positionY = 0;
+        Assert.assertFalse(whackAMole.place(positionX, positionY));
     }
 
+    /**
+     * whackTest1.
+     */
     @Test
     public void whackTest1() {
-        whackAMole.place(0, 0);
-        whackAMole.place(1, 1);
-        whackAMole.place(2, 2);
-        whackAMole.whack(0, 0);
-        Assert.assertEquals(10, whackAMole.getScore());
-        Assert.assertEquals(1, whackAMole.getAttemptsLeft());
-        Assert.assertEquals(2, whackAMole.getMolesLeft());
+        final int positionX = 0;
+        final int positionY = 0;
+        final int expectedScore = 10;
+        final int expectedAttemptsLeft = 1;
+        final int expectedMolesLeft = 2;
+        whackAMole.whack(positionX, positionY);
+        Assert.assertEquals(expectedScore, whackAMole.getScore());
+        Assert.assertEquals(expectedAttemptsLeft, whackAMole.getAttemptsLeft());
+        Assert.assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
+
+    /**
+     * whackTest2.
+     */
     @Test
     public void whackTest2() {
-        whackAMole.place(0, 0);
-        whackAMole.place(1, 1);
-        whackAMole.place(2, 2);
-        whackAMole.whack(0, 0);
-        whackAMole.whack(1, 1);
-        Assert.assertEquals(20, whackAMole.getScore());
-        Assert.assertEquals(0, whackAMole.getAttemptsLeft());
-        Assert.assertEquals(1, whackAMole.getMolesLeft());
+        final int positionX = 0;
+        final int positionY = 0;
+        final int positionX1 = 1;
+        final int positionY1 = 1;
+        final int expectedScore = 20;
+        final int expectedAttemptsLeft = 0;
+        final int expectedMolesLeft = 1;
+        whackAMole.whack(positionX, positionY);
+        whackAMole.whack(positionX1, positionY1);
+        Assert.assertEquals(expectedScore, whackAMole.getScore());
+        Assert.assertEquals(expectedAttemptsLeft, whackAMole.getAttemptsLeft());
+        Assert.assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 }

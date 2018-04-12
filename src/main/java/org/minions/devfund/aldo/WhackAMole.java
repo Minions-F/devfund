@@ -1,19 +1,24 @@
 package org.minions.devfund.aldo;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * This class handle the WhackAMole game.
+ */
 class WhackAMole {
+    private static final int SCORE = 10;
     private int score;
     private int molesLeft;
     private int attemptsLeft;
     private int gridDimension;
     private int moles;
-
     private char[][] moleGrid;
-    //List<LocationMoles> locationMolesList;
 
-    WhackAMole(int numAttempts, int gridDimension) {
+    /**
+     * Constructor a new instance.
+     *
+     * @param numAttempts   the number Attempts.
+     * @param gridDimension the grid Dimension.
+     */
+    WhackAMole(final int numAttempts, final int gridDimension) {
         score = 0;
         moles = gridDimension;
         molesLeft = gridDimension;
@@ -23,6 +28,9 @@ class WhackAMole {
         fillGrid();
     }
 
+    /**
+     * Fills the grid.
+     */
     private void fillGrid() {
         for (int column = 0; column < gridDimension; column++) {
             for (int row = 0; row < gridDimension; row++) {
@@ -31,12 +39,15 @@ class WhackAMole {
         }
     }
 
+    /**
+     * Prints the grid to user.
+     */
     void printGridToUser() {
         for (int column = 0; column < gridDimension; column++) {
             for (int row = 0; row < gridDimension; row++) {
-                if(moleGrid[column][row] == 'M'){
+                if (moleGrid[column][row] == 'M') {
                     System.out.print("*");
-                } else{
+                } else {
                     System.out.print(moleGrid[column][row]);
                 }
             }
@@ -44,6 +55,9 @@ class WhackAMole {
         }
     }
 
+    /**
+     * Prints the grid.
+     */
     void printGrid() {
         for (int column = 0; column < gridDimension; column++) {
             for (int row = 0; row < gridDimension; row++) {
@@ -53,7 +67,14 @@ class WhackAMole {
         }
     }
 
-    boolean place(int x, int y) {
+    /**
+     * Places the moles.
+     *
+     * @param x position x in molesGrid.
+     * @param y position y in molesGrid.
+     * @return true if it doesn't exist the moles in the point.
+     */
+    boolean place(final int x, final int y) {
         if (moleGrid[x][y] == '*' && moles > 0) {
             moleGrid[x][y] = 'M';
             moles--;
@@ -62,27 +83,48 @@ class WhackAMole {
         return false;
     }
 
-    void whack(int x, int y) {
+    /**
+     * User hit.
+     *
+     * @param x position x in molesGrid.
+     * @param y position y in molesGrid.
+     */
+    void whack(final int x, final int y) {
         if (moleGrid[x][y] == 'M') {
-            score += 10;
+            score += SCORE;
             attemptsLeft--;
             molesLeft--;
             moleGrid[x][y] = 'W';
-        } else{
+        } else {
             attemptsLeft--;
         }
 
     }
 
-    public int getScore() {
+    /**
+     * Gets Score.
+     *
+     * @return Score.
+     */
+    int getScore() {
         return score;
     }
 
-    public int getMolesLeft() {
+    /**
+     * Gets MolesLeft.
+     *
+     * @return MolesLeft.
+     */
+    int getMolesLeft() {
         return molesLeft;
     }
 
-    public int getAttemptsLeft() {
+    /**
+     * Gets AttemptsLeft.
+     *
+     * @return AttemptsLeft.
+     */
+    int getAttemptsLeft() {
         return attemptsLeft;
     }
 }
