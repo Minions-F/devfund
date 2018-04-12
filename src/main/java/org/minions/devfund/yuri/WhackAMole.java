@@ -5,6 +5,10 @@ package org.minions.devfund.yuri;
  */
 public final class WhackAMole {
 
+    private int score;
+    private int molesLeft;
+    private int attemptsLeft;
+
     /**
      * Constructor method.
      */
