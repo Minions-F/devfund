@@ -61,8 +61,10 @@ public class WhackAMole {
 
     /**
      * Prints the grid to the user to show where he/she whacked.
+     *
+     * @return String with the matrix.
      */
-    public void printGridToUser() {
+    public String printGridToUser() {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
@@ -75,12 +77,15 @@ public class WhackAMole {
             builder.append("\n");
         }
         System.out.println(builder);
+        return builder.toString();
     }
 
     /**
      * Prints all grid with moles.
+     *
+     * @return String with the matrix.
      */
-    public void printGrid() {
+    public String printGrid() {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
@@ -89,12 +94,14 @@ public class WhackAMole {
             builder.append("\n");
         }
         System.out.println(builder);
+        return builder.toString();
     }
 
     /**
      * Gets the moles left.
      *
      * @return int the moles left value.
+     * String with the matrix.
      */
     public int getMolesLeft() {
         return molesLeft;

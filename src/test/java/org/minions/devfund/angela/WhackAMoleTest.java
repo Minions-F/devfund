@@ -6,9 +6,10 @@ import org.junit.Test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Test for {@link WhackAMole}.
@@ -100,11 +101,11 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Verify test place.
+     * Verify test print grids aren't null.
      */
     @Test
     public void prints() {
-        whackAMole.printGrid();
-        whackAMole.printGridToUser();
+        assertNotEquals("Grid is empty", "", whackAMole.printGrid());
+        assertNotEquals("Grid is empty", "", whackAMole.printGridToUser());
     }
 }
