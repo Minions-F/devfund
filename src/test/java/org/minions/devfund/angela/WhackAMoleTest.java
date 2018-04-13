@@ -29,13 +29,35 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Verify attempts reduced method.
+     * Verify main.
      *
      * @throws FileNotFoundException {@link FileNotFoundException}.
      */
     @Test
     public void main() throws FileNotFoundException {
         System.setIn(new FileInputStream("input.txt"));
+        Main.main(new String[0]);
+    }
+
+    /**
+     * Verify main game over.
+     *
+     * @throws FileNotFoundException {@link FileNotFoundException}.
+     */
+    @Test
+    public void mainGameOver() throws FileNotFoundException {
+        System.setIn(new FileInputStream("inputGameOver.txt"));
+        Main.main(new String[0]);
+    }
+
+    /**
+     * Verify main won.
+     *
+     * @throws FileNotFoundException {@link FileNotFoundException}.
+     */
+    @Test
+    public void mainWon() throws FileNotFoundException {
+        System.setIn(new FileInputStream("inputWon.txt"));
         Main.main(new String[0]);
     }
 

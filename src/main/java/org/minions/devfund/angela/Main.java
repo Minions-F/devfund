@@ -23,7 +23,7 @@ public final class Main {
         final Logger logger = Logger.getLogger(Main.class.getName());
         final Scanner scanner = new Scanner(System.in, "UTF-8");
 
-        final int numAttempts = 50;
+        final int numAttempts = 100;
         final int gridDimension = 10;
         final int molesQuantity = 10;
 

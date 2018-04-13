@@ -52,40 +52,43 @@ public class WhackAMole {
      */
     public void whack(int x, int y) {
         attemptsLeft--;
-        if (moleGrid[y][x] == 'M') {
+        if (moleGrid[x][y] == 'M') {
             score++;
             molesLeft--;
         }
-        moleGrid[y][x] = 'W';
+        moleGrid[x][y] = 'W';
     }
 
     /**
      * Prints the grid to the user to show where he/she whacked.
      */
     public void printGridToUser() {
+        final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 if (moleGrid[i][j] == 'M') {
-                    System.out.print("* ");
+                    builder.append("* ");
                 } else {
-
-                    System.out.print(moleGrid[i][j] + " ");
+                    builder.append(moleGrid[i][j]).append(" ");
                 }
             }
-            System.out.println("\n");
+            builder.append("\n");
         }
+        System.out.println(builder);
     }
 
     /**
      * Prints all grid with moles.
      */
     public void printGrid() {
+        final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
-                System.out.print(moleGrid[i][j] + " ");
+                builder.append(moleGrid[i][j]).append(" ");
             }
-            System.out.print("\n");
+            builder.append("\n");
         }
+        System.out.println(builder);
     }
 
     /**
