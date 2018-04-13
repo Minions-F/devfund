@@ -16,11 +16,6 @@ public class WhackAMoleTest {
     private static final int ATTEMPTS = 50;
     private static final int GRID_DIMENSION = 10;
     private static final int SCORE = 0;
-    private static final int POS_5 = 5;
-    private static final int POS_3 = 3;
-    private static final int POS_2 = 2;
-    private static final int POS_1 = 1;
-    private static final int POS_4 = 4;
     private WhackAMole whackAMole;
 
     /**
@@ -35,9 +30,9 @@ public class WhackAMoleTest {
      */
     @Test
     public void verifyPlaceAMoleWorks() {
-
-
-        assertTrue(whackAMole.place(1, POS_5));
+        final int posX = 1;
+        final int posY = 5;
+        assertTrue(whackAMole.place(posX, posY));
     }
 
     /**
@@ -45,9 +40,11 @@ public class WhackAMoleTest {
      */
     @Test
     public void verifyWhackAMoleWorks() {
-        whackAMole.place(POS_3, POS_3);
-        whackAMole.whack(POS_3,  POS_3);
-        assertEquals('W', whackAMole.getStatusPosition(POS_3,  POS_3));
+        final int posX = 3;
+        final int posY = 3;
+        whackAMole.place(posX, posY);
+        whackAMole.whack(posX,  posY);
+        assertEquals('W', whackAMole.getStatusPosition(posX,  posY));
     }
 
     /**
@@ -55,8 +52,10 @@ public class WhackAMoleTest {
      */
     @Test
     public void verifyWhackMissWorks() {
-        whackAMole.whack(POS_2, POS_1);
-        assertEquals('*', whackAMole.getStatusPosition(POS_2, POS_1));
+        final int posX = 2;
+        final int posY = 1;
+        whackAMole.whack(posX, posY);
+        assertEquals('*', whackAMole.getStatusPosition(posX, posY));
     }
 
     /**
@@ -64,7 +63,9 @@ public class WhackAMoleTest {
      */
     @Test
     public void verifyAttemptsIsChangeAfterAWhack() {
-        whackAMole.whack(POS_4, POS_2);
+        final int posX = 4;
+        final int posY = 2;
+        whackAMole.whack(posX, posY);
         assertEquals(ATTEMPTS - 1, whackAMole.getAttemptsLeft());
     }
 
@@ -73,8 +74,10 @@ public class WhackAMoleTest {
      */
     @Test
     public void verifyScoreIsWorking() {
-        whackAMole.place(POS_1, POS_2);
-        whackAMole.whack(POS_1,  POS_2);
+        final int posX = 1;
+        final int posY = 2;
+        whackAMole.place(posX, posY);
+        whackAMole.whack(posX,  posY);
         assertEquals(SCORE + 1, whackAMole.getScore());
     }
 }

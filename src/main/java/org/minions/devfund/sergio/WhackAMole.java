@@ -86,10 +86,8 @@ public class WhackAMole {
             moleGrid[posX][posY] = whack;
             molesLeft--;
             score++;
-            attemptsLeft--;
-        } else {
-            attemptsLeft--;
         }
+        attemptsLeft--;
         printGridToUser();
     }
 
@@ -120,11 +118,12 @@ public class WhackAMole {
      * Prints the grid.
      */
     public void printGrid() {
+        StringBuilder print = new StringBuilder();
         for (int i = 0; i < this.gridDimension; i++) {
             for (int j = 0; j < this.gridDimension; j++) {
-                System.out.print(moleGrid[i][j]);
+                print.append(moleGrid[i][j]);
             }
-            System.out.println("");
+            System.out.println(print);
         }
     }
 
