@@ -124,7 +124,8 @@ public class WhackAMoleTest {
         StringBuilder test = new StringBuilder();
         for (int i = 0; i < GRID_DIMENSION; i++) {
             for (int j = 0; j < GRID_DIMENSION; j++) {
-                if (i == posX && j == posY) {
+                boolean positionFound = i == posX && j == posY;
+                if (positionFound) {
                     test.append('M');
                 } else {
                     test.append('*');
