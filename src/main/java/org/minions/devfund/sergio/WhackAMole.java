@@ -10,13 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class WhackAMole {
 
-    private static final char GRID_WHITE_SPACE = '*';
-    private static final char MOLE = 'M';
-    private int molesLeft = 0;
-    private int score = 0;
-    private int attemptsLeft = 0;
-    private char[][] moleGrid;
-    private int gridDimension;
+    static final char GRID_WHITE_SPACE = '*';
+    static final char MOLE = 'M';
+    int molesLeft;
+    int score;
+    int attemptsLeft;
+    char[][] moleGrid;
+    int gridDimension;
 
     /**
      * Constructor for WhackAMole.
@@ -33,6 +33,7 @@ public class WhackAMole {
 
     /**
      * Return the current status of given position.
+     *
      * @param posX - Represent the X coordinate.
      * @param posY -Represent the Y coordinate.
      * @return The current status.
@@ -43,6 +44,7 @@ public class WhackAMole {
 
     /**
      * Gets the score.
+     *
      * @return The score.
      */
     int getScore() {
@@ -51,6 +53,7 @@ public class WhackAMole {
 
     /**
      * Gets the number of current attempts.
+     *
      * @return The number of attempts.
      */
     int getAttemptsLeft() {
@@ -95,36 +98,51 @@ public class WhackAMole {
      * Prints the current grid for user.
      */
     private void printGridToUser() {
+        System.out.println( getUserGrid());
+    }
+
+    /**
+     * Builds the user grid.
+     *
+     * @return A grid for user.
+     */
+    private StringBuilder getUserGrid() {
+        StringBuilder userGrid = new StringBuilder();
         for (int i = 0; i < this.gridDimension; i++) {
             for (int j = 0; j < this.gridDimension; j++) {
-                switch (moleGrid[i][j]) {
-                    case 'M':
-                        System.out.print(GRID_WHITE_SPACE);
-                        break;
-                    case 'W':
-                        System.out.print("W");
-                        break;
-                    default:
-                        System.out.print(GRID_WHITE_SPACE);
-                        break;
+                if (moleGrid[i][j] == 'M') {
+                    userGrid.append(GRID_WHITE_SPACE);
+                } else if (moleGrid[i][j] == 'W') {
+                    userGrid.append('W');
+                } else {
+                    userGrid.append(GRID_WHITE_SPACE);
                 }
-
             }
-            System.out.println("");
+            userGrid.append("\n");
         }
+        return userGrid;
     }
 
     /**
      * Prints the grid.
      */
     public void printGrid() {
-        StringBuilder print = new StringBuilder();
+        System.out.println(getGrid());
+    }
+
+    /**
+     * Build the Grid.
+     *
+     * @return The grid.
+     */
+    private StringBuilder getGrid() {
+        StringBuilder grid = new StringBuilder();
         for (int i = 0; i < this.gridDimension; i++) {
             for (int j = 0; j < this.gridDimension; j++) {
-                print.append(moleGrid[i][j]);
+                grid.append(moleGrid[i][j]);
             }
-            System.out.println(print);
         }
+        return grid;
     }
 
     /**
