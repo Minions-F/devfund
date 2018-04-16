@@ -11,7 +11,6 @@ public class WhackAMole {
     private static final char VOID_PLACE = '*';
     private static final char MOLE_PLACE = 'M';
     private static final char WHACKED_PLACE = 'W';
-    private static final int SCORE_INCREMENT = 1;
     private static final String LF_STRING = "\n";
     private static final String SPACE_STRING = "  ";
 
@@ -102,7 +101,7 @@ public class WhackAMole {
     private void whackMole(final int row, final int column) {
         if (moleGrid[row][column] == MOLE_PLACE) {
             molesLeft--;
-            score += SCORE_INCREMENT;
+            score++;
         }
     }
 
@@ -163,8 +162,7 @@ public class WhackAMole {
      * @return random place value.
      */
     private int getRandomPlace() {
-        Random random = new Random();
-        return random.nextInt(moleGrid.length);
+        return new Random().nextInt(moleGrid.length);
     }
 
     /**
