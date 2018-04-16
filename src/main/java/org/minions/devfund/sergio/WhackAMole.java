@@ -10,13 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class WhackAMole {
 
-    static final char GRID_WHITE_SPACE = '*';
-    static final char MOLE = 'M';
-    int molesLeft;
-    int score;
-    int attemptsLeft;
-    char[][] moleGrid;
-    int gridDimension;
+    private static final char GRID_WHITE_SPACE = '*';
+    private static final char MOLE = 'M';
+    private int molesLeft;
+    private int score;
+    private int attemptsLeft;
+    private char[][] moleGrid;
+    private int gridDimension;
 
     /**
      * Constructor for WhackAMole.
@@ -98,7 +98,7 @@ public class WhackAMole {
      * Prints the current grid for user.
      */
     private void printGridToUser() {
-        System.out.println( getUserGrid());
+        System.out.println(getUserGrid());
     }
 
     /**
