@@ -3,33 +3,34 @@ package org.minions.devfund.dennis;
 /**
  * Game methods and engine the game.
  */
-public class WhackAMole {
-    private static final int MOLES_LEFT = 10;
-    private int score = 0;
-    private int molesLeft = MOLES_LEFT;
+class WhackAMole {
+    private int score;
+    private int molesLeft;
     private int attemptsLeft;
     private char[][] moleGrid;
 
     /**
-     *
-     * @param numAttempts number of attempts that a user have
-     * @param gridDimension grid size in this case is 10
+     * Constructor.
+     * @param numAttempts allow the number of attempts user
+     * @param gridDimension grid size
      */
-    public WhackAMole(int numAttempts, int gridDimension) {
+
+    WhackAMole(int numAttempts, int gridDimension) {
         attemptsLeft = numAttempts;
         moleGrid = new char[gridDimension][gridDimension];
-        starGrid();
-        molesInGrid();
+        startGrid();
     }
 
     /**
-     * This method return if this a whackamole.
-     * @param x position of the whackamole in X
-     * @param y position of the whackamole in Y
-     * @return true if was whackamole
+     * This method return is a mole is added.
+     * @param x position of a mole in the grid for coordinate x
+     * @param y position of a mole in the grid for coordinate y
+     * @return this return if the mole is added
      */
-    public boolean place(int x, int y) {
-        if (moleGrid[x][y] == 'M') {
+    boolean place(int x, int y) {
+        if (moleGrid[x][y] != 'M') {
+            moleGrid[x][y] = 'M';
+            molesLeft += 1;
             return true;
         }
         return false;
@@ -39,35 +40,36 @@ public class WhackAMole {
      * This method change to "W" if this a wackamole.
      * decrease the moles.
      * increases the score.
-     * decrease the attemps.
-     * @param x position of the whackamole in X
-     * @param y position of the whackamole in Y
+     * decrease the attempts.
+     * @param x position of user in x
+     * @param y position of user in y
      */
-    public void whack(int x, int y) {
-        if (place(x, y)) {
+    void whack(int x, int y) {
+        if (moleGrid[x][y] == 'M') {
             moleGrid[x][y] = 'W';
-            molesLeft--;
+            molesLeft -= 1;
             score += 1;
         }
         attemptsLeft--;
     }
 
     /**
-     * This method print the initial game to user.
+     * This method print the first grid for user.
      */
-    public void printGridToUser() {
+    void printGridToUser() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
-                System.out.print("\t * ");
+                moleGrid[i][j] = '*';
+                System.out.print(moleGrid[i][j] + "\t");
             }
             System.out.println();
         }
     }
 
     /**
-     * This method Print the final grid with the results.
+     * This method print the last grid for user.
      */
-    public void printGrid() {
+    void printGrid() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 System.out.print(moleGrid[i][j] + "\t");
@@ -77,32 +79,9 @@ public class WhackAMole {
     }
 
     /**
-     * This method return a radom value to set the wacks in the grid.
-     * @return value int
+     * This method start the grid with "*".
      */
-    public int randomPosition() {
-        final int randomMole = 10;
-        double value = Math.random() * randomMole;
-        return (int) value;
-    }
-
-    /**
-     * This method set the wackamoles in the grid with the random position.
-     */
-    public void molesInGrid() {
-        int molePositionX;
-        int molePositionY;
-        for (int i = 0; i < molesLeft; i++) {
-            molePositionX = randomPosition();
-            molePositionY = randomPosition();
-            moleGrid[molePositionX][molePositionY] = 'M';
-        }
-    }
-
-    /**
-     * This method fill the grid with values *.
-     */
-    public void starGrid() {
+    void startGrid() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 moleGrid[i][j] = '*';
@@ -113,7 +92,7 @@ public class WhackAMole {
     /**
      * This method print the actual results in each attempt.
      */
-    public void results() {
+    void results() {
         System.out.println("Attempts available: " + attemptsLeft + "   " + "Moles available: "
                 + molesLeft + "   " + "Score: " + score);
     }
@@ -122,7 +101,7 @@ public class WhackAMole {
      * This method return the attempts.
      * @return attempts
      */
-    public int getAttempts() {
+    int getAttempts() {
         return attemptsLeft;
     }
 
@@ -130,8 +109,17 @@ public class WhackAMole {
      * This method return the Score in each attempts.
      * @return Score
      */
-    public int getScore() {
+    int getScore() {
         return score;
     }
+
+    /**
+     * This method return the molesLeft.
+     * @return Score
+     */
+    int getMolesLeft() {
+        return molesLeft;
+    }
+
 
 }
