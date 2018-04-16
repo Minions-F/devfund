@@ -11,19 +11,8 @@ import static org.junit.Assert.assertFalse;
  */
 public class WhackAMoleTest {
 
-    private static final int TEN_ATTEMPTS = 10;
-    private static final int DIMENSION_TEN = 10;
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private static final int THREE = 3;
-    private static final int FOUR = 4;
-    private static final int FIVE = 5;
-    private static final int SIX = 6;
-    private static final int SEVEN = 7;
-    private static final int EIGHT = 8;
-    private static final int NINE = 9;
-    private static final int ONE_HUNDRED = 100;
+    private static final int ATTEMPTS_NUMBER = 10;
+    private static final int DIMENSION_LENGTH = 10;
 
     private WhackAMole whackAMole;
 
@@ -32,24 +21,24 @@ public class WhackAMoleTest {
      */
     @Before
     public void setUp() {
-        whackAMole = new WhackAMole(TEN_ATTEMPTS, DIMENSION_TEN);
+        whackAMole = new WhackAMole(ATTEMPTS_NUMBER, DIMENSION_LENGTH);
     }
 
     /**
-     * Get score test.
+     * Get score new game test.
      */
     @Test
-    public void getScoreTest() {
-        int expectedScore = 0;
+    public void getScoreNewGameTest() {
+        final int expectedScore = 0;
         assertEquals(expectedScore, whackAMole.getScore());
     }
 
     /**
-     * Get moles left test.
+     * Get moles left new game test.
      */
     @Test
-    public void getMolesLeftTest() {
-        int expectedMolesLeft = 0;
+    public void getMolesLeftNewGameTest() {
+        final int expectedMolesLeft = 0;
         assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
@@ -58,35 +47,41 @@ public class WhackAMoleTest {
      */
     @Test
     public void getMolesLeftWithOneMoleTest() {
-        int expectedMolesLeft = 1;
-        whackAMole.place(ZERO, ZERO);
+        final int rowPlacement = 0;
+        final int columnPlacement = 0;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
         assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
-     * Place mole in invalid grid row and column test.
+     * Place mole in row and column that is already taken test.
      */
     @Test
-    public void placeMoleInInvalidRowAndColumnTest() {
-        whackAMole.place(ONE, ONE);
-        assertFalse(whackAMole.place(ONE, ONE));
+    public void placeMoleInPlaceAlreadyTakenTest() {
+        final int rowPlacement = 1;
+        final int columnPlacement = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
+        assertFalse(whackAMole.place(rowPlacement, columnPlacement));
     }
 
     /**
-     * Get attempts left test.
+     * Get attempts left in new game test.
      */
     @Test
-    public void getAttemptsLeftTest() {
-        assertEquals(TEN_ATTEMPTS, whackAMole.getAttemptsLeft());
+    public void getAttemptsLeftNewGameTest() {
+        assertEquals(ATTEMPTS_NUMBER, whackAMole.getAttemptsLeft());
     }
 
     /**
-     * Get attempts left when all the attempts were used.
+     * Get attempts left after first whack test.
      */
     @Test
-    public void getAttemptsLeftEmpty() {
-        int expectedAttempts = TEN_ATTEMPTS - 1;
-        whackAMole.whack(TWO, TWO);
+    public void getAttemptsLeftAfterFirstWhackTest() {
+        final int rowPlacement = 2;
+        final int columnPlacement = 2;
+        final int expectedAttempts = ATTEMPTS_NUMBER - 1;
+        whackAMole.whack(rowPlacement, columnPlacement);
         assertEquals(expectedAttempts, whackAMole.getAttemptsLeft());
     }
 
@@ -95,9 +90,12 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackAMoleTest() {
-        whackAMole.place(THREE, THREE);
-        whackAMole.whack(THREE, THREE);
-        assertEquals(ZERO, whackAMole.getMolesLeft());
+        final int rowPlacement = 3;
+        final int columnPlacement = 3;
+        final int expectedMolesLeft = 0;
+        whackAMole.place(rowPlacement, columnPlacement);
+        whackAMole.whack(rowPlacement, columnPlacement);
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -105,11 +103,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatDoesNotExistOneTest() {
-        int whackRow = -1;
-        int whackColumn = -1;
-        whackAMole.place(FIVE, SEVEN);
+        final int rowPlacement = 5;
+        final int columnPlacement = 7;
+        final int whackRow = -1;
+        final int whackColumn = -1;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
         whackAMole.whack(whackRow, whackColumn);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -117,11 +118,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatDoesNotExistTwoTest() {
-        int whackRow = -1;
-        int whackColumn = 1;
-        whackAMole.place(NINE, ONE);
+        final int rowPlacement = 9;
+        final int columnPlacement = 1;
+        final int whackRow = -1;
+        final int whackColumn = 1;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
         whackAMole.whack(whackRow, whackColumn);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -129,11 +133,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatDoesNotExistThreeTest() {
-        int whackRow = 1;
-        int whackColumn = -1;
-        whackAMole.place(EIGHT, FIVE);
+        final int rowPlacement = 8;
+        final int columnPlacement = 5;
+        final int whackRow = 1;
+        final int whackColumn = -1;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
         whackAMole.whack(whackRow, whackColumn);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -141,10 +148,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatDoesNotExistFourTest() {
-        int whackColumn = -1;
-        whackAMole.place(FOUR, SIX);
-        whackAMole.whack(ONE_HUNDRED, whackColumn);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        final int rowPlacement = 4;
+        final int columnPlacement = 6;
+        final int whackRow = 100;
+        final int whackColumn = -1;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
+        whackAMole.whack(whackRow, whackColumn);
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -152,9 +163,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatDoesNotExistFiveTest() {
-        whackAMole.place(FOUR, SIX);
-        whackAMole.whack(ONE, ONE_HUNDRED);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        final int rowPlacement = 4;
+        final int columnPlacement = 6;
+        final int whackRow = 1;
+        final int whackColumn = 100;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
+        whackAMole.whack(whackRow, whackColumn);
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -162,11 +178,14 @@ public class WhackAMoleTest {
      */
     @Test
     public void whackInPlaceThatExistTest() {
-        int whackRow = 1;
-        int whackColumn = 1;
-        whackAMole.place(ZERO, SEVEN);
+        final int rowPlacement = 0;
+        final int columnPlacement = 7;
+        final int whackRow = 1;
+        final int whackColumn = 1;
+        final int expectedMolesLeft = 1;
+        whackAMole.place(rowPlacement, columnPlacement);
         whackAMole.whack(whackRow, whackColumn);
-        assertEquals(ONE, whackAMole.getMolesLeft());
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -174,8 +193,10 @@ public class WhackAMoleTest {
      */
     @Test
     public void fillGridTest() {
-        whackAMole.fillGrid(TWO);
-        assertEquals(TWO, whackAMole.getMolesLeft());
+        final int molesNumber = 2;
+        final int expectedMolesLeft = 2;
+        whackAMole.fillGrid(molesNumber);
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -183,9 +204,12 @@ public class WhackAMoleTest {
      */
     @Test
     public void fillGridRepeatingPlaceTest() {
-        whackAMole = new WhackAMole(TEN_ATTEMPTS, THREE);
-        whackAMole.fillGrid(SEVEN);
-        assertEquals(SEVEN, whackAMole.getMolesLeft());
+        final int gridDimension = 3;
+        final int molesNumber = 7;
+        final int expectedMolesLeft = 7;
+        whackAMole = new WhackAMole(ATTEMPTS_NUMBER, gridDimension);
+        whackAMole.fillGrid(molesNumber);
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
     }
 
     /**
@@ -193,8 +217,9 @@ public class WhackAMoleTest {
      */
     @Test
     public void printEmptyGridToUserTest() {
-        String expectedGrid = "*  *  *  \n*  *  *  \n*  *  *  \n";
-        whackAMole = new WhackAMole(TEN_ATTEMPTS, THREE);
+        final String expectedGrid = "*  *  *  \n*  *  *  \n*  *  *  \n";
+        final int gridDimension = 3;
+        whackAMole = new WhackAMole(ATTEMPTS_NUMBER, gridDimension);
         assertEquals(expectedGrid, whackAMole.printGridToUser());
     }
 
@@ -203,9 +228,12 @@ public class WhackAMoleTest {
      */
     @Test
     public void printGridWhackToUserTest() {
-        String expectedGrid = "W  *  *  \n*  *  *  \n*  *  *  \n";
-        whackAMole = new WhackAMole(TEN_ATTEMPTS, THREE);
-        whackAMole.whack(ZERO, ZERO);
+        final int gridDimension = 3;
+        final int whackRow = 0;
+        final int whackColumn = 0;
+        final String expectedGrid = "W  *  *  \n*  *  *  \n*  *  *  \n";
+        whackAMole = new WhackAMole(ATTEMPTS_NUMBER, gridDimension);
+        whackAMole.whack(whackRow, whackColumn);
         assertEquals(expectedGrid, whackAMole.printGridToUser());
     }
 
@@ -214,10 +242,15 @@ public class WhackAMoleTest {
      */
     @Test
     public void printGridTest() {
-        String expectedGrid = "W  M  *  \n*  *  *  \n*  *  *  \n";
-        whackAMole = new WhackAMole(TEN_ATTEMPTS, THREE);
-        whackAMole.whack(ZERO, ZERO);
-        whackAMole.place(ZERO, ONE);
+        final int gridDimension = 3;
+        final int rowPlacement = 0;
+        final int columnPlacement = 1;
+        final int whackRow = 0;
+        final int whackColumn = 0;
+        final String expectedGrid = "W  M  *  \n*  *  *  \n*  *  *  \n";
+        whackAMole = new WhackAMole(ATTEMPTS_NUMBER, gridDimension);
+        whackAMole.whack(whackRow, whackColumn);
+        whackAMole.place(rowPlacement, columnPlacement);
         assertEquals(expectedGrid, whackAMole.printGrid());
     }
 }
