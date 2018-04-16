@@ -3,8 +3,10 @@ package org.minions.devfund.yuri;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * It is in charge to test the WackAMole class functionality.
@@ -19,7 +21,6 @@ public class WackAMoleTest {
     public static final char MOLE = 'M';
     public static final char WACKED = 'W';
     public static final char EMPTYCELL = '*';
-    public static final int EXPECTED_MOLES = 9;
     private WhackAMole game;
 
     /**
@@ -28,6 +29,7 @@ public class WackAMoleTest {
     @Before
     public void setUp() {
         game = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
+        game.insertMoles(GRID_DIMENSION);
     }
 
     /**
@@ -36,7 +38,7 @@ public class WackAMoleTest {
     @Test
     public void testMoleIsPlacedInSpecificCell() {
         game.place(POS_X, POS_Y);
-        assertEquals(MOLE, game.getGrid()[POS_X][POS_Y]);
+        assertEquals(MOLE, game.getMoleGrid()[POS_X][POS_Y]);
     }
 
     /**
@@ -44,7 +46,7 @@ public class WackAMoleTest {
      */
     @Test
     public void testAnSpecificCellIsEmpty() {
-        game.getGrid()[POS_X][POS_Y] = EMPTYCELL;
+        game.getMoleGrid()[POS_X][POS_Y] = EMPTYCELL;
         assertTrue(game.isEmptyCell(POS_X, POS_Y));
     }
 
@@ -53,7 +55,7 @@ public class WackAMoleTest {
      */
     @Test
     public void testAnSpecificCellIsMole() {
-        game.getGrid()[POS_X][POS_Y] = MOLE;
+        game.getMoleGrid()[POS_X][POS_Y] = MOLE;
         assertTrue(game.isMole(POS_X, POS_Y));
     }
 
@@ -70,10 +72,11 @@ public class WackAMoleTest {
      */
     @Test
     public void testMolesAmountInsertedInGridIsCorrect() {
+        game.insertMoles(MOLES_AMOUNT);
         int accumulator = 0;
         for (int row = 0; row < game.getDimension(); row++) {
-            for (int column = 0; column < game.getGrid()[row].length; column++) {
-                if (game.getGrid()[row][column] == MOLE) {
+            for (int column = 0; column < game.getMoleGrid()[row].length; column++) {
+                if (game.getMoleGrid()[row][column] == MOLE) {
                     accumulator++;
                 }
             }
@@ -87,7 +90,7 @@ public class WackAMoleTest {
     @Test
     public void testWackInsertedInGridIsCorrect() {
         game.whack(POS_X, POS_Y);
-        assertEquals(WACKED, game.getGrid()[POS_X][POS_Y]);
+        assertEquals(WACKED, game.getMoleGrid()[POS_X][POS_Y]);
     }
 
     /**
@@ -95,9 +98,12 @@ public class WackAMoleTest {
      */
     @Test
     public void testMolesLeftDecreaseWhenAMoleIsWhacked() {
+        final int attempts = 5;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
         game.place(POS_X, POS_Y);
         game.whack(POS_X, POS_Y);
-        assertEquals(EXPECTED_MOLES, game.getMolesLeft());
+        assertEquals(0, game.getMolesLeft());
     }
 
     /**
@@ -105,14 +111,119 @@ public class WackAMoleTest {
      */
     @Test
     public void testAllCellsGridAreFilled() {
+        final int attempts = 5;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
         int accumulator = 0;
         for (int row = 0; row < game.getDimension(); row++) {
-            for (int column = 0; column < game.getGrid()[row].length; column++) {
-                if (!Character.isWhitespace(game.getGrid()[row][column])) {
+            for (int column = 0; column < game.getMoleGrid()[row].length; column++) {
+                if (!Character.isWhitespace(game.getMoleGrid()[row][column])) {
                     accumulator++;
                 }
             }
         }
         assertEquals(CELLS_AMOUNT, accumulator);
+    }
+
+    /**
+     * Verifies that  grid for user is not empty.
+     */
+    @Test
+    public void testPrintGridToUser() {
+        String expectedResult = " ";
+        assertNotEquals("The grid is empty", expectedResult, game.printGridToUser());
+    }
+
+    /**
+     * Verifies that  grid is not empty.
+     */
+    @Test
+    public void testPrintGrid() {
+        String expectedResult = " ";
+        assertNotEquals("The grid is empty", expectedResult, game.printGrid());
+    }
+
+    /**
+     * Verifies that initial score for a player is  cero.
+     */
+    @Test
+    public  void testInitialScore() {
+        int expectedResult = 0;
+        assertEquals(expectedResult, game.getScore());
+    }
+
+    /**
+     * Verifies that is possible to hit to empty cell.
+     */
+    @Test
+    public void testWhackToEmptyCell() {
+        int posX = 0;
+        int posY = 0;
+        game.getMoleGrid()[posX][posY] = '*';
+        game.whack(posX, posY);
+        assertEquals('W', game.getMoleGrid()[posX][posY]);
+    }
+
+    /**
+     * Verifies that a cell contains a mole.
+     */
+    @Test
+    public void testTheCellIsMole() {
+        int posX = 0;
+        int posY = 0;
+        game.place(posX, posY);
+        char expectedResult = 'M';
+        assertEquals(expectedResult, game.getMoleGrid()[posX][posY]);
+    }
+
+    /**
+     * Verifies that a player is able to win.
+     */
+    @Test
+    public void testPlayerWin() {
+        final int attempts = 5;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
+        game.place(0, 0);
+        game.whack(0, 0);
+        assertTrue(game.playerWin());
+    }
+
+    /**
+     * Verifies that a player is able to win.
+     */
+    @Test
+    public void testPlayerLose() {
+        final int attempts = 5;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
+        game.place(0, 0);
+        game.whack(1, 1);
+        assertFalse(game.playerWin());
+    }
+    /**
+     * Verifies that a player does not have attempts.
+     */
+    @Test
+    public void testPlayerNoAttempts() {
+        final int attempts = 1;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
+        game.place(0, 0);
+        game.whack(1, 1);
+        assertTrue(game.noAttempts());
+    }
+
+    /**
+     * Verifies that a player has attempts.
+     */
+    @Test
+    public void testPlayerWithAttempts() {
+        final int attempts = 2;
+        final int dimension = 10;
+        WhackAMole game = new WhackAMole(attempts, dimension);
+        game.place(0, 0);
+        game.whack(1, 1);
+        assertFalse(game.noAttempts());
     }
 }

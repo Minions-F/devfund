@@ -22,9 +22,10 @@ final class WhackAMoleApp {
     public static void main(final String[] args) {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         WhackAMole whackAMoleGame = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
+        whackAMoleGame.insertMoles(GRID_DIMENSION);
         boolean givingUp = false;
-        while (!givingUp && !whackAMoleGame.playerWin() && !whackAMoleGame.playerLose()) {
-            whackAMoleGame.printGrid();
+        while (!givingUp && !whackAMoleGame.playerWin() && !whackAMoleGame.noAttempts()) {
+            System.out.println(whackAMoleGame.printGrid());
             System.out.println("==================================================");
             System.out.println("Type X = -1 and Y = -1 to exit of WackAMole Game");
             System.out.println(String.format("Type the position X , between 0 - %d :",
@@ -38,7 +39,7 @@ final class WhackAMoleApp {
             } else {
                 whackAMoleGame.whack(posX, posY);
                 System.out.println("==================================================");
-                whackAMoleGame.printGridToUser();
+                System.out.println(whackAMoleGame.printGridToUser());
                 System.out.println("==================================================");
             }
         }

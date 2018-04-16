@@ -10,14 +10,11 @@ public final class WhackAMole {
   public static final char MOLE = 'M';
   public static final char WACKED = 'W';
   public static final char EMPTYCELL = '*';
-  public static final int MOLES_AMOUNT = 10;
-  public static final int INITIAL_SCORE = 0;
-  public static final int ONE = 1;
   private int score;
   private int molesLeft;
   private int attemptsLeft;
   private int dimension;
-  private char[][] grid;
+  private char[][] moleGrid;
 
   /**
    * Constructor Method.
@@ -27,11 +24,10 @@ public final class WhackAMole {
   public WhackAMole(final int numAttempts, final int gridDimension) {
     dimension = gridDimension;
     attemptsLeft = numAttempts;
-    molesLeft = MOLES_AMOUNT;
-    score = INITIAL_SCORE;
-    grid = new char[gridDimension][gridDimension];
+    molesLeft = 0;
+    score = 0;
+    moleGrid = new char[gridDimension][gridDimension];
     fillGrid();
-    insertMoles();
   }
 
   /**
@@ -45,21 +41,20 @@ public final class WhackAMole {
   public boolean place(final int posX, final int posY) {
     boolean flag = false;
     if (isEmptyCell(posX, posY)) {
-      grid[posX][posY] = MOLE;
+      moleGrid[posX][posY] = MOLE;
       flag = true;
+      molesLeft++;
     }
     return flag;
   }
 
   /**
    * It is in charge to insert Moles to moleGrid.
-    */
-  public void insertMoles() {
-    int accumulator = 0;
-    while (accumulator < MOLES_AMOUNT) {
-      if (place(getRandomNumber(), getRandomNumber())) {
-        accumulator++;
-      }
+   * @param molesAmount moles amount.
+   */
+  public void insertMoles(final int molesAmount) {
+    while (molesLeft < molesAmount) {
+      place(getRandomNumber(), getRandomNumber());
     }
   }
 
@@ -70,13 +65,11 @@ public final class WhackAMole {
    */
   public void whack(final int posX, final int posY) {
     if (isMole(posX, posY)) {
-      increaseScore();
-      decreaseAttemptsLeft();
-      decreaseMolesLeft();
-    } else {
-      decreaseAttemptsLeft();
+      score++;
+      molesLeft--;
     }
-    grid[posX][posY] = WACKED;
+    attemptsLeft--;
+    moleGrid[posX][posY] = WACKED;
   }
 
   /**
@@ -87,7 +80,7 @@ public final class WhackAMole {
    *         <code>false</code> if it is not.
    */
   public boolean isEmptyCell(final int posX, final int posY) {
-    return grid[posX][posY] == EMPTYCELL;
+    return moleGrid[posX][posY] == EMPTYCELL;
   }
 
   /**
@@ -98,16 +91,16 @@ public final class WhackAMole {
    *         <code>false</code> if it is not.
    */
   public boolean isMole(final int posX, final int posY) {
-    return grid[posX][posY] == MOLE;
+    return moleGrid[posX][posY] == MOLE;
   }
 
   /**
    * This method initialize the moleGrid with empty values.
    */
   public void fillGrid() {
-    for (int row = 0; row < grid.length; row++) {
-      for (int column = 0; column < grid[row].length; column++) {
-        grid[row][column] = EMPTYCELL;
+    for (int row = 0; row < moleGrid.length; row++) {
+      for (int column = 0; column < moleGrid[row].length; column++) {
+        moleGrid[row][column] = EMPTYCELL;
       }
     }
   }
@@ -120,23 +113,38 @@ public final class WhackAMole {
   public int getRandomNumber() {
     return new Random().nextInt(dimension);
   }
-
   /**
-   * Prints the Grid without showing where the moles are.
+   * Gets the Grid without showing where the moles are.
+   * @return the grid.
    */
-  public void printGridToUser() {
-    for (int row = 0; row < grid.length; row++) {
-      for (int column = 0; column < grid[row].length; column++) {
-        if (grid[row][column] == MOLE) {
-          System.out.print(String.format("%c ", EMPTYCELL));
+  public String printGridToUser() {
+    final StringBuilder stringBuilder = new StringBuilder();
+    for (int row = 0; row < moleGrid.length; row++) {
+      for (int column = 0; column < moleGrid[row].length; column++) {
+        if (moleGrid[row][column] == MOLE) {
+          stringBuilder.append(String.format("%c ", EMPTYCELL));
         } else {
-          System.out.print(String.format("%c ", grid[row][column]));
+          stringBuilder.append(String.format("%c ", moleGrid[row][column]));
         }
       }
-      System.out.print("\n");
+      stringBuilder.append("\n");
     }
+    return stringBuilder.toString();
   }
-
+  /**
+   * Gets the moleGrid completely.
+   * @return the grid.
+   */
+  public String printGrid() {
+    final StringBuilder stringBuilder = new StringBuilder();
+    for (int row = 0; row < moleGrid.length; row++) {
+      for (int column = 0; column < moleGrid[row].length; column++) {
+        stringBuilder.append(String.format("%c ", moleGrid[row][column]));
+      }
+      stringBuilder.append("\n");
+    }
+    return stringBuilder.toString();
+  }
   /**
    * It is in charge to get the moleGrid dimension.
    * @return  moleGrid dimension.
@@ -146,41 +154,20 @@ public final class WhackAMole {
   }
 
   /**
-   * It ins charge to get the moleGrid.
-   * @return the moleGrid matrix.
-   */
-  public char[][] getGrid() {
-    char[][] gridGame = this.grid;
-    return gridGame;
-  }
-
-  /**
-   * Prints the moleGrid completely.
-   */
-  public void printGrid() {
-    for (int row = 0; row < grid.length; row++) {
-      for (int column = 0; column < grid[row].length; column++) {
-        System.out.print(String.format("%c ", grid[row][column]));
-      }
-      System.out.print("\n");
-    }
-  }
-
-  /**
-   * It is in charge to get player score.
-   * @return the player score.
+   * It is in charge to get the player score..
+   * @return  score.
    */
   public int getScore() {
     return score;
   }
 
   /**
-   * It is in charge to increase the player score.
+   * It ins charge to get the moleGrid.
+   * @return the moleGrid matrix.
    */
-  public void increaseScore() {
-    score = score + ONE;
+  public char[][] getMoleGrid() {
+    return moleGrid.clone();
   }
-
   /**
    * It is in charge to get the moles left amount.
    * @return moles left amount.
@@ -188,14 +175,6 @@ public final class WhackAMole {
   public int getMolesLeft() {
     return molesLeft;
   }
-
-  /**
-   * It is in charge to decrease the moles left amount.
-   */
-  public void decreaseMolesLeft() {
-    molesLeft = molesLeft - ONE;
-  }
-
   /**
    * It is in charge to get the player attempts left amount.
    * @return player attempts left amount.
@@ -203,14 +182,6 @@ public final class WhackAMole {
   public int getAttemptsLeft() {
     return attemptsLeft;
   }
-
-  /**
-   * It is in charge to decrease the player attempts left amount.
-   */
-  public void decreaseAttemptsLeft() {
-    attemptsLeft = attemptsLeft - ONE;
-  }
-
   /**
    * It is in charge to verify if the player won.
    * @return <code>true</code> if the player won ;
@@ -225,7 +196,7 @@ public final class WhackAMole {
    * @return <code>true</code> if the player lose ;
    *         <code>false</code> if it is not.
    */
-  public boolean playerLose() {
+  public boolean noAttempts() {
     return attemptsLeft == 0;
   }
 }
