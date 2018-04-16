@@ -144,4 +144,16 @@ public class WhackAMoleTest {
         whackAMole.loadMole();
         assertEquals(whackAMole.getMolesLeft(), TOTAL_MOLES);
     }
+
+    /**
+     * Verifies that the load module jump an already mole in the grid.
+     */
+    @Test
+    public void verifyLoadMoleJumpAMole() {
+        final int totalMoles = 4;
+        String test = "MM\nMM".trim();
+        WhackAMole whackAMoleTest = new WhackAMole(1, 2, totalMoles);
+        whackAMoleTest.loadMole();
+        assertEquals(test, whackAMoleTest.getGrid().toString().trim());
+    }
 }
