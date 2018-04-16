@@ -137,7 +137,7 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Verifies id the load mole is working.
+     * Verifies id the load mole is working in the Game.
      */
     @Test
     public void verifyLoadMoleIsWorking() {
