@@ -12,6 +12,7 @@ public class WhackAMole {
 
     private static final char GRID_WHITE_SPACE = '*';
     private static final char MOLE = 'M';
+    private int totalMoles;
     private int molesLeft;
     private int score;
     private int attemptsLeft;
@@ -23,9 +24,11 @@ public class WhackAMole {
      *
      * @param numAttempts   - The number of attempts for user.
      * @param gridDimension - The dimension of the grid.
+     * @param totalMoles - The total moles in the grid.
      */
-    WhackAMole(int numAttempts, int gridDimension) {
+    WhackAMole(int numAttempts, int gridDimension, int totalMoles) {
         attemptsLeft = numAttempts;
+        this.totalMoles = totalMoles;
         this.gridDimension = gridDimension;
         moleGrid = new char[this.gridDimension][this.gridDimension];
         loadGrid();
@@ -61,6 +64,15 @@ public class WhackAMole {
     }
 
     /**
+     * Gets the number of current moles.
+     *
+     * @return The number of moles.
+     */
+    int getMolesLeft() {
+        return molesLeft;
+    }
+
+    /**
      * Places a Mole.
      *
      * @param posX - Represent the X coordinate.
@@ -91,13 +103,6 @@ public class WhackAMole {
             score++;
         }
         attemptsLeft--;
-        printGridToUser();
-    }
-
-    /**
-     * Prints the current grid for user.
-     */
-    private void printGridToUser() {
         System.out.println(getUserGrid());
     }
 
@@ -106,7 +111,7 @@ public class WhackAMole {
      *
      * @return A grid for user.
      */
-    private StringBuilder getUserGrid() {
+    public StringBuilder getUserGrid() {
         StringBuilder userGrid = new StringBuilder();
         for (int i = 0; i < this.gridDimension; i++) {
             for (int j = 0; j < this.gridDimension; j++) {
@@ -124,23 +129,17 @@ public class WhackAMole {
     }
 
     /**
-     * Prints the grid.
-     */
-    public void printGrid() {
-        System.out.println(getGrid());
-    }
-
-    /**
      * Build the Grid.
      *
      * @return The grid.
      */
-    private StringBuilder getGrid() {
+    public StringBuilder getGrid() {
         StringBuilder grid = new StringBuilder();
         for (int i = 0; i < this.gridDimension; i++) {
             for (int j = 0; j < this.gridDimension; j++) {
                 grid.append(moleGrid[i][j]);
             }
+            grid.append("\n");
         }
         return grid;
     }
@@ -154,15 +153,14 @@ public class WhackAMole {
                 moleGrid[i][j] = GRID_WHITE_SPACE;
             }
         }
-        loadMole();
     }
 
     /**
      * Places a mole Randomly.
      */
-    private void loadMole() {
+    public void loadMole() {
         int complete = 0;
-        while (complete < molesLeft) {
+        while (complete < totalMoles) {
             int x = ThreadLocalRandom.current().nextInt(0, gridDimension);
             int y = ThreadLocalRandom.current().nextInt(0, gridDimension);
             if (moleGrid[x][y] != 'M') {

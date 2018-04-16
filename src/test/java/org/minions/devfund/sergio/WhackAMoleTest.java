@@ -3,6 +3,7 @@ package org.minions.devfund.sergio;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,13 +17,15 @@ public class WhackAMoleTest {
     private static final int ATTEMPTS = 50;
     private static final int GRID_DIMENSION = 10;
     private static final int SCORE = 0;
+    private static final int TOTAL_MOLES = 10;
     private WhackAMole whackAMole;
+
 
     /**
      * Constructor for WhackAMoleTest.
      */
     public WhackAMoleTest() {
-         this.whackAMole = new WhackAMole(ATTEMPTS, GRID_DIMENSION);
+        this.whackAMole = new WhackAMole(ATTEMPTS, GRID_DIMENSION, TOTAL_MOLES);
     }
 
     /**
@@ -33,6 +36,17 @@ public class WhackAMoleTest {
         final int posX = 1;
         final int posY = 5;
         assertTrue(whackAMole.place(posX, posY));
+    }
+
+    /**
+     * Verifies if it not possible place a mole in a mole already created.
+     */
+    @Test
+    public void verifyIsAlreadyAMole() {
+        final int posX = 1;
+        final int posY = 1;
+        whackAMole.place(posX, posY);
+        assertFalse(whackAMole.place(posX, posY));
     }
 
     /**
@@ -79,5 +93,54 @@ public class WhackAMoleTest {
         whackAMole.place(posX, posY);
         whackAMole.whack(posX,  posY);
         assertEquals(SCORE + 1, whackAMole.getScore());
+    }
+
+    /**
+     * Verifies if the grid for user no show the moles.
+     */
+    @Test
+    public void verifyUserGridShowCorrectly() {
+        final int posX = 4;
+        final int posY = 5;
+        whackAMole.place(posX, posY);
+        StringBuilder test = new StringBuilder();
+        for (int i = 0; i < GRID_DIMENSION; i++) {
+            for (int j = 0; j < GRID_DIMENSION; j++) {
+                test.append('*');
+            }
+            test.append("\n");
+        }
+        assertEquals(test.toString().trim(), whackAMole.getUserGrid().toString().trim());
+    }
+
+    /**
+     * Verifies that get grid is working.
+     */
+    @Test
+    public void verifyGetGridIsWorking() {
+        final int posX = 2;
+        final int posY = 2;
+        whackAMole.place(posX, posY);
+        StringBuilder test = new StringBuilder();
+        for (int i = 0; i < GRID_DIMENSION; i++) {
+            for (int j = 0; j < GRID_DIMENSION; j++) {
+                if (i == posX && j == posY) {
+                    test.append('M');
+                } else {
+                    test.append('*');
+                }
+            }
+            test.append("\n");
+        }
+        assertEquals(test.toString().trim(), whackAMole.getGrid().toString().trim());
+    }
+
+    /**
+     * Verifies id the load mole is working.
+     */
+    @Test
+    public void verifyLoadMoleIsWorking() {
+        whackAMole.loadMole();
+        assertEquals(whackAMole.getMolesLeft(), TOTAL_MOLES);
     }
 }
