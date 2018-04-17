@@ -21,15 +21,15 @@ public class WackAMoleTest {
     public static final char MOLE = 'M';
     public static final char WACKED = 'W';
     public static final char EMPTYCELL = '*';
-    private WhackAMole game;
+    private WhackAMole wackamole;
 
     /**
      * Method setup.
      */
     @Before
     public void setUp() {
-        game = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
-        game.insertMoles(GRID_DIMENSION);
+        wackamole = new WhackAMole(NUM_ATTEMPTS, GRID_DIMENSION);
+        wackamole.insertMoles(GRID_DIMENSION);
     }
 
     /**
@@ -37,8 +37,8 @@ public class WackAMoleTest {
      */
     @Test
     public void testMoleIsPlacedInSpecificCell() {
-        game.place(POS_X, POS_Y);
-        assertEquals(MOLE, game.getMoleGrid()[POS_X][POS_Y]);
+        wackamole.place(POS_X, POS_Y);
+        assertEquals(MOLE, wackamole.getMoleGrid()[POS_X][POS_Y]);
     }
 
     /**
@@ -46,8 +46,8 @@ public class WackAMoleTest {
      */
     @Test
     public void testAnSpecificCellIsEmpty() {
-        game.getMoleGrid()[POS_X][POS_Y] = EMPTYCELL;
-        assertTrue(game.isEmptyCell(POS_X, POS_Y));
+        wackamole.getMoleGrid()[POS_X][POS_Y] = EMPTYCELL;
+        assertTrue(wackamole.isEmptyCell(POS_X, POS_Y));
     }
 
     /**
@@ -55,8 +55,8 @@ public class WackAMoleTest {
      */
     @Test
     public void testAnSpecificCellIsMole() {
-        game.getMoleGrid()[POS_X][POS_Y] = MOLE;
-        assertTrue(game.isMole(POS_X, POS_Y));
+        wackamole.getMoleGrid()[POS_X][POS_Y] = MOLE;
+        assertTrue(wackamole.isMole(POS_X, POS_Y));
     }
 
     /**
@@ -64,7 +64,7 @@ public class WackAMoleTest {
      */
     @Test
     public void testNumberAttemptsIsCorrect() {
-        assertEquals(NUM_ATTEMPTS, game.getAttemptsLeft());
+        assertEquals(NUM_ATTEMPTS, wackamole.getAttemptsLeft());
     }
 
     /**
@@ -72,11 +72,11 @@ public class WackAMoleTest {
      */
     @Test
     public void testMolesAmountInsertedInGridIsCorrect() {
-        game.insertMoles(MOLES_AMOUNT);
+        wackamole.insertMoles(MOLES_AMOUNT);
         int accumulator = 0;
-        for (int row = 0; row < game.getDimension(); row++) {
-            for (int column = 0; column < game.getMoleGrid()[row].length; column++) {
-                if (game.getMoleGrid()[row][column] == MOLE) {
+        for (int row = 0; row < wackamole.getDimension(); row++) {
+            for (int column = 0; column < wackamole.getMoleGrid()[row].length; column++) {
+                if (wackamole.getMoleGrid()[row][column] == MOLE) {
                     accumulator++;
                 }
             }
@@ -89,8 +89,8 @@ public class WackAMoleTest {
      */
     @Test
     public void testWackInsertedInGridIsCorrect() {
-        game.whack(POS_X, POS_Y);
-        assertEquals(WACKED, game.getMoleGrid()[POS_X][POS_Y]);
+        wackamole.whack(POS_X, POS_Y);
+        assertEquals(WACKED, wackamole.getMoleGrid()[POS_X][POS_Y]);
     }
 
     /**
@@ -131,7 +131,7 @@ public class WackAMoleTest {
     @Test
     public void testPrintGridToUser() {
         String expectedResult = " ";
-        assertNotEquals("The grid is empty", expectedResult, game.printGridToUser());
+        assertNotEquals("The grid is empty", expectedResult, wackamole.printGridToUser());
     }
 
     /**
@@ -140,7 +140,7 @@ public class WackAMoleTest {
     @Test
     public void testPrintGrid() {
         String expectedResult = " ";
-        assertNotEquals("The grid is empty", expectedResult, game.printGrid());
+        assertNotEquals("The grid is empty", expectedResult, wackamole.printGrid());
     }
 
     /**
@@ -149,7 +149,7 @@ public class WackAMoleTest {
     @Test
     public  void testInitialScore() {
         int expectedResult = 0;
-        assertEquals(expectedResult, game.getScore());
+        assertEquals(expectedResult, wackamole.getScore());
     }
 
     /**
@@ -159,9 +159,9 @@ public class WackAMoleTest {
     public void testWhackToEmptyCell() {
         int posX = 0;
         int posY = 0;
-        game.getMoleGrid()[posX][posY] = '*';
-        game.whack(posX, posY);
-        assertEquals('W', game.getMoleGrid()[posX][posY]);
+        wackamole.getMoleGrid()[posX][posY] = '*';
+        wackamole.whack(posX, posY);
+        assertEquals('W', wackamole.getMoleGrid()[posX][posY]);
     }
 
     /**
@@ -171,9 +171,9 @@ public class WackAMoleTest {
     public void testTheCellIsMole() {
         int posX = 0;
         int posY = 0;
-        game.place(posX, posY);
+        wackamole.place(posX, posY);
         char expectedResult = 'M';
-        assertEquals(expectedResult, game.getMoleGrid()[posX][posY]);
+        assertEquals(expectedResult, wackamole.getMoleGrid()[posX][posY]);
     }
 
     /**
