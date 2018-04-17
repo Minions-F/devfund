@@ -8,6 +8,7 @@ class WhackAMole {
     private int molesLeft;
     private int attemptsLeft;
     private char[][] moleGrid;
+    private StringBuilder gridInString = new StringBuilder();
 
     /**
      * Constructor.
@@ -30,7 +31,7 @@ class WhackAMole {
     boolean place(int x, int y) {
         if (moleGrid[x][y] != 'M') {
             moleGrid[x][y] = 'M';
-            molesLeft += 1;
+            molesLeft ++;
             return true;
         }
         return false;
@@ -47,8 +48,8 @@ class WhackAMole {
     void whack(int x, int y) {
         if (moleGrid[x][y] == 'M') {
             moleGrid[x][y] = 'W';
-            molesLeft -= 1;
-            score += 1;
+            molesLeft --;
+            score ++;
         }
         attemptsLeft--;
     }
@@ -60,22 +61,25 @@ class WhackAMole {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 moleGrid[i][j] = '*';
-                System.out.print(moleGrid[i][j] + "\t");
+                gridInString.append(moleGrid[i][j] + "\t");
             }
-            System.out.println();
+            gridInString.append("\n");
         }
+        System.out.print(gridInString);
     }
 
     /**
      * This method print the last grid for user.
      */
     void printGrid() {
+        gridInString.setLength(0);
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
-                System.out.print(moleGrid[i][j] + "\t");
+                gridInString.append(moleGrid[i][j] + "\t");
             }
-            System.out.println();
+            gridInString.append("\n");
         }
+        System.out.print(gridInString);
     }
 
     /**
@@ -93,8 +97,9 @@ class WhackAMole {
      * This method print the actual results in each attempt.
      */
     void results() {
-        System.out.println("Attempts available: " + attemptsLeft + "   " + "Moles available: "
-                + molesLeft + "   " + "Score: " + score);
+        String result = String.format("--Attempts available: %1$d  --Moles available: %2$d  --Score: %3$d",
+                attemptsLeft, molesLeft, score);
+        System.out.println(result);
     }
 
     /**
