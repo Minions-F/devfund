@@ -138,6 +138,23 @@ public class WhackAMoleTest {
     }
 
     /**
+     * Print grid to user .
+     */
+    @Test
+    public void testChangeMbyCharacterGridWhackToUser() {
+        final int gridDimension = 3;
+        final int placementX = 0;
+        final int placementY = 1;
+        final int whackRow = 0;
+        final int whackColumn = 0;
+        final String expectedGrid = "W  *  *  \n*  *  *  \n*  *  *  \n";
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        whackAMole.whack(whackRow, whackColumn);
+        whackAMole.place(placementX, placementY);
+        assertEquals(expectedGrid, whackAMole.printGridToUser());
+    }
+
+    /**
      * Print grid to user empty .
      */
     @Test
