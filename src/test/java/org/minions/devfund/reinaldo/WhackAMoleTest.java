@@ -163,7 +163,7 @@ public class WhackAMoleTest {
         final int gridDimension = 3;
         final int placementX = 0;
         final int placementY = 0;
-        WhackAMole whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
         assertTrue(whackAMole.place(placementX, placementY));
     }
 
@@ -174,7 +174,7 @@ public class WhackAMoleTest {
     public void testPlayerNoAttempts() {
         final int attempts = 1;
         final int dimension = 10;
-        WhackAMole whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole = new WhackAMole(attempts, dimension);
         whackAMole.place(0, 0);
         whackAMole.whack(1, 1);
         assertTrue(whackAMole.getAttemptsLeft() == 0);
