@@ -112,19 +112,17 @@ public class WhackAMole {
 
     /**
      * This method return the molesLeft.
-     * @return Score
+     * @return MolesLeft
      */
     public int getMolesLeft() {
         return molesLeft;
     }
 
     /**
-     * This method return the molesLeft.
-     * @return Score
+     * This method return the final grid.
+     * @return Grid
      */
     public char[][] getGrid() {
         return moleGrid.clone();
     }
-
-
 }

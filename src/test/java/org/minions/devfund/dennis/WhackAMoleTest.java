@@ -129,6 +129,26 @@ public class WhackAMoleTest {
     public void testReturnFalseIfTheMoleAlreadyAdded() {
         whackamole.place(POSITION_X, POSITION_Y);
         assertFalse(whackamole.place(POSITION_X, POSITION_Y));
+    }
 
+    /**
+     * Test change the Mole to Whack.
+     */
+    @Test
+    public void testIsPossibleWhackAMole() {
+        whackamole.whack(POSITION_X, POSITION_Y);
+        assertEquals(1, whackamole.getScore());
+        assertEquals(ATTEMPTS - 1, whackamole.getAttempts());
+        assertEquals(0, whackamole.getMolesLeft());
+    }
+
+    /**
+     * Test miss the whack.
+     */
+    @Test
+    public void testMissTheWhack() {
+        whackamole.place(POSITION_X, POSITION_Y);
+        whackamole.whack(POSITION_X, POSITION_Y);
+        assertNotEquals(WHACK, whackamole.getGrid()[POSITION_X][POSITION_Y]);
     }
 }
