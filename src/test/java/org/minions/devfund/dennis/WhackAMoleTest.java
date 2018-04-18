@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- *
+ * Unit Test class for WhackAMole game for all methods.
  */
 public class WhackAMoleTest {
     private static final int ATTEMPTS = 50;
@@ -102,7 +102,6 @@ public class WhackAMoleTest {
      */
     @Test
     public void testInitialAmountOfMolesIs0() {
-
         assertEquals(0, whackamole.getMolesLeft());
     }
 
@@ -111,7 +110,6 @@ public class WhackAMoleTest {
      */
     @Test
     public void testInitialAmountOfAttemptsIs50() {
-
         assertEquals(ATTEMPTS, whackamole.getAttempts());
     }
 
@@ -120,7 +118,6 @@ public class WhackAMoleTest {
      */
     @Test
     public void testInitialScoreIs0() {
-
         assertEquals(0, whackamole.getScore());
     }
 }
