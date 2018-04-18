@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Unit Test class for WhackAMole game for all methods.
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 public class WhackAMoleTest {
     private static final int ATTEMPTS = 50;
     private static final int DIMENSION = 10;
-    private static final int POSITION_X = 1;
+    private static final int POSITION_X = 3;
     private static final int POSITION_Y = 3;
     private static final int WPOSITION_X = 3;
     private static final int WPOSITION_Y = 8;
@@ -21,7 +22,7 @@ public class WhackAMoleTest {
     private static final char EMPTY = '*';
     private String gridToUser = "**********\n**********\n**********\n**********\n**********\n**********\n**********"
             + "\n**********\n**********\n**********\n";
-    private String finalGridToUser = "**********\n***W******\n**********\n********M*\n**********\n**********"
+    private String finalGridToUser = "**********\n**********\n**********\n***W****M*\n**********\n**********"
             + "\n**********\n**********\n**********\n**********\n";
     private WhackAMole whackamole;
 
@@ -119,5 +120,15 @@ public class WhackAMoleTest {
     @Test
     public void testInitialScoreIs0() {
         assertEquals(0, whackamole.getScore());
+    }
+
+    /**
+     * Test if the mole already added.
+     */
+    @Test
+    public void testReturnFalseIfTheMoleAlreadyAdded() {
+        whackamole.place(POSITION_X, POSITION_Y);
+        assertFalse(whackamole.place(POSITION_X, POSITION_Y));
+
     }
 }

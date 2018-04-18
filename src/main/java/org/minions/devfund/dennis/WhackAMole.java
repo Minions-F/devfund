@@ -8,7 +8,6 @@ public class WhackAMole {
     private int molesLeft;
     private int attemptsLeft;
     private char[][] moleGrid;
-    private StringBuilder gridInString = new StringBuilder();
 
     /**
      * Constructor.
@@ -59,13 +58,14 @@ public class WhackAMole {
      * @return the grid to user
      */
     public String printGridToUser() {
+        StringBuilder gridInStringToUser = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
-                gridInString.append("*");
+                gridInStringToUser.append("*");
             }
-            gridInString.append('\n');
+            gridInStringToUser.append('\n');
         }
-        return gridInString.toString();
+        return gridInStringToUser.toString();
     }
 
     /**
@@ -73,7 +73,7 @@ public class WhackAMole {
      * @return the last grid to user
      */
     public String printGrid() {
-        gridInString.setLength(0);
+        StringBuilder gridInString = new StringBuilder();
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 gridInString.append(moleGrid[i][j]);
