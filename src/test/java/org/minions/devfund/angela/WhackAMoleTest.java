@@ -3,13 +3,10 @@ package org.minions.devfund.angela;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test for {@link WhackAMole}.
@@ -27,39 +24,6 @@ public class WhackAMoleTest {
     @Before
     public void setup() {
         whackAMole = new WhackAMole(ATTEMPTS, GRID_DIMENSION);
-    }
-
-    /**
-     * Verify main.
-     *
-     * @throws FileNotFoundException {@link FileNotFoundException}.
-     */
-    @Test
-    public void main() throws FileNotFoundException {
-        System.setIn(new FileInputStream("input.txt"));
-        Main.main(new String[0]);
-    }
-
-    /**
-     * Verify main game over.
-     *
-     * @throws FileNotFoundException {@link FileNotFoundException}.
-     */
-    @Test
-    public void mainGameOver() throws FileNotFoundException {
-        System.setIn(new FileInputStream("inputGameOver.txt"));
-        Main.main(new String[0]);
-    }
-
-    /**
-     * Verify main won.
-     *
-     * @throws FileNotFoundException {@link FileNotFoundException}.
-     */
-    @Test
-    public void mainWon() throws FileNotFoundException {
-        System.setIn(new FileInputStream("inputWon.txt"));
-        Main.main(new String[0]);
     }
 
     /**
@@ -105,6 +69,7 @@ public class WhackAMoleTest {
      */
     @Test
     public void prints() {
+        whackAMole.place(1, 1);
         assertNotEquals("Grid is empty", "", whackAMole.printGrid());
         assertNotEquals("Grid is empty", "", whackAMole.printGridToUser());
     }
