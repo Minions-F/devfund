@@ -6,6 +6,7 @@ import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /***
  * Created by reinaldo on 4/12/2018.
@@ -152,6 +153,31 @@ public class WhackAMoleTest {
         whackAMole.whack(whackRow, whackColumn);
         whackAMole.place(placementX, placementY);
         assertEquals(expectedGrid, whackAMole.printGridToUser());
+    }
+
+    /**
+     * Mole on  a pleace.
+     */
+    @Test
+    public void testPutAMoleAPleace() {
+        final int gridDimension = 3;
+        final int placementX = 0;
+        final int placementY = 0;
+        WhackAMole whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        assertTrue(whackAMole.place(placementX, placementY));
+    }
+
+    /**
+     * no attemps .
+     */
+    @Test
+    public void testPlayerNoAttempts() {
+        final int attempts = 1;
+        final int dimension = 10;
+        WhackAMole whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.place(0, 0);
+        whackAMole.whack(1, 1);
+        assertTrue(whackAMole.getAttemptsLeft() == 0);
     }
 
     /**
