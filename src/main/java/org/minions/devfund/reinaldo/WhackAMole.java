@@ -12,6 +12,8 @@ public class WhackAMole {
     private int molesLeft;
     private int cantMoles;
     private char[][] moleGrid;
+    private static final String NEWLINE = "\n";
+    private static final String SPACES = "  ";
 
     /***
      * This is the construtor to WhackAMole.
@@ -24,21 +26,19 @@ public class WhackAMole {
         cantMoles = gridDimension;
         molesLeft = gridDimension;
         this.gridDimension = gridDimension;
-        moleGrid = getFillWhackAMole();
+        moleGrid = new char[gridDimension][gridDimension];
+        getFillWhackAMole();
     }
 
     /***
      * Methods to fill the grid with character *.
-     * @return char[][].
      */
-    public char[][] getFillWhackAMole() {
-        char[][] moleGridNew = new char[gridDimension ][gridDimension ];
-        for (int column = 0; column < gridDimension; column++) {
-            for (int row = 0; row < gridDimension; row++) {
-                moleGridNew[column][row] = '*';
+    public void getFillWhackAMole() {
+        for (int row = 0; row < moleGrid.length; row++) {
+            for (int column = 0; column < moleGrid[row].length; column++) {
+                moleGrid[row][column] = '*';
             }
         }
-        return moleGridNew;
     }
 
     /**
@@ -64,40 +64,47 @@ public class WhackAMole {
     public void whack(int postX, int postY) {
         if (moleGrid[postX][postY] == 'M') {
             score += USERSCORE;
-            attemptsLeft--;
             molesLeft--;
-            moleGrid[postX][postY] = 'W';
-        } else {
-            attemptsLeft--;
         }
+        moleGrid[postX][postY] = 'W';
+        attemptsLeft--;
+
     }
 
     /**
      * Methods that print the grid.
+     *
+     * @return grid string.
      */
-    public void printGrid() {
+    public String printGrid() {
+        StringBuilder grid = new StringBuilder();
         for (int column = 0; column < gridDimension; column++) {
             for (int row = 0; row < gridDimension; row++) {
-                System.out.print(moleGrid[column][row]);
+                grid.append(String.valueOf(moleGrid[column][row]).concat(SPACES));
             }
-            System.out.println();
+            grid.append(NEWLINE);
         }
+        return grid.toString();
     }
 
     /**
      * Method that print to user.
+     *
+     * @return user grid string.
      */
-    public void printGridToUser() {
+    public String printGridToUser() {
+        StringBuilder userGrid = new StringBuilder();
         for (int column = 0; column < gridDimension; column++) {
             for (int row = 0; row < gridDimension; row++) {
                 if (moleGrid[column][row] == 'M') {
-                    System.out.print("*");
+                    userGrid.append(String.valueOf("*").concat(SPACES));
                 } else {
-                    System.out.print(moleGrid[column][row]);
+                    userGrid.append(String.valueOf(moleGrid[column][row]).concat(SPACES));
                 }
             }
-            System.out.println();
+            userGrid.append(NEWLINE);
         }
+        return userGrid.toString();
     }
 
     /**

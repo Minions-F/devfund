@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /***
  * Created by reinaldo on 4/12/2018.
@@ -26,18 +26,29 @@ public class WhackAMoleTest {
     }
 
     /**
-     *Test when.
+     * test score.
      */
     @Test
-    public void testWhackMoleWhenTheFillMoleGrid() {
+    public void testWhenScoreIsCer() {
+        final int expectedScore = 0;
+        assertEquals(expectedScore, whackAMole.getScore());
+    }
 
-        //when
-        final char[][] moleGriActualResult = {{'*', '*', '*'}, {'*', '*', '*'}, {'*', '*', '*'}};
+    /**
+     * Test mole left.
+     */
+    @Test
+    public void testWhenMolesLeftIsCer() {
+        final int expectedMolesLeft = 3;
+        assertEquals(expectedMolesLeft, whackAMole.getMolesLeft());
+    }
 
-        //then
-        final char[][] moleGridExpectedResult = whackAMole.getFillWhackAMole();
-
-        assertArrayEquals(moleGridExpectedResult, moleGriActualResult);
+    /**
+     * Test attempts left.
+     */
+    @Test
+    public void testWhenAttemptsLeft() {
+        assertEquals(NUM_ATTEMPTS, whackAMole.getAttemptsLeft());
     }
 
     /**
@@ -92,5 +103,36 @@ public class WhackAMoleTest {
         whackAMole.place(2, 2);
         whackAMole.whack(0, 0);
         Assert.assertEquals(EXPECTED2, whackAMole.getMolesLeft());
+    }
+
+    /**
+     * Print the grid with M and W.
+     */
+    @Test
+    public void printGridTest() {
+        final int gridDimension = 3;
+        final int placementX = 0;
+        final int placementY = 1;
+        final int whackRow = 0;
+        final int whackColumn = 0;
+        final String expectedGrid = "W  M  *  \n*  *  *  \n*  *  *  \n";
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        whackAMole.whack(whackRow, whackColumn);
+        whackAMole.place(placementX, placementY);
+        assertEquals(expectedGrid, whackAMole.printGrid());
+    }
+
+    /**
+     * Print grid to user .
+     */
+    @Test
+    public void testPrintGridWhackToUser() {
+        final int gridDimension = 3;
+        final int whackRow = 0;
+        final int whackColumn = 0;
+        final String expectedGrid = "W  *  *  \n*  *  *  \n*  *  *  \n";
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        whackAMole.whack(whackRow, whackColumn);
+        assertEquals(expectedGrid, whackAMole.printGridToUser());
     }
 }
