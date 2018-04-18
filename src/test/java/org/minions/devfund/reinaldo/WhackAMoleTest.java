@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /***
  * Created by reinaldo on 4/12/2018.
@@ -134,5 +135,14 @@ public class WhackAMoleTest {
         whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
         whackAMole.whack(whackRow, whackColumn);
         assertEquals(expectedGrid, whackAMole.printGridToUser());
+    }
+
+    /**
+     * Print grid to user empty .
+     */
+    @Test
+    public void testPrintGridToUserEmpty() {
+        String expectedResult = " ";
+        assertNotEquals(expectedResult, whackAMole.printGridToUser());
     }
 }
