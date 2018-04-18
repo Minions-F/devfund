@@ -168,6 +168,18 @@ public class WhackAMoleTest {
     }
 
     /**
+     * Is Mole on pleace.
+     */
+    @Test
+    public void testIsNotMoleAPleace() {
+        final int gridDimension = 3;
+        final int placementX = 0;
+        final int placementY = 0;
+        whackAMole = new WhackAMole(NUM_ATTEMPTS, gridDimension);
+        assertTrue(whackAMole.isMoleInTheCell(placementX, placementY));
+    }
+
+    /**
      * no attemps .
      */
     @Test

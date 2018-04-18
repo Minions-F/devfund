@@ -10,7 +10,6 @@ public class WhackAMole {
     private int gridDimension;
     private int score;
     private int molesLeft;
-    private int cantMoles;
     private char[][] moleGrid;
     private static final String NEWLINE = "\n";
     private static final String SPACES = "  ";
@@ -23,7 +22,6 @@ public class WhackAMole {
     WhackAMole(final int numAttempts, int gridDimension) {
         score = 0;
         attemptsLeft = numAttempts;
-        cantMoles = gridDimension;
         molesLeft = gridDimension;
         this.gridDimension = gridDimension;
         moleGrid = new char[gridDimension][gridDimension];
@@ -48,12 +46,23 @@ public class WhackAMole {
      * @return boolean
      */
     public boolean place(int postX, int postY) {
-        if (moleGrid[postX][postY] == '*' && cantMoles > 0) {
+        if (isMoleInTheCell(postX, postY)) {
             moleGrid[postX][postY] = 'M';
-            cantMoles--;
             return true;
         }
         return false;
+    }
+
+    /**
+     *
+     * verifies the mole in the position.
+     * @param posX value
+     * @param posY value
+     * @return boolean
+     */
+
+    public boolean isMoleInTheCell(final int posX, final int posY) {
+        return moleGrid[posX][posY] != 'M';
     }
 
     /**
