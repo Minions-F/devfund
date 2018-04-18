@@ -1,5 +1,7 @@
 package org.minions.devfund.angela;
 
+import java.util.Arrays;
+
 /**
  * Manages whack a mole game.
  */
@@ -20,12 +22,9 @@ public class WhackAMole {
         score = 0;
         attemptsLeft = numAttempts;
         moleGrid = new char[gridDimension][gridDimension];
-        for (int i = 0; i < gridDimension; i++) {
-            for (int j = 0; j < gridDimension; j++) {
-                moleGrid[i][j] = '*';
-            }
+        for (char[] row : moleGrid) {
+            Arrays.fill(row, '*');
         }
-
     }
 
     /**
@@ -76,7 +75,6 @@ public class WhackAMole {
             }
             builder.append("\n");
         }
-        System.out.println(builder);
         return builder.toString();
     }
 
@@ -93,7 +91,6 @@ public class WhackAMole {
             }
             builder.append("\n");
         }
-        System.out.println(builder);
         return builder.toString();
     }
 

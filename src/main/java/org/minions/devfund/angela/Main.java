@@ -23,7 +23,7 @@ public final class Main {
         final Logger logger = Logger.getLogger(Main.class.getName());
         final Scanner scanner = new Scanner(System.in, "UTF-8");
 
-        final int numAttempts = 100;
+        final int numAttempts = 101;
         final int gridDimension = 10;
         final int molesQuantity = 10;
 
@@ -42,7 +42,7 @@ public final class Main {
             logger.info("Y:");
             int y = scanner.nextInt();
             if (x == -1 && y == -1) {
-                whackAMole.printGridToUser();
+                System.out.println(whackAMole.printGridToUser());
                 logger.info("Game over");
                 break;
             }
@@ -52,7 +52,7 @@ public final class Main {
 
         if (whackAMole.getMolesLeft() == 0) {
             logger.info("You won!");
-            whackAMole.printGrid();
+            System.out.println(whackAMole.printGrid());
         }
 
         if (whackAMole.getAttempts() == 0) {
