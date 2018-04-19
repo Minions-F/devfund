@@ -25,7 +25,7 @@ public class WhackAMole {
         molesLeft = gridDimension;
         this.gridDimension = gridDimension;
         moleGrid = new char[gridDimension][gridDimension];
-        getFillWhackAMole();
+        fillWhackAMole();
     }
 
     /***
