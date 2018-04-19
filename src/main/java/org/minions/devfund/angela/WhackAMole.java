@@ -61,7 +61,7 @@ public class WhackAMole {
     /**
      * Prints the grid to the user to show where he/she whacked.
      *
-     * @return String with the matrix.
+     * @return String with the squarelotron.
      */
     public String printGridToUser() {
         final StringBuilder builder = new StringBuilder();
@@ -81,7 +81,7 @@ public class WhackAMole {
     /**
      * Prints all grid with moles.
      *
-     * @return String with the matrix.
+     * @return String with the squarelotron.
      */
     public String printGrid() {
         final StringBuilder builder = new StringBuilder();
@@ -98,7 +98,7 @@ public class WhackAMole {
      * Gets the moles left.
      *
      * @return int the moles left value.
-     * String with the matrix.
+     * String with the squarelotron.
      */
     public int getMolesLeft() {
         return molesLeft;
