@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
  */
 public class Squarelotron {
 
-    private int[][] squarelotron;
+    private int[][] squarematrix;
     private int size;
 
     /**
@@ -18,7 +18,7 @@ public class Squarelotron {
      */
     public Squarelotron(final int n) {
         this.size = n;
-        squarelotron = new int[n][n];
+        squarematrix = new int[n][n];
         fillMatrix();
     }
 
@@ -27,8 +27,17 @@ public class Squarelotron {
      *
      * @return square matrix.
      */
-    public int[][] getSquarelotron() {
-        return Arrays.copyOf(squarelotron, size);
+    public int[][] getSquarematrix() {
+        return Arrays.copyOf(squarematrix, size);
+    }
+
+    /**
+     * Sets the Squarelotron matrix.
+     *
+     * @param squarematrix square matrix.
+     */
+    public void setSquarematrix(final int[][] squarematrix) {
+        this.squarematrix = squarematrix.clone();
     }
 
     /**
@@ -38,10 +47,10 @@ public class Squarelotron {
      * @return {@link Squarelotron}.
      */
     public Squarelotron upsideDownFlip(final int ring) {
-        Squarelotron squarelotron = new Squarelotron(this.size);
-        squarelotron.squarelotron = squarelotron.swapRows(this.squarelotron);
-        squarelotron.squarelotron = replaceMaskValues(squarelotron.squarelotron, this.squarelotron, ring);
-        return squarelotron;
+        Squarelotron newSquarelotron = new Squarelotron(this.size);
+        newSquarelotron.setSquarematrix(swapRows(this.squarematrix));
+        newSquarelotron.setSquarematrix(replaceMaskValues(newSquarelotron.getSquarematrix(), this.squarematrix, ring));
+        return newSquarelotron;
     }
 
     /**
@@ -51,10 +60,10 @@ public class Squarelotron {
      * @return {@link Squarelotron}.
      */
     public Squarelotron mainDiagonalFlip(final int ring) {
-        Squarelotron squarelotron = new Squarelotron(this.size);
-        squarelotron.squarelotron = squarelotron.transposeMatrix(this.squarelotron);
-        squarelotron.squarelotron = replaceMaskValues(squarelotron.squarelotron, this.squarelotron, ring);
-        return squarelotron;
+        Squarelotron newSquarelotron = new Squarelotron(this.size);
+        newSquarelotron.setSquarematrix(transposeMatrix(this.squarematrix));
+        newSquarelotron.setSquarematrix(replaceMaskValues(newSquarelotron.getSquarematrix(), this.squarematrix, ring));
+        return newSquarelotron;
     }
 
     /**
@@ -76,7 +85,7 @@ public class Squarelotron {
     private void fillMatrix() {
         int accumulator = 1;
         for (int i = 0; i < this.size; i++) {
-            squarelotron[i] = IntStream.range(accumulator, accumulator + size).toArray();
+            squarematrix[i] = IntStream.range(accumulator, accumulator + size).toArray();
             accumulator += size;
         }
     }
@@ -123,8 +132,8 @@ public class Squarelotron {
     private void rotateClockWise(final int numberOfTurns) {
         int turns = numberOfTurns;
         while (turns-- > 0) {
-            this.squarelotron = swapRows(this.squarelotron);
-            this.squarelotron = transposeMatrix(this.squarelotron);
+            this.squarematrix = swapRows(this.squarematrix);
+            this.squarematrix = transposeMatrix(this.squarematrix);
         }
     }
 
@@ -136,8 +145,8 @@ public class Squarelotron {
     private void rotateCounterClockWise(final int numberOfTurns) {
         int turns = numberOfTurns;
         while (turns++ < 0) {
-            this.squarelotron = transposeMatrix(this.squarelotron);
-            this.squarelotron = swapRows(this.squarelotron);
+            this.squarematrix = transposeMatrix(this.squarematrix);
+            this.squarematrix = swapRows(this.squarematrix);
         }
     }
 
