@@ -123,7 +123,7 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateLeft() {
-        int numberOfTurns = -1;
+        final int numberOfTurns = -1;
         squarelotron.rotateRight(numberOfTurns);
         int[] array1 = {Numbers.FOUR.getNumber(), Numbers.EIGHT.getNumber(), Numbers.TWELVE.getNumber(),
                 Numbers.SIXTEEN.getNumber()};
@@ -145,7 +145,7 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateTwiceLeft() {
-        int numberOfTurns = -2;
+        final int numberOfTurns = -2;
         squarelotron.rotateRight(numberOfTurns);
         int[] array1 = {Numbers.SIXTEEN.getNumber(), Numbers.FIFTEEN.getNumber(), Numbers.FOURTEEN.getNumber(),
                 Numbers.THIRTEEN.getNumber()};
@@ -167,7 +167,7 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateThreeTimesLeft() {
-        int numberOfTurns = -3;
+        final int numberOfTurns = -3;
         squarelotron.rotateRight(numberOfTurns);
         int[] array1 = {Numbers.THIRTEEN.getNumber(), Numbers.NINE.getNumber(), Numbers.FIVE.getNumber(),
                 Numbers.ONE.getNumber()};

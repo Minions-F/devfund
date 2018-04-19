@@ -79,7 +79,6 @@ public class Squarelotron {
             }
         }
         return new Squarelotron(newNumbers);
-
     }
 
 
@@ -177,5 +176,4 @@ public class Squarelotron {
     public int getSize() {
         return size;
     }
-
 }
