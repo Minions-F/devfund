@@ -31,7 +31,7 @@ public class WhackAMole {
     /***
      * Methods to fill the grid with character *.
      */
-    public void getFillWhackAMole() {
+    public void fillWhackAMole() {
         for (int row = 0; row < moleGrid.length; row++) {
             for (int column = 0; column < moleGrid[row].length; column++) {
                 moleGrid[row][column] = '*';
