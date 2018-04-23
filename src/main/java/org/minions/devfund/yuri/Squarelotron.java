@@ -39,13 +39,10 @@ public class Squarelotron {
      * Fills the squarelotron elements.
      */
     public void fillSquarelotron() {
+        int accumalator = 1;
         for (int row = 0; row < size; row++) {
             for (int column = 0; column < size; column++) {
-                if (row == 0) {
-                    squarelotron[row][column] = column + 1;
-                } else {
-                    squarelotron[row][column] = squarelotron[row - 1][column] + size;
-                }
+                    squarelotron[row][column] = accumalator++;
             }
         }
     }
