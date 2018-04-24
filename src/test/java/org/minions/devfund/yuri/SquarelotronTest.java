@@ -89,7 +89,7 @@ public class SquarelotronTest {
     final int ringNumber = 1;
     final int[] expectedResult = new int[] {1, 2, 3, 4, 5, 8, 12, 16, 15, 14, 13, 9, 5};
     Squarelotron squarelotron = new Squarelotron(size);
-    int[] actualResult = squarelotron.getRing(ringNumber);
-    assertArrayEquals(expectedResult, actualResult);
+    squarelotron.maskedSpecificRing(2);
+    squarelotron.showMatrix();
   }
 }

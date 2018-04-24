@@ -69,10 +69,33 @@ public class Squarelotron {
 
   /**
    * Gets an specific ring of a matrix.
+   *
    * @param ringNumber the ring number.
    * @return an array that contains the elements of the ring.
    */
-  public int[] getRing(final int ringNumber) {
-    return new int[]{};
+  public int[][] maskedSpecificRing(final int ringNumber) {
+    int[][] squarelotronMasked = squarelotron.clone();
+    for (int i = ringNumber - 1; i <= size - ringNumber; i++) {
+      squarelotronMasked[i][ringNumber - 1] = 0;
+      squarelotronMasked[ringNumber - 1][i] = 0;
+      squarelotronMasked[size - ringNumber][i] = 0;
+      squarelotronMasked[i][size - ringNumber] = 0;
+    }
+    return squarelotronMasked;
+  }
+
+  /**
+   * Gets the matrix with all values.
+   * @return matrix.
+   */
+  public String showMatrix() {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        builder.append(squarelotron[i][j] + " ");
+      }
+      builder.append("\n");
+    }
+    return builder.toString();
   }
 }
