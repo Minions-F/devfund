@@ -121,12 +121,12 @@ public class SquarelotronTest {
         assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(2)));
     }
 
-    @Test
-    public void testRotateEastIn2x2OneTurn() {
-        squarelotron = new Squarelotron(2);
-        test.append("03 01").append("\n")
-            .append("04 02");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(1)));
-    }
+//    @Test
+//    public void testRotateEastIn2x2OneTurn() {
+//        squarelotron = new Squarelotron(2);
+//        test.append("03 01").append("\n")
+//            .append("04 02");
+//        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(1)));
+//    }
 
 }

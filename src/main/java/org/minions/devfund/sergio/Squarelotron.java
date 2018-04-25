@@ -1,7 +1,5 @@
 package org.minions.devfund.sergio;
 
-import java.util.Arrays;
-
 public class Squarelotron {
 
     private int[][] squarelotron;
@@ -48,48 +46,49 @@ public class Squarelotron {
 
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        return upsideDownFlip(squarelotronResult, ring, this.squarelotron);
+        squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, ring);
+        return squarelotronResult;
     }
 
-    public Squarelotron upsideDownFlip(final Squarelotron squarelotron, int ring,final int[][] auxSquare) {
+    public int[][] upsideDownFlip(int[][] squarelotronArray, int ring) {
+        final int[][] auxArray = squarelotronArray.clone();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (ringCheck(i, j, ring)) {
-                    squarelotron.squarelotron[i][j] = auxSquare[size - 1 - i][j];
+                    squarelotronArray[i][j] = auxArray[size - 1 - i][j];
                 }
             }
         }
-        return squarelotron;
+        return squarelotronArray;
     }
 
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        return mainDiagonalFlip(squarelotronResult, ring, this.squarelotron);
+        squarelotronResult.squarelotron = mainDiagonalFlip(squarelotronResult.squarelotron,ring);
+        return squarelotronResult;
     }
 
-    public Squarelotron mainDiagonalFlip(final Squarelotron squarelotron, int ring, final int[][] auxSquare) {
-//        final int[][] suare2 =  auxSquare.clone();
+    public int[][] mainDiagonalFlip(int[][] squarelotronArray, int ring) {
+        final int[][] auxArray = squarelotronArray.clone();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (ringCheck(i, j, ring)) {
-                    squarelotron.squarelotron[i][j] = auxSquare[j][i];
+                    squarelotronArray[i][j] = auxArray[j][i];
                 }
             }
         }
-        return squarelotron;
+        return squarelotronArray;
     }
 
-    public Squarelotron rotateEast(int turns) {
-        Squarelotron squarelotronResult = new Squarelotron(size);
-        while (turns > 0) {
-            squarelotronResult = upsideDownFlip(squarelotronResult, 1, this.squarelotron);
-            int[][] square = new int[size][size];
-            System.arraycopy(squarelotronResult.squarelotron, 0, square, 0, size);
-            squarelotronResult = mainDiagonalFlip(squarelotronResult, 1, square);
-            turns--;
-        }
-        return squarelotronResult;
-    }
+//    public Squarelotron rotateEast(int turns) {
+//        Squarelotron squarelotronResult = new Squarelotron(size);
+//        while (turns > 0) {
+//            squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, 1);
+//            squarelotronResult.squarelotron =
+//            turns--;
+//        }
+//        return squarelotronResult;
+//    }
 
 //    public Squarelotron rotateWest(int turns) {
 //        Squarelotron squarelotronResult = new Squarelotron(size);
