@@ -1,5 +1,7 @@
 package org.minions.devfund.sergio;
 
+import java.util.Arrays;
+
 public class Squarelotron {
 
     private int[][] squarelotron;
@@ -50,16 +52,16 @@ public class Squarelotron {
         return squarelotronResult;
     }
 
-    public int[][] upsideDownFlip(int[][] squarelotronArray, int ring) {
-        final int[][] auxArray = squarelotronArray.clone();
-        for (int i = 0; i < size; i++) {
+    private  int[][] upsideDownFlip(final int[][] squarelotronArray, int ring) {
+        final int[][] auxArray = Arrays.copyOf(squarelotronArray, size);
+        for (int i = 0; i < size/2; i++) {
             for (int j = 0; j < size; j++) {
                 if (ringCheck(i, j, ring)) {
-                    squarelotronArray[i][j] = auxArray[size - 1 - i][j];
+                    auxArray[i][j] = squarelotronArray[size - 1 - i][j];
                 }
             }
         }
-        return squarelotronArray;
+        return auxArray;
     }
 
     public Squarelotron mainDiagonalFlip(int ring) {
@@ -80,20 +82,20 @@ public class Squarelotron {
         return squarelotronArray;
     }
 
-//    public Squarelotron rotateEast(int turns) {
-//        Squarelotron squarelotronResult = new Squarelotron(size);
-//        while (turns > 0) {
-//            squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, 1);
-//            squarelotronResult.squarelotron =
-//            turns--;
-//        }
-//        return squarelotronResult;
-//    }
+    public Squarelotron rotateEast(int turns) {
+        Squarelotron squarelotronResult = new Squarelotron(size);
+        while (turns > 0) {
+            squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, 1);
+            squarelotronResult.squarelotron = mainDiagonalFlip(squarelotronResult.squarelotron, 1);
+            turns--;
+        }
+        return squarelotronResult;
+    }
 
 //    public Squarelotron rotateWest(int turns) {
 //        Squarelotron squarelotronResult = new Squarelotron(size);
 //        while (turns < 0) {
-//            squarelotronResult = mainDiagonalFlip(squarelotronResult, 1);
+//            squarelotronResult.squarelotron = mainDiagonalFlip(squarelotronResult.squarelotron, 1);
 //            squarelotronResult = upsideDownFlip(squarelotronResult, 1);
 //            turns++;
 //        }

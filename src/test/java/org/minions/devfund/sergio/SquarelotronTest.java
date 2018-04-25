@@ -58,7 +58,7 @@ public class SquarelotronTest {
 
     @Test
     public void testUpsideDownFlipInA5x5SquareRingOne() {
-        squarelotron = new Squarelotron(5);
+        squarelotron = new Squarelotron(2);
         test.append("21 22 23 24 25").append("\n")
             .append("16 07 08 09 20").append("\n")
             .append("11 12 13 14 15").append("\n")
@@ -69,7 +69,7 @@ public class SquarelotronTest {
 
     @Test
     public void testUpsideDownFlipInA6x6SquareRingTwo() {
-        squarelotron = new Squarelotron(6);
+        squarelotron = new Squarelotron(2);
         test.append("01 02 03 04 05 06").append("\n")
             .append("07 26 27 28 29 12").append("\n")
             .append("13 20 15 16 23 18").append("\n")
