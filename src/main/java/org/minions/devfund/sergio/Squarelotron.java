@@ -94,7 +94,7 @@ public class Squarelotron {
         // Check if the current number is in the ring
         return (i == ring - 1 || j == ring - 1 || i == size - ring || j == size - ring)
                 // And the current number is not outside of the ring
-                && !((i <= ring - 2 || i >= size + 1 - ring || j <= ring - 2 || j >= size + 1 - ring));
+                && !(i <= ring - 2 || i >= size + 1 - ring || j <= ring - 2 || j >= size + 1 - ring);
     }
 
     /**
