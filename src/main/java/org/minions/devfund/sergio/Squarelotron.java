@@ -94,7 +94,7 @@ public class Squarelotron {
         // Check if the current number is in the ring
         return (i == ring - 1 || j == ring - 1 || i == size - ring || j == size - ring)
                 // And the current number is not outside of the ring
-                && !(i <= ring - 2 || i >= size + 1 - ring || j <= ring - 2 || j >= size + 1 - ring);
+                && !((i <= ring - 2 || i >= size + 1 - ring || j <= ring - 2 || j >= size + 1 - ring));
     }
 
     /**
@@ -105,24 +105,25 @@ public class Squarelotron {
      */
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        squarelotronResult.squarelotron = upsideDownFlipArray(ring);
+        squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, ring);
         return squarelotronResult;
     }
 
     /**
      * Makes the square flip upsideDown.
      *
-     * @param ring - The ring to work with.
+     * @param squarelotronArray - The given square array.
+     * @param ring              - The ring to work with.
      * @return The flipped square.
      */
-    public int[][] upsideDownFlipArray(int ring) {
+    public int[][] upsideDownFlip(final int[][] squarelotronArray, int ring) {
         final int[][] auxArray = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (ringCheck(i, j, ring)) {
-                    auxArray[i][j] = this.squarelotron[size - 1 - i][j];
+                    auxArray[i][j] = squarelotronArray[size - 1 - i][j];
                 } else {
-                    auxArray[i][j] = this.squarelotron[i][j];
+                    auxArray[i][j] = squarelotronArray[i][j];
                 }
             }
         }
@@ -137,24 +138,25 @@ public class Squarelotron {
      */
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        squarelotronResult.squarelotron = mainDiagonalFlipArray(ring);
+        squarelotronResult.squarelotron = mainDiagonalFlip(squarelotronResult.squarelotron, ring);
         return squarelotronResult;
     }
 
     /**
      * Makes the square swap by main diagonal.
      *
-     * @param ring - The ring to work whit.
+     * @param squarelotronArray - The given square.
+     * @param ring              - The ring to work whit.
      * @return The Swapped square.
      */
-    public int[][] mainDiagonalFlipArray(int ring) {
+    public int[][] mainDiagonalFlip(final int[][] squarelotronArray, int ring) {
         final int[][] auxArray = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (ringCheck(i, j, ring)) {
-                    auxArray[i][j] = this.squarelotron[j][i];
+                    auxArray[i][j] = squarelotronArray[j][i];
                 } else {
-                    auxArray[i][j] = this.squarelotron[i][j];
+                    auxArray[i][j] = squarelotronArray[i][j];
                 }
             }
         }
@@ -164,15 +166,14 @@ public class Squarelotron {
     /**
      * Makes the rotation to right according the number of turns.
      *
-     * @param rings - The number of rings.
      * @param turns - Number of turns.
      * @return The processed Array.
      */
-    public int[][] rotateEast(int turns, int rings) {
+    public int[][] rotateEast(int turns) {
         while (turns > 0) {
-            for (int i = 1; i <= rings; i++) {
-                this.squarelotron = upsideDownFlipArray(i);
-                this.squarelotron = mainDiagonalFlipArray(i);
+            for (int i = 1; i <= getNumberOfRings(); i++) {
+                this.squarelotron = upsideDownFlip(this.squarelotron, i);
+                this.squarelotron = mainDiagonalFlip(this.squarelotron, i);
             }
             turns--;
         }
@@ -182,15 +183,14 @@ public class Squarelotron {
     /**
      * Makes the rotation to left according the number of turns.
      *
-     * @param rings - The number of rings.
      * @param turns - Number of turns.
      * @return - The processed Array.
      */
-    public int[][] rotateWest(int turns, int rings) {
+    public int[][] rotateWest(int turns) {
         while (turns < 0) {
-            for (int i = 1; i <= rings; i++) {
-                this.squarelotron = mainDiagonalFlipArray(i);
-                this.squarelotron = upsideDownFlipArray(i);
+            for (int i = 1; i <= getNumberOfRings(); i++) {
+                this.squarelotron = mainDiagonalFlip(this.squarelotron, i);
+                this.squarelotron = upsideDownFlip(this.squarelotron, i);
             }
             turns++;
         }
@@ -204,9 +204,9 @@ public class Squarelotron {
      */
     public void rotateRight(int numberOfTurns) {
         if (numberOfTurns >= 0) {
-            rotateEast(numberOfTurns, getNumberOfRings());
+            rotateEast(numberOfTurns);
             return;
         }
-        rotateWest(numberOfTurns, getNumberOfRings());
+        rotateWest(numberOfTurns);
     }
 }

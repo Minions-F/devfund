@@ -219,12 +219,11 @@ public class SquarelotronTest {
     @Test
     public void testRotateEastIn2x2OneTurn() {
         final int size = 2;
-        final int ring = 1;
         final int turns = 1;
         squarelotron = new Squarelotron(size);
         test.append("03 01").append("\n")
                 .append("04 02");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -233,14 +232,13 @@ public class SquarelotronTest {
     @Test
     public void testRotateEastIn4x4TwoTurns() {
         final int size = 4;
-        final int ring = 1;
         final int turns = 2;
         squarelotron = new Squarelotron(size);
         test.append("16 15 14 13").append("\n")
-                .append("12 06 07 09").append("\n")
-                .append("08 10 11 05").append("\n")
+                .append("12 11 10 09").append("\n")
+                .append("08 07 06 05").append("\n")
                 .append("04 03 02 01");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -249,7 +247,6 @@ public class SquarelotronTest {
     @Test
     public void testRotateEastIn6x6FourTurns() {
         final int size = 6;
-        final int ring = 1;
         final int turns = 4;
         squarelotron = new Squarelotron(size);
         test.append("01 02 03 04 05 06").append("\n")
@@ -258,7 +255,7 @@ public class SquarelotronTest {
                 .append("19 20 21 22 23 24").append("\n")
                 .append("25 26 27 28 29 30").append("\n")
                 .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -267,12 +264,11 @@ public class SquarelotronTest {
     @Test
     public void testRotateWestIn2x2OneTurn() {
         final int size = 2;
-        final int ring = 1;
         final int turns = -1;
         squarelotron = new Squarelotron(size);
         test.append("02 04").append("\n")
                 .append("01 03");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
@@ -282,13 +278,12 @@ public class SquarelotronTest {
     public void testRotateWestIn4x4TwoTurns() {
         final int size = 4;
         final int turns = -2;
-        final int ring = 1;
         squarelotron = new Squarelotron(size);
         test.append("16 15 14 13").append("\n")
-                .append("12 06 07 09").append("\n")
-                .append("08 10 11 05").append("\n")
+                .append("12 11 10 09").append("\n")
+                .append("08 07 06 05").append("\n")
                 .append("04 03 02 01");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
@@ -298,7 +293,6 @@ public class SquarelotronTest {
     public void testRotateWestIn6x6FourTurns() {
         final int size = 6;
         final int turns = -4;
-        final int ring = 1;
         squarelotron = new Squarelotron(size);
         test.append("01 02 03 04 05 06").append("\n")
                 .append("07 08 09 10 11 12").append("\n")
@@ -306,7 +300,7 @@ public class SquarelotronTest {
                 .append("19 20 21 22 23 24").append("\n")
                 .append("25 26 27 28 29 30").append("\n")
                 .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns, ring)));
+        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
