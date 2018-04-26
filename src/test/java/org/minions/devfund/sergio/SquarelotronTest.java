@@ -131,10 +131,10 @@ public class SquarelotronTest {
     @Test
     public void testUpsideDownFlipInOverCharge() {
         final int size = 5;
-        final int[][] expected = {{21, 22, 23, 24, 25}, {16, 7, 8, 9, 20}, {11, 12, 13, 14, 15},
-                {6, 17, 18, 19, 10}, {1, 2, 3, 4, 5}};
+        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 17, 18, 19, 10}, {11, 12, 13, 14, 15},
+                {16, 7, 8, 9, 20}, {21, 22, 23, 24, 25}};
         squarelotron = new Squarelotron(size);
-        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(2)
                 .getOriginalSquareArray()));
     }
 
