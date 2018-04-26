@@ -52,19 +52,19 @@ public class Squarelotron {
      * @param squarelotron - The current square.
      * @return A String of the square.
      */
-    public String showSquare(final int[][] squarelotron) {
+    public static String showSquare(final int[][] squarelotron) {
 
         final String unit = "0";
         final int decimal = 10;
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < squarelotron.length; i++) {
+            for (int j = 0; j < squarelotron.length; j++) {
                 if (squarelotron[i][j] < decimal) {
                     stringBuilder.append(unit);
                 }
                 stringBuilder.append(squarelotron[i][j]);
-                if (j != size - 1) {
+                if (j != squarelotron.length - 1) {
                     stringBuilder.append(" ");
                 }
             }

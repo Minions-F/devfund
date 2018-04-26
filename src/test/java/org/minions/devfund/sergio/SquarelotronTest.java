@@ -23,11 +23,12 @@ public class SquarelotronTest {
     @Test
     public void testSetValuesForSize2x2() {
         final int size = 2;
+        final int[][] expected = {{1, 2}, {3, 4}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02").append("\n")
-                .append("03 04");
-        assertEquals(squarelotron.showSquare(squarelotron.getOriginalSquareArray()), test.toString().trim());
+        assertEquals(Squarelotron.showSquare(expected),
+                Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
+
 
     /**
      * Tests the values in the square of 5x5.
@@ -35,13 +36,11 @@ public class SquarelotronTest {
     @Test
     public void testSetValuesForSize5x5() {
         final int size = 5;
+        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
+                {16, 17, 18, 19, 20}, {21, 22, 23, 24, 25}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05").append("\n")
-                .append("06 07 08 09 10").append("\n")
-                .append("11 12 13 14 15").append("\n")
-                .append("16 17 18 19 20").append("\n")
-                .append("21 22 23 24 25");
-        assertEquals(squarelotron.showSquare(squarelotron.getOriginalSquareArray()), test.toString().trim());
+        assertEquals(Squarelotron.showSquare(expected),
+                Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
 
     /**
@@ -52,7 +51,7 @@ public class SquarelotronTest {
         final int size = 4;
         squarelotron = new Squarelotron(size);
         final int ringsExpected = 2;
-        assertEquals(squarelotron.getNumberOfRings(), ringsExpected);
+        assertEquals(ringsExpected, squarelotron.getNumberOfRings());
     }
 
     /**
@@ -63,7 +62,7 @@ public class SquarelotronTest {
         final int size = 5;
         squarelotron = new Squarelotron(size);
         final int ringsExpected = 3;
-        assertEquals(squarelotron.getNumberOfRings(), ringsExpected);
+        assertEquals(ringsExpected, squarelotron.getNumberOfRings());
     }
 
     /**
@@ -92,13 +91,10 @@ public class SquarelotronTest {
     @Test
     public void testUpsideDownFlipInA5x5SquareRingOne() {
         final int size = 5;
+        final int[][] expected = {{21, 22, 23, 24, 25}, {16, 7, 8, 9, 20}, {11, 12, 13, 14, 15},
+                {6, 17, 18, 19, 10}, {1, 2, 3, 4, 5}};
         squarelotron = new Squarelotron(size);
-        test.append("21 22 23 24 25").append("\n")
-                .append("16 07 08 09 20").append("\n")
-                .append("11 12 13 14 15").append("\n")
-                .append("06 17 18 19 10").append("\n")
-                .append("01 02 03 04 05");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(1)
                 .getOriginalSquareArray()));
     }
 
@@ -108,14 +104,10 @@ public class SquarelotronTest {
     @Test
     public void testUpsideDownFlipInA6x6SquareRingTwo() {
         final int size = 6;
+        final int[][] expected = {{1, 2, 3, 4, 5, 6}, {7, 26, 27, 28, 29, 12}, {13, 20, 15, 16, 23, 18},
+                {19, 14, 21, 22, 17, 24}, {25, 8, 9, 10, 11, 30}, {31, 32, 33, 34, 35, 36}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05 06").append("\n")
-                .append("07 26 27 28 29 12").append("\n")
-                .append("13 20 15 16 23 18").append("\n")
-                .append("19 14 21 22 17 24").append("\n")
-                .append("25 08 09 10 11 30").append("\n")
-                .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(2)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(2)
                 .getOriginalSquareArray()));
     }
 
@@ -126,14 +118,10 @@ public class SquarelotronTest {
     public void testUpsideDownFlipIn6x6SquareRingThree() {
         final int size = 6;
         final int ring = 3;
+        final int[][] expected = {{1, 2, 3, 4, 5, 6}, {7, 8, 9, 10, 11, 12}, {13, 14, 21, 22, 17, 18},
+                {19, 20, 15, 16, 23, 24}, {25, 26, 27, 28, 29, 30}, {31, 32, 33, 34, 35, 36}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05 06").append("\n")
-                .append("07 08 09 10 11 12").append("\n")
-                .append("13 14 21 22 17 18").append("\n")
-                .append("19 20 15 16 23 24").append("\n")
-                .append("25 26 27 28 29 30").append("\n")
-                .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
                 .getOriginalSquareArray()));
     }
 
@@ -143,13 +131,10 @@ public class SquarelotronTest {
     @Test
     public void testUpsideDownFlipInOverCharge() {
         final int size = 5;
+        final int[][] expected = {{21, 22, 23, 24, 25}, {16, 7, 8, 9, 20}, {11, 12, 13, 14, 15},
+                {6, 17, 18, 19, 10}, {1, 2, 3, 4, 5}};
         squarelotron = new Squarelotron(size);
-        test.append("21 22 23 24 25").append("\n")
-                .append("16 07 08 09 20").append("\n")
-                .append("11 12 13 14 15").append("\n")
-                .append("06 17 18 19 10").append("\n")
-                .append("01 02 03 04 05");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(1)
                 .getOriginalSquareArray()));
     }
 
@@ -159,10 +144,9 @@ public class SquarelotronTest {
     @Test
     public void testMainDiagonalFlipIn2x2SquareRingOne() {
         final int size = 2;
+        final int[][] expected = {{1, 3}, {2, 4}};
         squarelotron = new Squarelotron(size);
-        test.append("01 03").append("\n")
-                .append("02 04");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
                 .getOriginalSquareArray()));
     }
 
@@ -172,14 +156,10 @@ public class SquarelotronTest {
     @Test
     public void testMainDiagonalFlipIn6x6SquareRingOne() {
         final int size = 6;
+        final int[][] expected = {{1, 7, 13, 19, 25, 31}, {2, 8, 9, 10, 11, 32}, {3, 14, 15, 16, 17, 33},
+                {4, 20, 21, 22, 23, 34}, {5, 26, 27, 28, 29, 35}, {6, 12, 18, 24, 30, 36}};
         squarelotron = new Squarelotron(size);
-        test.append("01 07 13 19 25 31").append("\n")
-                .append("02 08 09 10 11 32").append("\n")
-                .append("03 14 15 16 17 33").append("\n")
-                .append("04 20 21 22 23 34").append("\n")
-                .append("05 26 27 28 29 35").append("\n")
-                .append("06 12 18 24 30 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
                 .getOriginalSquareArray()));
     }
 
@@ -189,12 +169,10 @@ public class SquarelotronTest {
     @Test
     public void testMainDiagonalFlipIn4x4RingTwo() {
         final int size = 4;
+        final int[][] expected = {{1, 2, 3, 4}, {5, 6, 10, 8}, {9, 7, 11, 12},
+                {13, 14, 15, 16}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04").append("\n")
-                .append("05 06 10 08").append("\n")
-                .append("09 07 11 12").append("\n")
-                .append("13 14 15 16");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(2)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(2)
                 .getOriginalSquareArray()));
     }
 
@@ -204,12 +182,10 @@ public class SquarelotronTest {
     @Test
     public void testMainDiagonalFlipOverCharge() {
         final int size = 4;
+        final int[][] expected = {{1, 5, 9, 13}, {2, 6, 7, 14}, {3, 10, 11, 15},
+                {4, 8, 12, 16}};
         squarelotron = new Squarelotron(size);
-        test.append("01 05 09 13").append("\n")
-                .append("02 06 07 14").append("\n")
-                .append("03 10 11 15").append("\n")
-                .append("04 08 12 16");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(1)
                 .getOriginalSquareArray()));
     }
 
@@ -220,10 +196,9 @@ public class SquarelotronTest {
     public void testRotateEastIn2x2OneTurn() {
         final int size = 2;
         final int turns = 1;
+        final int[][] expected = {{3, 1}, {4, 2}};
         squarelotron = new Squarelotron(size);
-        test.append("03 01").append("\n")
-                .append("04 02");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -233,12 +208,10 @@ public class SquarelotronTest {
     public void testRotateEastIn4x4TwoTurns() {
         final int size = 4;
         final int turns = 2;
+        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
+                {4, 3, 2, 1}};
         squarelotron = new Squarelotron(size);
-        test.append("16 15 14 13").append("\n")
-                .append("12 11 10 09").append("\n")
-                .append("08 07 06 05").append("\n")
-                .append("04 03 02 01");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -248,14 +221,10 @@ public class SquarelotronTest {
     public void testRotateEastIn6x6FourTurns() {
         final int size = 6;
         final int turns = 4;
+        final int[][] expected = {{1, 2, 3, 4, 5, 6}, {7, 8, 9, 10, 11, 12}, {13, 14, 15, 16, 17, 18},
+                {19, 20, 21, 22, 23, 24}, {25, 26, 27, 28, 29, 30}, {31, 32, 33, 34, 35, 36}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05 06").append("\n")
-                .append("07 08 09 10 11 12").append("\n")
-                .append("13 14 15 16 17 18").append("\n")
-                .append("19 20 21 22 23 24").append("\n")
-                .append("25 26 27 28 29 30").append("\n")
-                .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateEast(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateEast(turns)));
     }
 
     /**
@@ -265,10 +234,9 @@ public class SquarelotronTest {
     public void testRotateWestIn2x2OneTurn() {
         final int size = 2;
         final int turns = -1;
+        final int[][] expected = {{2, 4}, {1, 3}};
         squarelotron = new Squarelotron(size);
-        test.append("02 04").append("\n")
-                .append("01 03");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
@@ -278,12 +246,10 @@ public class SquarelotronTest {
     public void testRotateWestIn4x4TwoTurns() {
         final int size = 4;
         final int turns = -2;
+        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
+                {4, 3, 2, 1}};
         squarelotron = new Squarelotron(size);
-        test.append("16 15 14 13").append("\n")
-                .append("12 11 10 09").append("\n")
-                .append("08 07 06 05").append("\n")
-                .append("04 03 02 01");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
@@ -293,14 +259,10 @@ public class SquarelotronTest {
     public void testRotateWestIn6x6FourTurns() {
         final int size = 6;
         final int turns = -4;
+        final int[][] expected = {{1, 2, 3, 4, 5, 6}, {7, 8, 9, 10, 11, 12}, {13, 14, 15, 16, 17, 18},
+                {19, 20, 21, 22, 23, 24}, {25, 26, 27, 28, 29, 30}, {31, 32, 33, 34, 35, 36}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05 06").append("\n")
-                .append("07 08 09 10 11 12").append("\n")
-                .append("13 14 15 16 17 18").append("\n")
-                .append("19 20 21 22 23 24").append("\n")
-                .append("25 26 27 28 29 30").append("\n")
-                .append("31 32 33 34 35 36");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.rotateWest(turns)));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.rotateWest(turns)));
     }
 
     /**
@@ -309,13 +271,15 @@ public class SquarelotronTest {
     @Test
     public void testRotateRightWithPositiveTurns() {
         final int size = 4;
+        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
+                {4, 3, 2, 1}};
         squarelotron = new Squarelotron(size);
         test.append("16 15 14 13").append("\n")
-                .append("12 11 10 09").append("\n")
-                .append("08 07 06 05").append("\n")
-                .append("04 03 02 01");
+            .append("12 11 10 09").append("\n")
+            .append("08 07 06 05").append("\n")
+            .append("04 03 02 01");
         squarelotron.rotateRight(2);
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
 
     /**
@@ -325,13 +289,11 @@ public class SquarelotronTest {
     public void testRotateRightWithNegativeTurns() {
         final int size = 4;
         final int turns = -2;
+        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
+                {4, 3, 2, 1}};
         squarelotron = new Squarelotron(size);
-        test.append("16 15 14 13").append("\n")
-                .append("12 11 10 09").append("\n")
-                .append("08 07 06 05").append("\n")
-                .append("04 03 02 01");
         squarelotron.rotateRight(turns);
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
 
     /**
@@ -341,11 +303,9 @@ public class SquarelotronTest {
     public void testUpsideDownFlipDimensionThreeRingOne() {
         final int size = 3;
         final int ring = 1;
+        final int[][] expected = {{7, 8, 9}, {4, 5, 6}, {1, 2, 3}};
         squarelotron = new Squarelotron(size);
-        test.append("07 08 09").append("\n")
-                .append("04 05 06").append("\n")
-                .append("01 02 03");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
                 .getOriginalSquareArray()));
     }
 
@@ -356,11 +316,9 @@ public class SquarelotronTest {
     public void testUpsideDownFlipDimensionThreeRingTwo() {
         final int size = 3;
         final int ring = 2;
+        final int[][] expected = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03").append("\n")
-                .append("04 05 06").append("\n")
-                .append("07 08 09");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.upsideDownFlip(ring)
                 .getOriginalSquareArray()));
     }
 
@@ -371,13 +329,10 @@ public class SquarelotronTest {
     public void testMainDiagonalFlipIn5x5RingOne() {
         final int size = 5;
         final int ring = 1;
+        final int[][] expected = {{1, 6, 11, 16, 21}, {2, 7, 8, 9, 22}, {3, 12, 13, 14, 23},
+                {4, 17, 18, 19, 24}, {5, 10, 15, 20, 25}};
         squarelotron = new Squarelotron(size);
-        test.append("01 06 11 16 21").append("\n")
-                .append("02 07 08 09 22").append("\n")
-                .append("03 12 13 14 23").append("\n")
-                .append("04 17 18 19 24").append("\n")
-                .append("05 10 15 20 25");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(ring)
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(ring)
                 .getOriginalSquareArray()));
     }
 
@@ -388,13 +343,15 @@ public class SquarelotronTest {
     public void testMainDiagonalFlipIn5x5RingTwo() {
         final int size = 5;
         final int ring = 2;
+        final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 12, 17, 10}, {11, 8, 13, 18, 15},
+                {16, 9, 14, 19, 20}, {21, 22, 23, 24, 25}};
         squarelotron = new Squarelotron(size);
         test.append("01 02 03 04 05").append("\n")
-                .append("06 07 12 17 10").append("\n")
-                .append("11 08 13 18 15").append("\n")
-                .append("16 09 14 19 20").append("\n")
-                .append("21 22 23 24 25");
-        assertEquals(test.toString().trim(), squarelotron.showSquare(squarelotron.mainDiagonalFlip(ring)
+            .append("06 07 12 17 10").append("\n")
+            .append("11 08 13 18 15").append("\n")
+            .append("16 09 14 19 20").append("\n")
+            .append("21 22 23 24 25");
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(ring)
                 .getOriginalSquareArray()));
     }
 }
