@@ -114,13 +114,4 @@ public class Squarelotron {
     public int[][] getSquarematrix() {
         return Arrays.copyOf(squarematrix, size);
     }
-
-    /**
-     * Gets the squalotron size.
-     *
-     * @return int with the size value.
-     */
-    public int getSize() {
-        return size;
-    }
 }
