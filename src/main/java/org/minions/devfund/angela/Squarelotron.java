@@ -30,34 +30,11 @@ public class Squarelotron {
     /**
      * Constructor for {@link Squarelotron}.
      *
-     * @param array the unidimensional array to fill the squarematrix.
+     * @param matrix the matrix to fill the squarematrix.
      */
-    public Squarelotron(final int[] array) {
-        size = (int) Math.sqrt(array.length);
-        squarematrix = new int[size][size];
-        int counter = 0;
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-                getSquarematrix()[i][j] = array[counter];
-                counter++;
-            }
-        }
-    }
-
-    /**
-     * Changes the matrix to unidimensional array.
-     *
-     * @return an array of ints.
-     */
-    private int[] changeToUnidimensionalArray() {
-        int[] numberArray = new int[getSize() * getSize()];
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-
-                numberArray[i * getSize() + j] = getSquarematrix()[i][j];
-            }
-        }
-        return numberArray;
+    private Squarelotron(final int[][] matrix) {
+        size = matrix.length;
+        squarematrix = matrix;
     }
 
     /**
@@ -67,14 +44,14 @@ public class Squarelotron {
      * @return {@link Squarelotron}.
      */
     Squarelotron upsideDownFlip(final int ring) {
-        int[] numbers = changeToUnidimensionalArray();
-        int[] newNumbers = new int[getSize() * getSize()];
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-                if (i == ring - 1 || i == getSize() - ring || j == ring - 1 || j == getSize() - ring) {
-                    newNumbers[i * getSize() + j] = numbers[(getSize() - i - 1) * getSize() + j];
+        int[][] newNumbers = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i == ring - 1 || i == size - ring && j >= ring - 1 && j <= size - ring
+                        || j == ring - 1 || j == size - ring && i >= ring - 1 && i <= size - ring) {
+                    newNumbers[size - 1 - i][j] = squarematrix[i][j];
                 } else {
-                    newNumbers[i * getSize() + j] = numbers[i * getSize() + j];
+                    newNumbers[i][j] = squarematrix[i][j];
                 }
             }
         }
@@ -89,14 +66,14 @@ public class Squarelotron {
      * @return {@link Squarelotron}.
      */
     public Squarelotron mainDiagonalFlip(final int ring) {
-        int[] numbers = changeToUnidimensionalArray();
-        int[] newNumbers = new int[getSize() * getSize()];
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-                if (i == ring - 1 || i == getSize() - ring || j == ring - 1 || j == getSize() - ring) {
-                    newNumbers[i * getSize() + j] = numbers[j * getSize() + i];
+        int[][] newNumbers = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i == ring - 1 || i == size - ring && j >= ring - 1 && j <= size - ring
+                        || j == ring - 1 || j == size - ring && i >= ring - 1 && i <= size - ring) {
+                    newNumbers[j][i] = squarematrix[i][j];
                 } else {
-                    newNumbers[i * getSize() + j] = numbers[i * getSize() + j];
+                    newNumbers[i][j] = squarematrix[i][j];
                 }
             }
         }
@@ -135,25 +112,25 @@ public class Squarelotron {
      * Rotates the squarematrix 90 degrees.
      */
     private void rotate() {
-        for (int k = 0; k < getSize() / 2; k++) {
+        for (int k = 0; k < size / 2; k++) {
             int[] savedArray = new int[getSize() - 2 * k];
             int n = 0;
-            for (int j = k; j < getSize() - k; j++) {
-                savedArray[n] = getSquarematrix()[k][j];
+            for (int j = k; j < size - k; j++) {
+                savedArray[n] = squarematrix[k][j];
                 n++;
             }
-            for (int j = k; j < getSize() - k; j++) {
-                getSquarematrix()[k][j] = getSquarematrix()[getSize() - 1 - j][k];
+            for (int j = k; j < size - k; j++) {
+                squarematrix[k][j] = squarematrix[size - 1 - j][k];
             }
-            for (int i = k; i < getSize() - k; i++) {
-                getSquarematrix()[i][k] = getSquarematrix()[getSize() - 1 - k][i];
+            for (int i = k; i < size - k; i++) {
+                squarematrix[i][k] = squarematrix[size - 1 - k][i];
             }
-            for (int j = k; j < getSize() - k; j++) {
-                getSquarematrix()[getSize() - 1 - k][j] = getSquarematrix()[getSize() - 1 - j][getSize() - 1 - k];
+            for (int j = k; j < size - k; j++) {
+                squarematrix[getSize() - 1 - k][j] = squarematrix[size - 1 - j][size - 1 - k];
             }
             n = 0;
-            for (int i = k; i < getSize() - k; i++) {
-                getSquarematrix()[i][getSize() - 1 - k] = savedArray[n];
+            for (int i = k; i < size - k; i++) {
+                squarematrix[i][size - 1 - k] = savedArray[n];
                 n++;
             }
         }

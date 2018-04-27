@@ -68,7 +68,7 @@ public class SquarelotronTest {
      */
     @Before
     public void setup() {
-        int size = Numbers.FOUR.getNumber();
+        final int size = 4;
         squarelotron = new Squarelotron(size);
     }
 
