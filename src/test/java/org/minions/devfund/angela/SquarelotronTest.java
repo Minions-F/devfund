@@ -102,20 +102,9 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateRight() {
-        squarelotron.rotateRight(Numbers.ONE.getNumber());
-        int[] array1 = {Numbers.THIRTEEN.getNumber(), Numbers.NINE.getNumber(), Numbers.FIVE.getNumber(),
-                Numbers.ONE.getNumber()};
-        int[] array2 = {Numbers.FOURTEEN.getNumber(), Numbers.TEN.getNumber(), Numbers.SIX.getNumber(),
-                Numbers.TWO.getNumber()};
-        int[] array3 = {Numbers.FIFTEEN.getNumber(), Numbers.ELEVEN.getNumber(), Numbers.SEVEN.getNumber(),
-                Numbers.THREE.getNumber()};
-        int[] array4 = {Numbers.SIXTEEN.getNumber(), Numbers.TWELVE.getNumber(), Numbers.EIGHT.getNumber(),
-                Numbers.FOUR.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        squarelotron.rotateRight(1);
+        final int[][] matrixResult = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 
     /**
@@ -125,19 +114,8 @@ public class SquarelotronTest {
     public void rotateLeft() {
         final int numberOfTurns = -1;
         squarelotron.rotateRight(numberOfTurns);
-        int[] array1 = {Numbers.FOUR.getNumber(), Numbers.EIGHT.getNumber(), Numbers.TWELVE.getNumber(),
-                Numbers.SIXTEEN.getNumber()};
-        int[] array2 = {Numbers.THREE.getNumber(), Numbers.SEVEN.getNumber(), Numbers.ELEVEN.getNumber(),
-                Numbers.FIFTEEN.getNumber()};
-        int[] array3 = {Numbers.TWO.getNumber(), Numbers.SIX.getNumber(),  Numbers.TEN.getNumber(),
-                Numbers.FOURTEEN.getNumber()};
-        int[] array4 = {Numbers.ONE.getNumber(), Numbers.FIVE.getNumber(), Numbers.NINE.getNumber(),
-                Numbers.THIRTEEN.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        final int[][] matrixResult = {{4, 8, 12, 16}, {3, 7, 11, 15}, {2, 6, 10, 14}, {1, 5, 9, 13}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 
     /**
@@ -147,19 +125,8 @@ public class SquarelotronTest {
     public void rotateTwiceLeft() {
         final int numberOfTurns = -2;
         squarelotron.rotateRight(numberOfTurns);
-        int[] array1 = {Numbers.SIXTEEN.getNumber(), Numbers.FIFTEEN.getNumber(), Numbers.FOURTEEN.getNumber(),
-                Numbers.THIRTEEN.getNumber()};
-        int[] array2 = {Numbers.TWELVE.getNumber(), Numbers.ELEVEN.getNumber(), Numbers.TEN.getNumber(),
-                Numbers.NINE.getNumber()};
-        int[] array3 = {Numbers.EIGHT.getNumber(), Numbers.SEVEN.getNumber(), Numbers.SIX.getNumber(),
-                Numbers.FIVE.getNumber()};
-        int[] array4 = {Numbers.FOUR.getNumber(), Numbers.THREE.getNumber(), Numbers.TWO.getNumber(),
-                Numbers.ONE.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        final int[][] matrixResult = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 
     /**
@@ -169,19 +136,8 @@ public class SquarelotronTest {
     public void rotateThreeTimesLeft() {
         final int numberOfTurns = -3;
         squarelotron.rotateRight(numberOfTurns);
-        int[] array1 = {Numbers.THIRTEEN.getNumber(), Numbers.NINE.getNumber(), Numbers.FIVE.getNumber(),
-                Numbers.ONE.getNumber()};
-        int[] array2 = {Numbers.FOURTEEN.getNumber(), Numbers.TEN.getNumber(), Numbers.SIX.getNumber(),
-                Numbers.TWO.getNumber()};
-        int[] array3 = {Numbers.FIFTEEN.getNumber(), Numbers.ELEVEN.getNumber(), Numbers.SEVEN.getNumber(),
-                Numbers.THREE.getNumber()};
-        int[] array4 = {Numbers.SIXTEEN.getNumber(), Numbers.TWELVE.getNumber(), Numbers.EIGHT.getNumber(),
-                Numbers.FOUR.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        final int[][] matrixResult = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 
     /**
@@ -189,20 +145,9 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateRightTwice() {
-        squarelotron.rotateRight(Numbers.TWO.getNumber());
-        int[] array1 = {Numbers.SIXTEEN.getNumber(), Numbers.FIFTEEN.getNumber(), Numbers.FOURTEEN.getNumber(),
-                Numbers.THIRTEEN.getNumber()};
-        int[] array2 = {Numbers.TWELVE.getNumber(), Numbers.ELEVEN.getNumber(), Numbers.TEN.getNumber(),
-                Numbers.NINE.getNumber()};
-        int[] array3 = {Numbers.EIGHT.getNumber(), Numbers.SEVEN.getNumber(), Numbers.SIX.getNumber(),
-                Numbers.FIVE.getNumber()};
-        int[] array4 = {Numbers.FOUR.getNumber(), Numbers.THREE.getNumber(), Numbers.TWO.getNumber(),
-                Numbers.ONE.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        squarelotron.rotateRight(2);
+        final int[][] matrixResult = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 
     /**
@@ -210,19 +155,9 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateRightThreeTimes() {
-        squarelotron.rotateRight(Numbers.THREE.getNumber());
-        int[] array1 = {Numbers.FOUR.getNumber(), Numbers.EIGHT.getNumber(), Numbers.TWELVE.getNumber(),
-                Numbers.SIXTEEN.getNumber()};
-        int[] array2 = {Numbers.THREE.getNumber(), Numbers.SEVEN.getNumber(), Numbers.ELEVEN.getNumber(),
-                Numbers.FIFTEEN.getNumber()};
-        int[] array3 = {Numbers.TWO.getNumber(), Numbers.SIX.getNumber(),  Numbers.TEN.getNumber(),
-                Numbers.FOURTEEN.getNumber()};
-        int[] array4 = {Numbers.ONE.getNumber(), Numbers.FIVE.getNumber(), Numbers.NINE.getNumber(),
-                Numbers.THIRTEEN.getNumber()};
-
-        assertArrayEquals(array1, squarelotron.getSquarematrix()[0]);
-        assertArrayEquals(array2, squarelotron.getSquarematrix()[1]);
-        assertArrayEquals(array3, squarelotron.getSquarematrix()[2]);
-        assertArrayEquals(array4, squarelotron.getSquarematrix()[Numbers.THREE.getNumber()]);
+        final int numberOfTurns = 3;
+        squarelotron.rotateRight(numberOfTurns);
+        final int[][] matrixResult = {{4, 8, 12, 16}, {3, 7, 11, 15}, {2, 6, 10, 14}, {1, 5, 9, 13}};
+        assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
 }
