@@ -102,7 +102,7 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateRight() {
-        squarelotron.rotateRight(1);
+        squarelotron.rotate(1);
         final int[][] matrixResult = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
@@ -113,7 +113,7 @@ public class SquarelotronTest {
     @Test
     public void rotateLeft() {
         final int numberOfTurns = -1;
-        squarelotron.rotateRight(numberOfTurns);
+        squarelotron.rotate(numberOfTurns);
         final int[][] matrixResult = {{4, 8, 12, 16}, {3, 7, 11, 15}, {2, 6, 10, 14}, {1, 5, 9, 13}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
@@ -124,7 +124,7 @@ public class SquarelotronTest {
     @Test
     public void rotateTwiceLeft() {
         final int numberOfTurns = -2;
-        squarelotron.rotateRight(numberOfTurns);
+        squarelotron.rotate(numberOfTurns);
         final int[][] matrixResult = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
@@ -135,7 +135,7 @@ public class SquarelotronTest {
     @Test
     public void rotateThreeTimesLeft() {
         final int numberOfTurns = -3;
-        squarelotron.rotateRight(numberOfTurns);
+        squarelotron.rotate(numberOfTurns);
         final int[][] matrixResult = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
@@ -145,7 +145,7 @@ public class SquarelotronTest {
      */
     @Test
     public void rotateRightTwice() {
-        squarelotron.rotateRight(2);
+        squarelotron.rotate(2);
         final int[][] matrixResult = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
@@ -156,7 +156,7 @@ public class SquarelotronTest {
     @Test
     public void rotateRightThreeTimes() {
         final int numberOfTurns = 3;
-        squarelotron.rotateRight(numberOfTurns);
+        squarelotron.rotate(numberOfTurns);
         final int[][] matrixResult = {{4, 8, 12, 16}, {3, 7, 11, 15}, {2, 6, 10, 14}, {1, 5, 9, 13}};
         assertArrayEquals(matrixResult, squarelotron.getSquarematrix());
     }
