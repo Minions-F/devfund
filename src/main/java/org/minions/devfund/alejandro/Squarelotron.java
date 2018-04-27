@@ -96,7 +96,7 @@ public class Squarelotron {
         if (ring > 0 && ring <= this.size / 2) {
             for (int i = ring - 1; i <= this.size - ring; i++) {
                 for (int j = ring - 1; j <= this.size - ring; j++) {
-                    if (i == ring - 1 || j == ring - 1 || i == this.size - ring || j == this.size - ring) {
+                    if (isPositionInRing(ring, i, j)) {
                         resultSquare.squarelotronMatrix[i][j] = this.squarelotronMatrix[j][i];
                     }
                 }
