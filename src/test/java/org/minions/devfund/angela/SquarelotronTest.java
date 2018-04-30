@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -30,6 +31,13 @@ public class SquarelotronTest {
         assertTrue("The position isn't part of the ring.", squarelotron.isPartOfTheRing(1, 0, 0));
     }
 
+    /**
+     * Test to verify if a position is notpart of the ring.
+     */
+    @Test
+    public void testIsNotPartOfTheRing() {
+        assertFalse("The position is part of the ring.", squarelotron.isPartOfTheRing(1, 1, 1));
+    }
     /**
      * Test if Upside Down Flip is working.
      */
