@@ -36,8 +36,7 @@ public class WhackAMole {
      * @return true if the place is empty otherwise false.
      */
     public boolean place(int x, int y) {
-        if (x >= 0 && y >= 0 && x < moleGrid.length && y < moleGrid.length
-                && moleGrid[x][y] == EMPTY_PLACE) {
+        if (x >= 0 && y >= 0 && x < moleGrid.length && y < moleGrid.length) {
             moleGrid[x][y] = MOLE;
             molesLeft++;
             return true;
@@ -141,7 +140,7 @@ public class WhackAMole {
      * @return true if the rules are applied otherwise false.
      */
     public boolean rules() {
-        return attemptsLeft > 0 && molesLeft >= 0;
+        return attemptsLeft > 0;
     }
 
     /**
