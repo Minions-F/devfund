@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
  */
 public class Squarelotron {
 
+    private static final int COMPLETE_TURN = 4;
     private int[][] squarematrix;
     private int size;
 
@@ -72,11 +73,12 @@ public class Squarelotron {
      * @param numberOfTurns number of turns value.
      */
     public void rotateRight(final int numberOfTurns) {
-        if (numberOfTurns >= 0) {
-            rotateClockWise(numberOfTurns);
+        int totalTurns = numberOfTurns % COMPLETE_TURN;
+        if (totalTurns >= 0) {
+            rotateClockWise(totalTurns);
             return;
         }
-        rotateCounterClockWise(numberOfTurns);
+        rotateCounterClockWise(totalTurns);
     }
 
     /**
@@ -88,22 +90,6 @@ public class Squarelotron {
             squarematrix[i] = IntStream.range(accumulator, accumulator + size).toArray();
             accumulator += size;
         }
-    }
-
-    /**
-     * Generates the ring mask matrix.
-     *
-     * @param ring matrix ring value.
-     * @return ring mask matrix.
-     */
-    private int[][] generateRingMask(final int ring) {
-        int[][] ringMask = new int[this.size][this.size];
-        for (int row = 0; row < this.size; row++) {
-            for (int col = 0; col < this.size; col++) {
-                ringMask[row][col] = isInsideRing(ring, row, col) ? 1 : 0;
-            }
-        }
-        return ringMask;
     }
 
     /**
@@ -190,11 +176,10 @@ public class Squarelotron {
      * @return matrix with replaced values.
      */
     private int[][] replaceMaskValues(final int[][] modMatrix, final int[][] origMatrix, final int ring) {
-        int[][] maskMatrix = generateRingMask(ring);
         int[][] replacedMatrix = new int[this.size][this.size];
         for (int row = 0; row < this.size; row++) {
             for (int col = 0; col < this.size; col++) {
-                replacedMatrix[row][col] = maskMatrix[row][col] == 0 ? origMatrix[row][col] : modMatrix[row][col];
+                replacedMatrix[row][col] = isInsideRing(ring, row, col) ? modMatrix[row][col] : origMatrix[row][col];
             }
         }
         return replacedMatrix;
