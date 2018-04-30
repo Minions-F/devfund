@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Handles the test for game Whack a Mole.
+ *
+ * @author Sergio Navarro
+ * @since 4/12/2018
  */
 public class WhackAMoleTest {
 
