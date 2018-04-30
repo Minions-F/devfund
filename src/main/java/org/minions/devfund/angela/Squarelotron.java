@@ -68,8 +68,11 @@ public class Squarelotron {
      * @return true if position is part of the ring.
      */
     private boolean isPartOfTheRing(int ring, int i, int j) {
-        return i == ring - 1 || i == size - ring && j >= ring - 1 && j <= size - ring
-                || j == ring - 1 || j == size - ring && i >= ring - 1 && i <= size - ring;
+        final boolean isPartOfTheRingAndRow = (i == ring - 1 || i == size - ring)
+                && j >= ring - 1 && j <= size - ring;
+        final boolean isPartOfTheRingAndColumn = (j == ring - 1 || j == size - ring)
+                && i >= ring - 1 && i <= size - ring;
+        return isPartOfTheRingAndRow || isPartOfTheRingAndColumn;
     }
 
 
