@@ -129,7 +129,8 @@ public class SquarelotronTest {
     final int ring = 1;
     final int size = 5;
     final Squarelotron squarelotron = new Squarelotron(size);
-    final int[][] expectedResult = new int[][]{{1, 6, 11, 16, 21}, {2, 7, 8, 9, 22}, {3, 12, 13, 14, 23}, {4, 17, 18, 19, 24}, {5, 10, 15, 20, 25}};
+    final int[][] expectedResult = new int[][]{{1, 6, 11, 16, 21}, {2, 7, 8, 9, 22}, {3, 12, 13, 14, 23},
+            {4, 17, 18, 19, 24}, {5, 10, 15, 20, 25}};
     Squarelotron result = squarelotron.mainDiagonalFlip(ring);
     assertArrayEquals(expectedResult, result.getSquarelotron());
   }
