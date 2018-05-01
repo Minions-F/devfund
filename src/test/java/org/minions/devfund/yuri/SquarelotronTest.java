@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 
 /**
@@ -59,27 +57,6 @@ public class SquarelotronTest {
     final int actualResult = squarelotron.getRingsAmount();
     assertEquals(expectedResult, actualResult);
   }
-
-  /**
-   * Verifies that the matrix size 3 has a center element.
-   */
-  @Test
-  public void testMatrixSizeTreeHasCenterElement() {
-    final int size = 3;
-    Squarelotron squarelotron = new Squarelotron(size);
-    assertTrue(squarelotron.hasCenterElement());
-  }
-
-  /**
-   * Verifies that the matrix size 3 has a center element.
-   */
-  @Test
-  public void testMatrixSizeFourHasCenterElement() {
-    final int size = 4;
-    Squarelotron squarelotron = new Squarelotron(size);
-    assertFalse(squarelotron.hasCenterElement());
-  }
-
   /**
    * Verifies that the values of First Ring is correct from a Matrix size four.
    */
@@ -91,5 +68,43 @@ public class SquarelotronTest {
     Squarelotron squarelotron = new Squarelotron(size);
     squarelotron.maskedSpecificRing(2);
     squarelotron.showMatrix();
+  }
+
+  /**
+   * Verifies that the values of First Ring is correct from a Matrix size four.
+   */
+  @Test
+  public void testSwapRowsMatrixSize4() {
+    final int size = 4;
+    final int[][] expectedResult = new int[][] {{13, 14, 15, 16}, {9, 10, 11, 12}, {5, 6, 7, 8}, {1, 2, 3, 4}};
+    Squarelotron squarelotron = new Squarelotron(size);
+    int[][] actualResult = squarelotron.exchangeRows(squarelotron.getSquarelotron());
+    assertArrayEquals(expectedResult, actualResult);
+  }
+
+  /**
+   * Verifies the upsidedown method with a matrix size 5.
+   */
+  @Test
+  public void testUpSideDownMatrixSize5() {
+    final int size = 5;
+    final int[][] expectedResult = new int[][] {{21, 22, 23, 24, 25}, {16, 7, 8, 9, 20},
+        {11, 12, 13, 14, 15}, {6, 17, 18, 19, 10}, {1, 2, 3, 4, 5}};
+    Squarelotron squarelotron = new Squarelotron(size);
+    Squarelotron newSquarelotron = squarelotron.upsideDownFlip(1);
+    int[][] actualResult = newSquarelotron.getSquarelotron();
+    assertArrayEquals(expectedResult, newSquarelotron.getSquarelotron());
+  }
+
+  /**
+   * Verifies the upsidedown method with a matrix size 4.
+   */
+  @Test
+  public void testUpSideDownMatrixSize4() {
+    final int size = 4;
+    final int[][] expectedResult = new int[][] {{13, 14, 15, 16}, {9, 6, 7, 12}, {5, 10, 11, 8}, {1, 2, 3, 4}};
+    Squarelotron squarelotron = new Squarelotron(size);
+    final Squarelotron actualResult = squarelotron.upsideDownFlip(1);
+    assertArrayEquals(expectedResult, actualResult.getSquarelotron());
   }
 }

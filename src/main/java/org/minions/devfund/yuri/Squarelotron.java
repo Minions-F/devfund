@@ -56,17 +56,6 @@ public class Squarelotron {
   public int getRingsAmount() {
     return size / 2;
   }
-
-  /**
-   * Gets the center information for a matrix.
-   *
-   * @return <code>true</code> if the matrix has center element;
-   * <code>false</code> if it is not.
-   */
-  public boolean hasCenterElement() {
-    return size % 2 == 1;
-  }
-
   /**
    * Gets an specific ring of a matrix.
    *
@@ -74,7 +63,7 @@ public class Squarelotron {
    * @return an array that contains the elements of the ring.
    */
   public int[][] maskedSpecificRing(final int ringNumber) {
-    int[][] squarelotronMasked = squarelotron.clone();
+    int[][] squarelotronMasked = new Squarelotron(size).getSquarelotron();
     for (int i = ringNumber - 1; i <= size - ringNumber; i++) {
       squarelotronMasked[i][ringNumber - 1] = 0;
       squarelotronMasked[ringNumber - 1][i] = 0;
@@ -86,6 +75,7 @@ public class Squarelotron {
 
   /**
    * Gets the matrix with all values.
+   *
    * @return matrix.
    */
   public String showMatrix() {
@@ -97,5 +87,49 @@ public class Squarelotron {
       builder.append("\n");
     }
     return builder.toString();
+  }
+
+  /**
+   * Exchanges the rows of a matrix.
+   *
+   * @param matrix matrix to be exchanged.
+   * @return matrix with exchanged rows.
+   */
+  public int[][] exchangeRows(final int[][] matrix) {
+    int[][] exchanged = new int[size][size];
+    for (int row = 0; row <= size / 2; row++) {
+      exchanged[row] = matrix[size - 1 - row];
+      exchanged[size - 1 - row] = matrix[row];
+    }
+    return exchanged;
+  }
+
+  /**
+   * Performs the upsideDownFlip operation.
+   * @param ring the ring number.
+   * @return a new squarelotron.
+   */
+  public Squarelotron upsideDownFlip(final int ring) {
+    Squarelotron newSquarelotron = new Squarelotron(size);
+    int[][] exchangedMatrix = newSquarelotron.exchangeRows(newSquarelotron.getSquarelotron());
+    int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
+    for (int row = 0; row < size; row++) {
+      for (int column = 0; column < size; column++) {
+        if (maskedMatrix[row][column] == 0) {
+          maskedMatrix[row][column] = exchangedMatrix[row][column];
+        }
+      }
+    }
+    newSquarelotron.setSquarelotron(maskedMatrix);
+    return newSquarelotron;
+  }
+
+  /**
+   * Sets the squarelotron matrix.
+   *
+   * @param matrix the integer matrix.
+   */
+  public void setSquarelotron(final int[][] matrix) {
+    squarelotron = matrix.clone();
   }
 }
