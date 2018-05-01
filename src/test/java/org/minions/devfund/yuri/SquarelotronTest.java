@@ -112,7 +112,7 @@ public class SquarelotronTest {
    * Main Diagonal Flip Test using Squarelotron with size 4 ring 1.
    */
   @Test
-  public void testMainDiagonalFlipTestSize4Ring1() {
+  public void testMainDiagonalFlipMatrixSize4Ring1() {
     final int ring = 1;
     final int size = 4;
     final Squarelotron squarelotron = new Squarelotron(size);
@@ -125,12 +125,49 @@ public class SquarelotronTest {
    * Main Diagonal Flip Test using Squarelotron with size 4 ring 2.
    */
   @Test
-  public void testMainDiagonalFlipTestSize4Ring2() {
+  public void testMainDiagonalFlipMatrixSize4Ring2() {
     final int ring = 2;
     final int dimension = 4;
     final Squarelotron squarelotron = new Squarelotron(dimension);
     final int[][] expectedResult = new int[][]{{1, 2, 3, 4}, {5, 6, 10, 8}, {9, 7, 11, 12}, {13, 14, 15, 16}};
     Squarelotron result = squarelotron.mainDiagonalFlip(ring);
     assertArrayEquals(expectedResult, result.getSquarelotron());
+  }
+  /**
+   * Rotate Clock Wise Test using Squarelotron with dimension 4 and zero number of turns.
+   */
+  @Test
+  public void testRotateCounterClockwiseMatrixSize4Turn0() {
+    final int dimension = 4;
+    final int numberOfTurns = 0;
+    final Squarelotron squarelotron = new Squarelotron(dimension);
+    final int[][] expectedMatrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+    squarelotron.rotateClockWise(numberOfTurns);
+    assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
+  }
+  /**
+   * Rotate Clock Wise Test using Squarelotron with dimension 4 .
+   */
+  @Test
+  public void testRotateClockwiseMatrixSize4Turns1() {
+    final int dimension = 4;
+    final int numberOfTurns = 1;
+    final Squarelotron squarelotron = new Squarelotron(dimension);
+    final int[][] expectedMatrix = new int[][]{{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
+    squarelotron.rotateClockWise(numberOfTurns);
+    assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
+  }
+
+  /**
+   * Rotate Counter Clock Wise Test using Squarelotron with dimension 4.
+   */
+  @Test
+  public void testRotateCounterClockwiseMatrixSize4NegativeTurn2() {
+    final int dimension = 4;
+    final int numberOfTurns = -2;
+    final Squarelotron squarelotron = new Squarelotron(dimension);
+    final int[][] expectedMatrix = new int[][]{{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
+    squarelotron.rotateCounterClockWise(numberOfTurns);
+    assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
   }
 }

@@ -72,23 +72,6 @@ public class Squarelotron {
     }
     return squarelotronMasked;
   }
-
-  /**
-   * Gets the matrix with all values.
-   *
-   * @return matrix.
-   */
-  public String showMatrix() {
-    StringBuilder builder = new StringBuilder();
-    for (int i = 0; i < size; i++) {
-      for (int j = 0; j < size; j++) {
-        builder.append(squarelotron[i][j] + " ");
-      }
-      builder.append("\n");
-    }
-    return builder.toString();
-  }
-
   /**
    * Exchanges the rows of a matrix.
    *
@@ -113,14 +96,7 @@ public class Squarelotron {
     Squarelotron newSquarelotron = new Squarelotron(size);
     int[][] exchangedMatrix = newSquarelotron.exchangeRows(newSquarelotron.getSquarelotron());
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
-    for (int row = 0; row < size; row++) {
-      for (int column = 0; column < size; column++) {
-        if (maskedMatrix[row][column] == 0) {
-          maskedMatrix[row][column] = exchangedMatrix[row][column];
-        }
-      }
-    }
-    newSquarelotron.setSquarelotron(maskedMatrix);
+    newSquarelotron.setSquarelotron(replaceValuesInMatrix(maskedMatrix, exchangedMatrix));
     return newSquarelotron;
   }
   /**
@@ -146,19 +122,52 @@ public class Squarelotron {
    */
   public Squarelotron mainDiagonalFlip(final int ring) {
     Squarelotron newSquarelotron = new Squarelotron(size);
-    //newSquarelotron.setSquarematrix(transposeMatrix(this.squarematrix));
-    //newSquarelotron.setSquarematrix(replaceMaskValues(newSquarelotron.getSquarematrix(), this.squarematrix, ring));
     int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(newSquarelotron.getSquarelotron());
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
+    newSquarelotron.setSquarelotron(replaceValuesInMatrix(maskedMatrix, diagonalMatrix));
+    return newSquarelotron;
+  }
+
+  /**
+   * Replaces values on masked matrix.
+   * @param maskedMatrix the matrix with ring values.
+   * @param matrix the matrix with elements changed according operations.
+   * @return matrix.
+   */
+  public int[][] replaceValuesInMatrix(final int[][] maskedMatrix, final int[][] matrix) {
     for (int row = 0; row < size; row++) {
       for (int column = 0; column < size; column++) {
         if (maskedMatrix[row][column] == 0) {
-          maskedMatrix[row][column] = diagonalMatrix[row][column];
+          maskedMatrix[row][column] = matrix[row][column];
         }
       }
     }
-    newSquarelotron.setSquarelotron(maskedMatrix);
-    return newSquarelotron;
+    return maskedMatrix;
+  }
+  /**
+   * Rotates the matrix 90 degrees clockwise direction.
+   *
+   * @param numberOfTurns number of turns value.
+   */
+  public void rotateClockWise(final int numberOfTurns) {
+    int turns = numberOfTurns;
+    while (turns-- > 0) {
+      this.squarelotron = exchangeRows(this.squarelotron);
+      this.squarelotron = diagonalChangeMatrix(this.squarelotron);
+    }
+  }
+
+  /**
+   * Rotates the matrix 90 degrees in the counterclockwise direction.
+   *
+   * @param numberOfTurns number of turns value.
+   */
+  public  void rotateCounterClockWise(final int numberOfTurns) {
+    int attempts = numberOfTurns;
+    while (attempts++ < 0) {
+      this.squarelotron = diagonalChangeMatrix(this.squarelotron);
+      this.squarelotron = exchangeRows(this.squarelotron);
+    }
   }
   /**
    * Sets the squarelotron matrix.
