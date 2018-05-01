@@ -4,6 +4,7 @@ package org.minions.devfund.yuri;
  * Represents the squarelotron with all functionality.
  */
 public class Squarelotron {
+  public static final int COMPLETE_TURN = 4;
   private int[][] squarelotron;
   private int size;
 
@@ -143,6 +144,20 @@ public class Squarelotron {
       }
     }
     return maskedMatrix;
+  }
+
+  /**
+   * Rotates the square matrix elements 90 degrees according the number of turns.
+   *
+   * @param numberOfTurns number of turns value.
+   */
+  public void rotateRight(final int numberOfTurns) {
+    int totalTurns = numberOfTurns % COMPLETE_TURN;
+    if (totalTurns >= 0) {
+      rotateClockWise(totalTurns);
+      return;
+    }
+    rotateCounterClockWise(totalTurns);
   }
   /**
    * Rotates the matrix 90 degrees clockwise direction.

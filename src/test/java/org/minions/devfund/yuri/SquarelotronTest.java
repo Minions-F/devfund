@@ -122,6 +122,18 @@ public class SquarelotronTest {
   }
 
   /**
+   * Main Diagonal Flip Test using Squarelotron with size 5 ring 1.
+   */
+  @Test
+  public void testMainDiagonalFlipMatrixSize5Ring1() {
+    final int ring = 1;
+    final int size = 5;
+    final Squarelotron squarelotron = new Squarelotron(size);
+    final int[][] expectedResult = new int[][]{{1, 6, 11, 16, 21}, {2, 7, 8, 9, 22}, {3, 12, 13, 14, 23}, {4, 17, 18, 19, 24}, {5, 10, 15, 20, 25}};
+    Squarelotron result = squarelotron.mainDiagonalFlip(ring);
+    assertArrayEquals(expectedResult, result.getSquarelotron());
+  }
+  /**
    * Main Diagonal Flip Test using Squarelotron with size 4 ring 2.
    */
   @Test
@@ -142,7 +154,7 @@ public class SquarelotronTest {
     final int numberOfTurns = 0;
     final Squarelotron squarelotron = new Squarelotron(dimension);
     final int[][] expectedMatrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-    squarelotron.rotateClockWise(numberOfTurns);
+    squarelotron.rotateRight(numberOfTurns);
     assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
   }
   /**
@@ -154,7 +166,7 @@ public class SquarelotronTest {
     final int numberOfTurns = 1;
     final Squarelotron squarelotron = new Squarelotron(dimension);
     final int[][] expectedMatrix = new int[][]{{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
-    squarelotron.rotateClockWise(numberOfTurns);
+    squarelotron.rotateRight(numberOfTurns);
     assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
   }
 
@@ -167,7 +179,7 @@ public class SquarelotronTest {
     final int numberOfTurns = -2;
     final Squarelotron squarelotron = new Squarelotron(dimension);
     final int[][] expectedMatrix = new int[][]{{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5}, {4, 3, 2, 1}};
-    squarelotron.rotateCounterClockWise(numberOfTurns);
+    squarelotron.rotateRight(numberOfTurns);
     assertArrayEquals(expectedMatrix, squarelotron.getSquarelotron());
   }
 }
