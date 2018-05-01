@@ -123,7 +123,43 @@ public class Squarelotron {
     newSquarelotron.setSquarelotron(maskedMatrix);
     return newSquarelotron;
   }
-
+  /**
+   * Transposes a matrix using the main diagonal.
+   *
+   * @param matrix matrix to be transposed.
+   * @return transposed matrix.
+   */
+  public int[][] diagonalChangeMatrix(final int[][] matrix) {
+    int[][] diagonalChanged = new int[size][size];
+    for (int row = 0; row < size; row++) {
+      for (int col = 0; col < size; col++) {
+        diagonalChanged[row][col] = matrix[col][row];
+      }
+    }
+    return diagonalChanged;
+  }
+  /**
+   * Performs the Up Main Diagonal Flip operation.
+   *
+   * @param ring matrix ring value.
+   * @return {@link Squarelotron}.
+   */
+  public Squarelotron mainDiagonalFlip(final int ring) {
+    Squarelotron newSquarelotron = new Squarelotron(size);
+    //newSquarelotron.setSquarematrix(transposeMatrix(this.squarematrix));
+    //newSquarelotron.setSquarematrix(replaceMaskValues(newSquarelotron.getSquarematrix(), this.squarematrix, ring));
+    int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(newSquarelotron.getSquarelotron());
+    int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
+    for (int row = 0; row < size; row++) {
+      for (int column = 0; column < size; column++) {
+        if (maskedMatrix[row][column] == 0) {
+          maskedMatrix[row][column] = diagonalMatrix[row][column];
+        }
+      }
+    }
+    newSquarelotron.setSquarelotron(maskedMatrix);
+    return newSquarelotron;
+  }
   /**
    * Sets the squarelotron matrix.
    *
