@@ -1,11 +1,11 @@
 package org.minions.devfund.yuri;
 
 /**
- * Represents the squarelotron with all functionality.
+ * Represents the matrix with all functionality.
  */
 public class Squarelotron {
   public static final int COMPLETE_TURN = 4;
-  private int[][] squarelotron;
+  private int[][] matrix;
   private int size;
 
   /**
@@ -14,22 +14,22 @@ public class Squarelotron {
    * @param size matrix size.
    */
   public Squarelotron(final int size) {
-    squarelotron = new int[size][size];
+    matrix = new int[size][size];
     this.size = size;
     fillSquarelotron();
   }
 
   /**
-   * Gets the squarelotron matrix.
+   * Gets the matrix matrix.
    *
-   * @return squarelotron matrix.
+   * @return matrix matrix.
    */
-  public int[][] getSquarelotron() {
-    return squarelotron.clone();
+  public int[][] getMatrix() {
+    return matrix.clone();
   }
 
   /**
-   * Gets the squarelotron size.
+   * Gets the matrix size.
    *
    * @return size.
    */
@@ -38,13 +38,13 @@ public class Squarelotron {
   }
 
   /**
-   * Fills the squarelotron elements.
+   * Fills the matrix elements.
    */
   public void fillSquarelotron() {
     int accumalator = 1;
     for (int row = 0; row < size; row++) {
       for (int column = 0; column < size; column++) {
-        squarelotron[row][column] = accumalator++;
+        matrix[row][column] = accumalator++;
       }
     }
   }
@@ -64,7 +64,7 @@ public class Squarelotron {
    * @return an array that contains the elements of the ring.
    */
   public int[][] maskedSpecificRing(final int ringNumber) {
-    int[][] squarelotronMasked = new Squarelotron(size).getSquarelotron();
+    int[][] squarelotronMasked = new Squarelotron(size).getMatrix();
     for (int i = ringNumber - 1; i <= size - ringNumber; i++) {
       squarelotronMasked[i][ringNumber - 1] = 0;
       squarelotronMasked[ringNumber - 1][i] = 0;
@@ -91,13 +91,13 @@ public class Squarelotron {
   /**
    * Performs the upsideDownFlip operation.
    * @param ring the ring number.
-   * @return a new squarelotron.
+   * @return a new matrix.
    */
   public Squarelotron upsideDownFlip(final int ring) {
     Squarelotron newSquarelotron = new Squarelotron(size);
-    int[][] exchangedMatrix = newSquarelotron.exchangeRows(newSquarelotron.getSquarelotron());
+    int[][] exchangedMatrix = newSquarelotron.exchangeRows(newSquarelotron.getMatrix());
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
-    newSquarelotron.setSquarelotron(replaceValuesInMatrix(maskedMatrix, exchangedMatrix));
+    newSquarelotron.setMatrix(replaceValuesInMatrix(maskedMatrix, exchangedMatrix));
     return newSquarelotron;
   }
   /**
@@ -123,9 +123,9 @@ public class Squarelotron {
    */
   public Squarelotron mainDiagonalFlip(final int ring) {
     Squarelotron newSquarelotron = new Squarelotron(size);
-    int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(newSquarelotron.getSquarelotron());
+    int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(newSquarelotron.getMatrix());
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
-    newSquarelotron.setSquarelotron(replaceValuesInMatrix(maskedMatrix, diagonalMatrix));
+    newSquarelotron.setMatrix(replaceValuesInMatrix(maskedMatrix, diagonalMatrix));
     return newSquarelotron;
   }
 
@@ -167,8 +167,8 @@ public class Squarelotron {
   public void rotateClockWise(final int numberOfTurns) {
     int turns = numberOfTurns;
     while (turns-- > 0) {
-      this.squarelotron = exchangeRows(this.squarelotron);
-      this.squarelotron = diagonalChangeMatrix(this.squarelotron);
+      this.matrix = exchangeRows(this.matrix);
+      this.matrix = diagonalChangeMatrix(this.matrix);
     }
   }
 
@@ -180,16 +180,16 @@ public class Squarelotron {
   public  void rotateCounterClockWise(final int numberOfTurns) {
     int attempts = numberOfTurns;
     while (attempts++ < 0) {
-      this.squarelotron = diagonalChangeMatrix(this.squarelotron);
-      this.squarelotron = exchangeRows(this.squarelotron);
+      this.matrix = diagonalChangeMatrix(this.matrix);
+      this.matrix = exchangeRows(this.matrix);
     }
   }
   /**
-   * Sets the squarelotron matrix.
+   * Sets the matrix matrix.
    *
    * @param matrix the integer matrix.
    */
-  public void setSquarelotron(final int[][] matrix) {
-    squarelotron = matrix.clone();
+  public void setMatrix(final int[][] matrix) {
+    this.matrix = matrix.clone();
   }
 }
