@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class SquarelotronTest {
 
-    private static Squarelotron squarelotron;
+    private Squarelotron squarelotron;
 
     /**
      * Tests the values in the square of 2x2.
