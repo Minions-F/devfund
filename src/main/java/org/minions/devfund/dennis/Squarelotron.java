@@ -30,7 +30,7 @@ public class Squarelotron {
      * @param ring what ring you select
      * @return this return numbers in the ring and not in the ring
      */
-    public boolean numbersInRing(int fil, int col, int ring) {
+    private boolean numbersInRing(int fil, int col, int ring) {
         boolean isInRing = fil == ring - 1 || col == ring - 1
                 || fil == size - ring || col == size - ring;
         boolean notInRing = fil <= ring - 2 || col <= ring - 2

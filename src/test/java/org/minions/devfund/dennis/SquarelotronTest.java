@@ -90,46 +90,6 @@ public class SquarelotronTest {
     }
 
     /**
-     * Unit test for numbersInRing where dimension is 4 and ring 1.
-     */
-    @Test
-    public void testNumbersInRingDimension4andRing1() {
-        final int dimension = 4;
-        final int ring = 1;
-        final boolean[][] result = new boolean[dimension][dimension];
-        final Squarelotron squarelotronMatrix = new Squarelotron(dimension);
-        final boolean[][] expectedMatrix = {{true, true, true, true}, {true, false, false, true},
-                {true, false, false, true}, {true, true, true, true}};
-        for (int fil = 0; fil < dimension; fil++) {
-            for (int col = 0; col < dimension; col++) {
-                result[fil][col] = squarelotronMatrix.numbersInRing(fil, col, ring);
-            }
-            System.out.println();
-        }
-        assertArrayEquals(expectedMatrix, result);
-    }
-
-    /**
-     * Unit test for numbersInRing where dimension is 4 and ring 2.
-     */
-    @Test
-    public void testNumbersInRingDimension4andRing2() {
-        final int dimension = 4;
-        final int ring = 2;
-        final boolean[][] result = new boolean[dimension][dimension];
-        final Squarelotron squarelotronMatrix = new Squarelotron(dimension);
-        final boolean[][] expectedMatrix = {{false, false, false, false}, {false, true, true, false},
-                {false, true, true, false}, {false, false, false, false}};
-        for (int fil = 0; fil < dimension; fil++) {
-            for (int col = 0; col < dimension; col++) {
-                result[fil][col] = squarelotronMatrix.numbersInRing(fil, col, ring);
-            }
-            System.out.println();
-        }
-        assertArrayEquals(expectedMatrix, result);
-    }
-
-    /**
      * Unit test for UpsideDownFlip where dimension is 4 and ring 1.
      */
     @Test
