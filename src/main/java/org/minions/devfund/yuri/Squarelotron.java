@@ -16,7 +16,7 @@ public class Squarelotron {
   public Squarelotron(final int size) {
     matrix = new int[size][size];
     this.size = size;
-    fillSquarelotron();
+    fillSquarelotron(matrix);
   }
 
   /**
@@ -38,9 +38,10 @@ public class Squarelotron {
   }
 
   /**
-   * Fills the matrix elements.
+   * Fills a matrix with values.
+   * @param matrix the matrix to be populated.
    */
-  public void fillSquarelotron() {
+  public void fillSquarelotron(final int[][] matrix) {
     int accumalator = 1;
     for (int row = 0; row < size; row++) {
       for (int column = 0; column < size; column++) {
@@ -64,7 +65,8 @@ public class Squarelotron {
    * @return an array that contains the elements of the ring.
    */
   public int[][] maskedSpecificRing(final int ringNumber) {
-    int[][] squarelotronMasked = new Squarelotron(size).getMatrix();
+    int[][] squarelotronMasked = new int[size][size];
+    fillSquarelotron(squarelotronMasked);
     for (int i = ringNumber - 1; i <= size - ringNumber; i++) {
       squarelotronMasked[i][ringNumber - 1] = 0;
       squarelotronMasked[ringNumber - 1][i] = 0;
@@ -95,7 +97,7 @@ public class Squarelotron {
    */
   public Squarelotron upsideDownFlip(final int ring) {
     Squarelotron newSquarelotron = new Squarelotron(size);
-    int[][] exchangedMatrix = newSquarelotron.exchangeRows(newSquarelotron.getMatrix());
+    int[][] exchangedMatrix = newSquarelotron.exchangeRows(this.matrix);
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
     newSquarelotron.setMatrix(replaceValuesInMatrix(maskedMatrix, exchangedMatrix));
     return newSquarelotron;
@@ -123,7 +125,7 @@ public class Squarelotron {
    */
   public Squarelotron mainDiagonalFlip(final int ring) {
     Squarelotron newSquarelotron = new Squarelotron(size);
-    int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(newSquarelotron.getMatrix());
+    int[][] diagonalMatrix = newSquarelotron.diagonalChangeMatrix(this.matrix);
     int[][] maskedMatrix = newSquarelotron.maskedSpecificRing(ring);
     newSquarelotron.setMatrix(replaceValuesInMatrix(maskedMatrix, diagonalMatrix));
     return newSquarelotron;
