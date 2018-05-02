@@ -27,16 +27,6 @@ public class Squarelotron {
   public int[][] getMatrix() {
     return matrix.clone();
   }
-
-  /**
-   * Gets the matrix size.
-   *
-   * @return size.
-   */
-  public int getSize() {
-    return size;
-  }
-
   /**
    * Fills a matrix with values.
    * @param matrix the matrix to be populated.
@@ -48,15 +38,6 @@ public class Squarelotron {
         matrix[row][column] = accumalator++;
       }
     }
-  }
-
-  /**
-   * Gets the rings amount of a matrix.
-   *
-   * @return the rings amount;
-   */
-  public int getRingsAmount() {
-    return size / 2;
   }
   /**
    * Gets an specific ring of a matrix.

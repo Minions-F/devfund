@@ -3,7 +3,6 @@ package org.minions.devfund.yuri;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -22,42 +21,6 @@ public class SquarelotronTest {
     int[][] actualResult = squarelotron.getMatrix();
     assertArrayEquals(expectedResult, actualResult);
   }
-
-  /**
-   * Verifies squarelotron size configured is correct.
-   */
-  @Test
-  public void testSquarelotronSize() {
-    final int expectedResult = 5;
-    Squarelotron squarelotron = new Squarelotron(expectedResult);
-    final int actualResult = squarelotron.getSize();
-    assertEquals(expectedResult, actualResult);
-  }
-
-  /**
-   * Verifies the rings amount for a matrix size two.
-   */
-  @Test
-  public void testGetRingsFromMatrixSizeTwo() {
-    final int expectedResult = 1;
-    final int size = 2;
-    Squarelotron squarelotron = new Squarelotron(size);
-    final int actualResult = squarelotron.getRingsAmount();
-    assertEquals(expectedResult, actualResult);
-  }
-
-  /**
-   * Verifies the rings amount for a matrix size two.
-   */
-  @Test
-  public void testGetRingsFromMatrixSizeSeven() {
-    final int expectedResult = 3;
-    final int size = 7;
-    Squarelotron squarelotron = new Squarelotron(size);
-    final int actualResult = squarelotron.getRingsAmount();
-    assertEquals(expectedResult, actualResult);
-  }
-
   /**
    * Verifies that the values of First Ring is correct from a Matrix size four.
    */
