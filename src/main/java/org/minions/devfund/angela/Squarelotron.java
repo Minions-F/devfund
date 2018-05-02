@@ -47,8 +47,7 @@ public class Squarelotron {
         int[][] newNumbers = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if ((i == ring - 1 || i == size - ring) && j >= ring - 1 && j <= size - ring
-                        || (j == ring - 1 || j == size - ring) && i >= ring - 1 && i <= size - ring) {
+                if (isPartOfTheRing(ring, i, j)) {
                     newNumbers[size - 1 - i][j] = squarematrix[i][j];
                 } else if (ring == 0) {
                     newNumbers[size - 1 - i][j] = squarematrix[i][j];
@@ -70,8 +69,7 @@ public class Squarelotron {
         int[][] newNumbers = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if ((i == ring - 1 || i == size - ring) && j >= ring - 1 && j <= size - ring
-                        || (j == ring - 1 || j == size - ring) && i >= ring - 1 && i <= size - ring) {
+                if (isPartOfTheRing(ring, i, j)) {
                     newNumbers[j][i] = squarematrix[i][j];
                 } else if (ring == 0) {
                     newNumbers[j][i] = squarematrix[i][j];
@@ -81,6 +79,19 @@ public class Squarelotron {
             }
         }
         return new Squarelotron(newNumbers);
+    }
+
+    /**
+     * Verifies if a position is part of the ring.
+     *
+     * @param ring int the number of the ring.
+     * @param i    int the x position.
+     * @param j    int the y position.
+     * @return tru if position is part of the ring.
+     */
+    boolean isPartOfTheRing(int ring, int i, int j) {
+        return (i == ring - 1 || i == size - ring) && j >= ring - 1 && j <= size - ring
+                || (j == ring - 1 || j == size - ring) && i >= ring - 1 && i <= size - ring;
     }
 
     /**

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test for {@link Squarelotron} .
@@ -19,6 +20,18 @@ public class SquarelotronTest {
     public void setup() {
         final int size = 4;
         squarelotron = new Squarelotron(size);
+    }
+
+    /**
+     * Verifies if certain position is part of the ring.
+     */
+    @Test
+    public void testIsPositionPartOfTheRing() {
+        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(1, 0, 0));
+        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 1, 1));
+        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 1, 2));
+        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 2, 1));
+        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 2, 2));
     }
 
     /**
