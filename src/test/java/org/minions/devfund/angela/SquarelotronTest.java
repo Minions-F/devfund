@@ -27,11 +27,12 @@ public class SquarelotronTest {
      */
     @Test
     public void testIsPositionPartOfTheRing() {
-        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(1, 0, 0));
-        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 1, 1));
-        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 1, 2));
-        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 2, 1));
-        assertTrue("The position isn't part of the ring", squarelotron.isPartOfTheRing(2, 2, 2));
+        final String message = "The position isn't part of the ring";
+        assertTrue(message, squarelotron.isPartOfTheRing(1, 0, 0));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 1));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 2));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 2, 1));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 2, 2));
     }
 
     /**
