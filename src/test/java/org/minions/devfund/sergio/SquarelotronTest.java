@@ -274,10 +274,6 @@ public class SquarelotronTest {
         final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
                 {4, 3, 2, 1}};
         squarelotron = new Squarelotron(size);
-        test.append("16 15 14 13").append("\n")
-            .append("12 11 10 09").append("\n")
-            .append("08 07 06 05").append("\n")
-            .append("04 03 02 01");
         squarelotron.rotateRight(2);
         assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
@@ -346,11 +342,6 @@ public class SquarelotronTest {
         final int[][] expected = {{1, 2, 3, 4, 5}, {6, 7, 12, 17, 10}, {11, 8, 13, 18, 15},
                 {16, 9, 14, 19, 20}, {21, 22, 23, 24, 25}};
         squarelotron = new Squarelotron(size);
-        test.append("01 02 03 04 05").append("\n")
-            .append("06 07 12 17 10").append("\n")
-            .append("11 08 13 18 15").append("\n")
-            .append("16 09 14 19 20").append("\n")
-            .append("21 22 23 24 25");
         assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.mainDiagonalFlip(ring)
                 .getOriginalSquareArray()));
     }
