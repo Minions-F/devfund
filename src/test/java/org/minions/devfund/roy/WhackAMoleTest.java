@@ -73,15 +73,27 @@ public class WhackAMoleTest {
      */
     @Test
     public void whack() {
-        final int attempts = 2;
-        final int dimension = 1;
-        final int x = 0;
-        final int y = 0;
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = 2;
+        final int y = 3;
+
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.whack(x, y);
+    }
+
+    /**
+     * Second test for whack Method.
+     */
+    @Test
+    public void whackTwo() {
+        final int attempts = 4;
+        final int dimension = 2;
 
         whackAMole = new WhackAMole(attempts, dimension);
         whackAMole.placeMoles();
-        whackAMole.whack(x, y);
-        Assert.assertTrue(whackAMole.getScore() > 0);
+        whackAMole.whack(0, 1);
+        whackAMole.printGrid();
     }
 
     /**
@@ -95,22 +107,7 @@ public class WhackAMoleTest {
         final int y = -1;
 
         whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertTrue(whackAMole.giveUp(x, y));
-    }
-
-    /**
-     * Tests Do not the game with positive and negative values.
-     */
-    @Test
-    public void doNotGiveUpTheGamePosiveNegarive() {
-        final int attempts = 25;
-        final int dimension = 10;
-        final int positive = 5;
-        final int negative = -1;
-
-        whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertFalse(whackAMole.giveUp(positive, negative));
-        Assert.assertFalse(whackAMole.giveUp(negative, positive));
+        whackAMole.whack(x, y);
     }
 
     /**
@@ -141,8 +138,30 @@ public class WhackAMoleTest {
                     new Random().nextInt(dimension - 1) + 1);
             aux--;
         }
+    }
 
-        Assert.assertTrue(whackAMole.getAttemptsLeft() == 0);
+    /**
+     * Tests printGrid method.
+     */
+    @Test
+    public void printGrid() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.printGrid();
+    }
+
+    /**
+     * Tests printGridForUser method.
+     */
+    @Test
+    public void printGridForUser() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.placeMoles();
+        whackAMole.printGridForUser();
     }
 
     /**
@@ -161,22 +180,34 @@ public class WhackAMoleTest {
      */
     @Test
     public void gridBuilderForUser() {
-        final int attempts = 2;
-        final int dimension = 1;
+        final int attempts = 25;
+        final int dimension = 10;
         whackAMole = new WhackAMole(attempts, dimension);
-        whackAMole.placeMoles();
-        Assert.assertEquals(whackAMole.gridBuilderForUser().charAt(0), '*');
+        Assert.assertTrue(whackAMole.gridBuilderForUser().getClass().equals(StringBuilder.class));
     }
 
     /**
-     * Tests gridBuilder for user method.
+     * Tests whack method for negative positions.
      */
     @Test
-    public void gridBuilderForUserTwo() {
-        final int attempts = 2;
-        final int dimension = 1;
+    public void whackInANegativePosition() {
+        final int attempts = 25;
+        final int dimension = 10;
+        final int x = -5;
+        final int y = -3;
         whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertEquals(whackAMole.gridBuilderForUser().charAt(0), '*');
+        whackAMole.whack(x, y);
+    }
+
+    /**
+     * Tests initialize grid method.
+     */
+    @Test
+    public void initializeGrid() {
+        final int attempts = 25;
+        final int dimension = 10;
+        whackAMole = new WhackAMole(attempts, dimension);
+        whackAMole.initializeGrid();
     }
 
     /**
@@ -202,43 +233,19 @@ public class WhackAMoleTest {
     }
 
     /**
-     * Test place.
+     * Tests rules method without moles.
      */
     @Test
-    public void testPlace() {
-        final int attempts = 2;
-        final int dimension = 1;
-        final int invalidPos = 5;
+    public void rulesWithOutMoles() {
+        final int attempts = 4;
+        final int dimension = 2;
         whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertFalse(whackAMole.place(invalidPos, 0));
-        Assert.assertFalse(whackAMole.place(0, invalidPos));
-    }
 
-    /**
-     * Test place negative and positive.
-     */
-    @Test
-    public void testPlaceNegativePositive() {
-        final int attempts = 2;
-        final int dimension = 10;
-        final int negative = -5;
-        final int positve = 4;
-        whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertFalse(whackAMole.place(negative, positve));
-        Assert.assertFalse(whackAMole.place(positve, negative));
-    }
-
-    /**
-     * Test place out of mole grid dimensions.
-     */
-    @Test
-    public void testPlaceOutOfMoleDimensions() {
-        final int attempts = 2;
-        final int dimension = 10;
-        final int inToTheRange = 5;
-        final int outOfTheRange = 14;
-        whackAMole = new WhackAMole(attempts, dimension);
-        Assert.assertFalse(whackAMole.place(inToTheRange, outOfTheRange));
-        Assert.assertFalse(whackAMole.place(outOfTheRange, inToTheRange));
+        for (int i = 1; i <= dimension; i++) {
+            for (int j = 1; j <= dimension; j++) {
+                whackAMole.whack(i, j);
+            }
+        }
+        Assert.assertFalse(whackAMole.rules());
     }
 }
