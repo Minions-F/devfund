@@ -1,6 +1,5 @@
-package org.minions.devfund.alejandro.tests.whackamole;
+package org.minions.devfund.alejandro;
 import org.junit.Before;
-import org.minions.devfund.alejandro.WhackAMole;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
