@@ -13,7 +13,7 @@ public class Squarelotron {
     /**
      * Internal Array.
      */
-    private int[][] squarelotron;
+    private int[][] square;
 
     /**
      * The zize of the Square.
@@ -29,10 +29,10 @@ public class Squarelotron {
     public Squarelotron(int n) {
         size = n;
         int num = 1;
-        squarelotron = new int[size][size];
+        square = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                squarelotron[i][j] = num++;
+                square[i][j] = num++;
             }
         }
     }
@@ -43,7 +43,7 @@ public class Squarelotron {
      * @return the Squarelotron.
      */
     final int[][] getOriginalSquareArray() {
-        return Arrays.copyOf(this.squarelotron, size);
+        return Arrays.copyOf(this.square, size);
     }
 
     /**
@@ -105,7 +105,7 @@ public class Squarelotron {
      */
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        squarelotronResult.squarelotron = upsideDownFlip(squarelotronResult.squarelotron, ring);
+        squarelotronResult.square = upsideDownFlip(squarelotronResult.square, ring);
         return squarelotronResult;
     }
 
@@ -138,7 +138,7 @@ public class Squarelotron {
      */
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron squarelotronResult = new Squarelotron(size);
-        squarelotronResult.squarelotron = mainDiagonalFlip(squarelotronResult.squarelotron, ring);
+        squarelotronResult.square = mainDiagonalFlip(squarelotronResult.square, ring);
         return squarelotronResult;
     }
 
@@ -172,12 +172,12 @@ public class Squarelotron {
     public int[][] rotateEast(int turns) {
         while (turns > 0) {
             for (int i = 1; i <= getNumberOfRings(); i++) {
-                this.squarelotron = upsideDownFlip(this.squarelotron, i);
-                this.squarelotron = mainDiagonalFlip(this.squarelotron, i);
+                this.square = upsideDownFlip(this.square, i);
+                this.square = mainDiagonalFlip(this.square, i);
             }
             turns--;
         }
-        return Arrays.copyOf(this.squarelotron, size);
+        return Arrays.copyOf(this.square, size);
     }
 
     /**
@@ -189,12 +189,12 @@ public class Squarelotron {
     public int[][] rotateWest(int turns) {
         while (turns < 0) {
             for (int i = 1; i <= getNumberOfRings(); i++) {
-                this.squarelotron = mainDiagonalFlip(this.squarelotron, i);
-                this.squarelotron = upsideDownFlip(this.squarelotron, i);
+                this.square = mainDiagonalFlip(this.square, i);
+                this.square = upsideDownFlip(this.square, i);
             }
             turns++;
         }
-        return Arrays.copyOf(this.squarelotron, size);
+        return Arrays.copyOf(this.square, size);
     }
 
     /**
