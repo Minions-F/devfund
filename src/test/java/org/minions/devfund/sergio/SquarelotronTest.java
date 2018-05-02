@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class SquarelotronTest {
 
-    private StringBuilder test = new StringBuilder();
     private Squarelotron squarelotron;
 
     /**
