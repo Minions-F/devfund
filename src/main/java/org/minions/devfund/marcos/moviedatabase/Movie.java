@@ -20,7 +20,6 @@ public class Movie {
     public Movie(final String name) {
         this.name = name;
         actors = new ArrayList<>();
-        rating = 0.0;
     }
 
     /**
