@@ -167,9 +167,8 @@ public class Squarelotron {
      * Makes the rotation to right according the number of turns.
      *
      * @param turns - Number of turns.
-     * @return The processed Array.
      */
-    public int[][] rotateEast(int turns) {
+    public void rotateEast(int turns) {
         while (turns > 0) {
             for (int i = 1; i <= getNumberOfRings(); i++) {
                 this.square = upsideDownFlip(this.square, i);
@@ -177,16 +176,14 @@ public class Squarelotron {
             }
             turns--;
         }
-        return Arrays.copyOf(this.square, size);
     }
 
     /**
      * Makes the rotation to left according the number of turns.
      *
      * @param turns - Number of turns.
-     * @return - The processed Array.
      */
-    public int[][] rotateWest(int turns) {
+    public void rotateWest(int turns) {
         while (turns < 0) {
             for (int i = 1; i <= getNumberOfRings(); i++) {
                 this.square = mainDiagonalFlip(this.square, i);
@@ -194,7 +191,6 @@ public class Squarelotron {
             }
             turns++;
         }
-        return Arrays.copyOf(this.square, size);
     }
 
     /**
