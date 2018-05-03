@@ -204,7 +204,7 @@ public class Squarelotron {
      */
     public void rotateRight(int numberOfTurns) {
         final int module = 4;
-        numberOfTurns = (numberOfTurns % module + module) % module;
+        numberOfTurns = numberOfTurns % module;
         if (numberOfTurns >= 0) {
             rotateEast(numberOfTurns);
             return;
