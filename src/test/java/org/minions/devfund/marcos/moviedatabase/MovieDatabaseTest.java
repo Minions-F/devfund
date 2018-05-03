@@ -44,8 +44,8 @@ public class MovieDatabaseTest {
     @Test
     public void testAddDuplicatedMovieToDatabase() {
         final MovieDatabase movieDatabase = new MovieDatabase();
-        final String movieTitle = "Interstellar";
-        final String[] actors = new String[]{"Anne Hathaway", "Matthew McConaughey"};
+        final String movieTitle = "Blade Runner 2049";
+        final String[] actors = new String[]{"Ryan Gosling", "Harrison Ford"};
         final int expectedMovieListSize = 1;
         final int expectedActorsListSize = 2;
         movieDatabase.addMovie(movieTitle, actors);
@@ -74,13 +74,13 @@ public class MovieDatabaseTest {
     @Test
     public void testGetBestActorFromDatabase() {
         final MovieDatabase movieDatabase = new MovieDatabase();
-        final String movieOneTitle = "Bohemian Rhapsody";
-        final String[] movieOneActors = new String[]{"Rami Malek"};
+        final String movieOneTitle = "Ghost in the Shell";
+        final String[] movieOneActors = new String[]{"Scarlett Johansson"};
         final int movieOneRating = 10;
         final String movieTwoTitle = "Zoolander";
-        final String[] movieTwoActors = new String[]{"RChristian Slater"};
+        final String[] movieTwoActors = new String[]{"Christian Slater"};
         final int movieTwoRating = 7;
-        final String expectedBestActor = "Rami Malek";
+        final String expectedBestActor = "Scarlett Johansson";
         movieDatabase.addMovie(movieOneTitle, movieOneActors);
         movieDatabase.addMovie(movieTwoTitle, movieTwoActors);
         movieDatabase.addRating(movieOneTitle, movieOneRating);
@@ -94,13 +94,13 @@ public class MovieDatabaseTest {
     @Test
     public void testGetBestMovieFromDatabase() {
         final MovieDatabase movieDatabase = new MovieDatabase();
-        final String movieOneTitle = "Bohemian Rhapsody";
-        final String[] movieOneActors = new String[]{"Rami Malek", "Aidan Gillen"};
+        final String movieOneTitle = "Star Wars: The Force Awakens";
+        final String[] movieOneActors = new String[]{"Daisy Ridley", "Mark Hamill"};
         final int movieOneRating = 10;
-        final String movieTwoTitle = "Zoolander";
-        final String[] movieTwoActors = new String[]{"RChristian Slater", "Owen Wilson"};
+        final String movieTwoTitle = "Star Trek 2009";
+        final String[] movieTwoActors = new String[]{"Leonard Nimoy", "Chris Pine"};
         final int movieTwoRating = 7;
-        final String expectedBestMovie = "Bohemian Rhapsody";
+        final String expectedBestMovie = "Star Wars: The Force Awakens";
         movieDatabase.addMovie(movieOneTitle, movieOneActors);
         movieDatabase.addMovie(movieTwoTitle, movieTwoActors);
         movieDatabase.updateRating(movieOneTitle, movieOneRating);

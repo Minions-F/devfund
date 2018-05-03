@@ -47,7 +47,7 @@ public class MovieTest {
      */
     @Test
     public void testSetMovieRating() {
-        final Movie movie = new Movie("Bohemian Rhapsody");
+        final Movie movie = new Movie("Blade Runner 2049");
         final double newMovieRating = 10;
         final double delta = 0;
         movie.setRating(newMovieRating);
