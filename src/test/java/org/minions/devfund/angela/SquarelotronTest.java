@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -28,11 +29,18 @@ public class SquarelotronTest {
     @Test
     public void testIsPositionPartOfTheRing() {
         final String message = "The position isn't part of the ring";
+        final String messageFalse = "The position is part of the ring";
+        squarelotron = new Squarelotron(5);
         assertTrue(message, squarelotron.isPartOfTheRing(1, 0, 0));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 1));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 2));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 2, 1));
-        assertTrue(message, squarelotron.isPartOfTheRing(2, 2, 2));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 3, 2));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, 3, 3));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 2, 2));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 0, 2));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 3, 4));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 0, 3));
     }
 
     /**
