@@ -30,17 +30,20 @@ public class SquarelotronTest {
     public void testIsPositionPartOfTheRing() {
         final String message = "The position isn't part of the ring";
         final String messageFalse = "The position is part of the ring";
-        squarelotron = new Squarelotron(5);
+        final int newSize = 5;
+        final int thirdPosition = 3;
+        final int fourthPosition = 4;
+        squarelotron = new Squarelotron(newSize);
         assertTrue(message, squarelotron.isPartOfTheRing(1, 0, 0));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 1));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 1, 2));
         assertTrue(message, squarelotron.isPartOfTheRing(2, 2, 1));
-        assertTrue(message, squarelotron.isPartOfTheRing(2, 3, 2));
-        assertTrue(message, squarelotron.isPartOfTheRing(2, 3, 3));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, thirdPosition, 2));
+        assertTrue(message, squarelotron.isPartOfTheRing(2, thirdPosition, thirdPosition));
         assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 2, 2));
         assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 0, 2));
-        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 3, 4));
-        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 0, 3));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, thirdPosition, fourthPosition));
+        assertFalse(messageFalse, squarelotron.isPartOfTheRing(2, 0, thirdPosition));
     }
 
     /**
