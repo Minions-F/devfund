@@ -49,8 +49,8 @@ public class MovieDatabase {
     public void addMovie(final String name, final String[] actors) {
         if (isNewMovie(name, movieList)) {
             Movie newMovie = new Movie(name);
-            ArrayList<Actor> movieActors = Arrays.stream(actors)
-                    .map(Actor::new).collect(Collectors.toCollection(ArrayList::new));
+            List<Actor> movieActors = Arrays.stream(actors).map(Actor::new)
+                    .collect(Collectors.toCollection(ArrayList::new));
             movieActors.forEach(actor -> actor.getMovies().add(newMovie));
             newMovie.setActors(movieActors);
             movieList.add(new Movie(name));
