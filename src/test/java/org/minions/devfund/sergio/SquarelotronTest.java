@@ -268,12 +268,13 @@ public class SquarelotronTest {
      * Tests the values of the method RotateRight.
      */
     @Test
-    public void testRotateRightWithPositiveTurns() {
+    public void testRotateRightWithFivePositiveTurns() {
         final int size = 4;
-        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
-                {4, 3, 2, 1}};
+        final int turns = 5;
+        final int[][] expected = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3},
+                {16, 12, 8, 4}};
         squarelotron = new Squarelotron(size);
-        squarelotron.rotateRight(2);
+        squarelotron.rotateRight(turns);
         assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
     }
 
@@ -281,11 +282,53 @@ public class SquarelotronTest {
      * Tests the values of the method RotateRight.
      */
     @Test
-    public void testRotateRightWithNegativeTurns() {
+    public void testRotateRightWithTwoPositiveTurns() {
+        final int size = 4;
+        final int turns = 2;
+        final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
+                {4, 3, 2, 1}};
+        squarelotron = new Squarelotron(size);
+        squarelotron.rotateRight(turns);
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
+    }
+
+    /**
+     * Tests the values of the method RotateRight.
+     */
+    @Test
+    public void testRotateRightWithTwoNegativeTurns() {
         final int size = 4;
         final int turns = -2;
         final int[][] expected = {{16, 15, 14, 13}, {12, 11, 10, 9}, {8, 7, 6, 5},
                 {4, 3, 2, 1}};
+        squarelotron = new Squarelotron(size);
+        squarelotron.rotateRight(turns);
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
+    }
+
+    /**
+     * Tests the values of the method RotateRight.
+     */
+    @Test
+    public void testRotateRightWithThreeNegativeTurns() {
+        final int size = 4;
+        final int turns = -3;
+        final int[][] expected = {{13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3},
+                {16, 12, 8, 4}};
+        squarelotron = new Squarelotron(size);
+        squarelotron.rotateRight(turns);
+        assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
+    }
+
+    /**
+     * Tests the values of the method RotateRight.
+     */
+    @Test
+    public void testRotateRightWithFourNegativeTurns() {
+        final int size = 4;
+        final int turns = -4;
+        final int[][] expected = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12},
+                {13, 14, 15, 16}};
         squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(turns);
         assertEquals(Squarelotron.showSquare(expected), Squarelotron.showSquare(squarelotron.getOriginalSquareArray()));
