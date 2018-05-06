@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class Squarelotron {
     private int size;
-    private int[][] squarelotron;
+    private int[][] matrixSquarelotron;
 
     /**
      * Squareletron's constructor.
@@ -18,11 +18,11 @@ public class Squarelotron {
      */
     public Squarelotron(int n) {
         size = n;
-        squarelotron = new int[n][n];
+        matrixSquarelotron = new int[n][n];
         int num = 1;
-        for (int i = 0; i < squarelotron.length; i++) {
-            for (int j = 0; j < squarelotron[i].length; j++) {
-                squarelotron[i][j] = num++;
+        for (int i = 0; i < matrixSquarelotron.length; i++) {
+            for (int j = 0; j < matrixSquarelotron[i].length; j++) {
+                matrixSquarelotron[i][j] = num++;
             }
         }
     }
@@ -35,14 +35,14 @@ public class Squarelotron {
      */
     public Squarelotron upsideDownFlip(int ring) {
         Squarelotron resultSquarelotron = new Squarelotron(size);
-        resultSquarelotron.squarelotron = upsideDownFlipHelper(this.squarelotron, ring);
+        resultSquarelotron.matrixSquarelotron = upsideDownFlipHelper(this.matrixSquarelotron, ring);
         return resultSquarelotron;
     }
 
     /**
-     * Method that process the information to flip down the squarelotron.
+     * Method that process the information to flip down the matrixSquarelotron.
      *
-     * @param squareMatrix Represents the squarelotron matrix to flip down.
+     * @param squareMatrix Represents the matrixSquarelotron matrix to flip down.
      * @param ring         the ring position to be flipped.
      * @return the matrix flipped down.
      */
@@ -53,7 +53,7 @@ public class Squarelotron {
         int lastRowPosition = size - 1 - (ring - 1);
         for (int i = ringPointer; i < size / 2; i++) {
             if (ringPointer == i) {
-                copyMatrix = swapCompleteRows(this.squarelotron, i, lastColumnPosition, ringPointer);
+                copyMatrix = swapCompleteRows(this.matrixSquarelotron, i, lastColumnPosition, ringPointer);
             } else {
                 copyMatrix = swapRingColumns(copyMatrix, i, ringPointer, lastRowPosition, lastColumnPosition);
             }
@@ -63,14 +63,14 @@ public class Squarelotron {
     }
 
     /**
-     * Method to swap ring columns of the squarelotron.
+     * Method to swap ring columns of the matrixSquarelotron.
      *
      * @param squareMatrix       the Squarelotron matrix.
      * @param rowPosition        row position that will be swapped.
      * @param ringPointer        Represents the ring pointer.
      * @param lastRowPosition    Represents the last row position.
      * @param lastColumnPosition it is the last column position.
-     * @return return the squarelotron matrix swapped.
+     * @return return the matrixSquarelotron matrix swapped.
      */
     public int[][] swapRingColumns(final int[][] squareMatrix, int rowPosition,
                                    int ringPointer, int lastRowPosition, int lastColumnPosition) {
@@ -92,7 +92,7 @@ public class Squarelotron {
      * @param rowPosition        Represents the row position.
      * @param lastColumnPosition it is the last column position from the matrix.
      * @param ringPointer        Represents the ring pointer.
-     * @return return the squarelotron matrix columns swapped.
+     * @return return the matrixSquarelotron matrix columns swapped.
      */
     public int[][] swapCompleteRows(final int[][] squareMatrix, int rowPosition,
                                     int lastColumnPosition, int ringPointer) {
@@ -121,14 +121,14 @@ public class Squarelotron {
     }
 
     /**
-     * Method that flip the main diagonal from squarelotron matrix.
+     * Method that flip the main diagonal from matrixSquarelotron matrix.
      *
      * @param ring represents the ring limit.
      * @return a Squarelotron object with the matrix flipped.
      */
     public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron resultSquarelotron = new Squarelotron(size);
-        resultSquarelotron.squarelotron = mainDiagonalFlipHelper(this.squarelotron, ring);
+        resultSquarelotron.matrixSquarelotron = mainDiagonalFlipHelper(this.matrixSquarelotron, ring);
         return resultSquarelotron;
     }
 
@@ -154,7 +154,7 @@ public class Squarelotron {
     }
 
     /**
-     * Method that rotate a squarelotron matrix.
+     * Method that rotate a matrixSquarelotron matrix.
      *
      * @param numberOfTurns Represents the number of turns.
      */
@@ -162,13 +162,13 @@ public class Squarelotron {
         final int maxNumberToRotate = 4;
         int numberOfTurnsAbs = Math.abs(numberOfTurns);
         while (numberOfTurnsAbs % maxNumberToRotate > 0) {
-            for (int i = 0; i < squarelotron.length / 2; i++) {
+            for (int i = 0; i < matrixSquarelotron.length / 2; i++) {
                 if (numberOfTurns > 0) {
-                    squarelotron = upsideDownFlipHelper(squarelotron, i + 1);
-                    squarelotron = mainDiagonalFlipHelper(squarelotron, i + 1);
+                    matrixSquarelotron = upsideDownFlipHelper(matrixSquarelotron, i + 1);
+                    matrixSquarelotron = mainDiagonalFlipHelper(matrixSquarelotron, i + 1);
                 } else {
-                    squarelotron = mainDiagonalFlipHelper(squarelotron, i + 1);
-                    squarelotron = upsideDownFlipHelper(squarelotron, i + 1);
+                    matrixSquarelotron = mainDiagonalFlipHelper(matrixSquarelotron, i + 1);
+                    matrixSquarelotron = upsideDownFlipHelper(matrixSquarelotron, i + 1);
                 }
             }
             numberOfTurnsAbs--;
@@ -178,9 +178,9 @@ public class Squarelotron {
     /**
      * Method to return the matrix.
      *
-     * @return squarelotron matrix.
+     * @return matrixSquarelotron matrix.
      */
-    public int[][] getSquarelotron() {
-        return squarelotron.clone();
+    public int[][] getMatrixSquarelotron() {
+        return matrixSquarelotron.clone();
     }
 }
