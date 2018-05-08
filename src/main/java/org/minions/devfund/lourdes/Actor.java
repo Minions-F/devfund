@@ -42,11 +42,10 @@ public class Actor {
      * @return the average rating.
      */
     public double averageRating() {
-        double average = 0;
-        for (Movie movie : movies) {
-            average += movie.getRating();
-        }
-        return average / movies.size();
+        return movies.stream()
+                .mapToDouble(Movie::getRating)
+                .average()
+                .orElse(0.0);
     }
 
     /**

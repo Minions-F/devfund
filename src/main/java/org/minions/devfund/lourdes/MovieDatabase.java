@@ -28,7 +28,7 @@ public class MovieDatabase {
      */
     public void addMovie(final String name, final String[] actors) {
         Movie movie = createMovie(name);
-        ArrayList<Actor> movieActors = new ArrayList<>();
+        List<Actor> movieActors = new ArrayList<>();
         for (String actorName : actors) {
             Actor actor = createActor(actorName);
             actor.addMovie(movie);
