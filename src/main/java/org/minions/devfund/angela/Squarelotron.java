@@ -22,7 +22,7 @@ public class Squarelotron {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 counter++;
-                getSquarematrix()[i][j] = counter;
+                squarematrix[i][j] = counter;
             }
         }
     }
