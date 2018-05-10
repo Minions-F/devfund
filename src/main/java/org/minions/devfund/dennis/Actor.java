@@ -1,13 +1,14 @@
 package org.minions.devfund.dennis;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the methods for Actor class.
  */
 public class Actor implements Comparable<Actor> {
     private String name;
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
 
     /**
      * Constructor for Actor.
@@ -45,7 +46,7 @@ public class Actor implements Comparable<Actor> {
      * get all movies of actor.
      * @return arrayList of the movies
      */
-    public ArrayList<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
@@ -53,7 +54,7 @@ public class Actor implements Comparable<Actor> {
      * Set the movies in the array list.
      * @param movies capture the name of movie
      */
-    public void setMovies(final ArrayList<Movie> movies) {
+    public void setMovies(final List<Movie> movies) {
         this.movies = movies;
     }
 
@@ -74,18 +75,6 @@ public class Actor implements Comparable<Actor> {
         }
         Actor newActor = (Actor) object;
         return newActor.getName().equals(name);
-    }
-
-    /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     *  person to read.
-     * @return a string representation of the object.
-     */
-    public String toString() {
-        return name + " average rating: " + getActorRating();
     }
 
     /**

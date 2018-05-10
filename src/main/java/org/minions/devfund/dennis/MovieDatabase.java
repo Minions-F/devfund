@@ -2,6 +2,7 @@ package org.minions.devfund.dennis;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * This is the methods for MovieDatabase class.
@@ -22,7 +23,7 @@ public class MovieDatabase {
      * Get the actor list.
      * @return actor list
      */
-    public ArrayList<Actor> getActorList() {
+    public List<Actor> getActorList() {
         return this.actorList;
     }
 
@@ -30,7 +31,7 @@ public class MovieDatabase {
      * Get the movie list.
      * @return movie list
      */
-    public ArrayList<Movie> getMovieList() {
+    public List<Movie> getMovieList() {
         return this.movieList;
     }
 
