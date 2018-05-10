@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class Submarine extends Ship {
 
     public Submarine() {
+
         setSize(3);
-        setHit(new boolean[3]);
-        Arrays.fill(this.getHit(), false);
+        Arrays.fill(getHit(), false);
     }
 
     @Override

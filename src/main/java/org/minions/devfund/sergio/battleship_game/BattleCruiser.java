@@ -7,7 +7,7 @@ public class BattleCruiser extends Ship {
     public BattleCruiser() {
         setSize(7);
         setHit(new boolean[7]);
-        Arrays.fill(this.getHit(), false);
+        Arrays.fill(getHit(), false);
     }
 
     @Override

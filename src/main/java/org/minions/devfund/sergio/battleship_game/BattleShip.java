@@ -7,7 +7,7 @@ public class BattleShip extends Ship{
     public BattleShip() {
         setSize(8);
         setHit(new boolean[8]);
-        Arrays.fill(this.getHit(), false);
+        Arrays.fill(getHit(), false);
     }
 
     @Override

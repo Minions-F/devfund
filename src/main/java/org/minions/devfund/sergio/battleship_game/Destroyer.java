@@ -6,7 +6,7 @@ public class Destroyer extends Ship {
     public Destroyer() {
         setSize(6);
         setHit(new boolean[6]);
-        Arrays.fill(this.getHit(), false);
+        Arrays.fill(getHit(), false);
     }
 
     @Override

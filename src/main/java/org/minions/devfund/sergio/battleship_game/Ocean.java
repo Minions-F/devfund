@@ -27,14 +27,6 @@ public class Ocean {
         return false;
     }
 
-//    public Ship[][] getShipArray() {
-//        return ships;
-//    }
-//
-//    public void setShips(Ship[][] ships) {
-//        this.ships = ships;
-//    }
-
     public int getShots() {
         return shots;
     }

@@ -11,23 +11,8 @@ public abstract class Ship {
 
     public void placeShipAt(int row, int column) {
     }
-
-
     public boolean currentHit(int row, int column) {
         return false;
-    }
-
-    public boolean isSunk() {
-        for (boolean b : hit) if (!b) return false;
-        return true;
-    }
-
-    public int getTableRow() {
-        return tableRow;
-    }
-
-    public void setTableRow(int tableRow) {
-        this.tableRow = tableRow;
     }
 
     public int getTableColumn() {
@@ -36,6 +21,14 @@ public abstract class Ship {
 
     public void setTableColumn(int tableColumn) {
         this.tableColumn = tableColumn;
+    }
+
+    public int getTableRow() {
+        return tableRow;
+    }
+
+    public void setTableRow(int tableRow) {
+        this.tableRow = tableRow;
     }
 
     public int getSize() {
@@ -54,5 +47,4 @@ public abstract class Ship {
     public void setHit(boolean[] hit) {
         this.hit = hit;
     }
-
 }
