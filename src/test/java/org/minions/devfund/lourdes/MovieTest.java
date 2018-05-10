@@ -2,7 +2,8 @@ package org.minions.devfund.lourdes;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +18,7 @@ public class MovieTest {
     public void testMovieConstructor() {
         final String movieName = "Iron Man I";
         Movie movie = new Movie(movieName);
-        assertEquals(movie.getName(), movieName);
+        assertEquals(movieName, movie.getName());
     }
 
     /**
@@ -26,7 +27,7 @@ public class MovieTest {
     @Test
     public void testMovieConstructorEmptyParam() {
         Movie movie = new Movie();
-        assertEquals(movie.getName(), "");
+        assertEquals("", movie.getName());
     }
 
     /**
@@ -36,12 +37,10 @@ public class MovieTest {
     public void addActorOne() {
         final String actorName = "Robert Downey";
         final String movieName = "Iron Man I";
-        Actor actor = new Actor(actorName);
-        final ArrayList<Actor> actors = new ArrayList<>();
-        actors.add(actor);
+        final List<Actor> actors = Arrays.asList(new Actor(actorName));
         Movie movie = new Movie(movieName);
         movie.setActors(actors);
-        assertEquals(movie.getActors().get(0).getName(), actorName);
+        assertEquals(actorName, movie.getActors().get(0).getName());
     }
 
     /**
@@ -52,6 +51,6 @@ public class MovieTest {
         final String movieName = "Terminator";
         Movie movie = new Movie();
         movie.setName(movieName);
-        assertEquals(movie.getName(), movieName);
+        assertEquals(movieName, movie.getName());
     }
 }

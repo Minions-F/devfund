@@ -2,7 +2,7 @@ package org.minions.devfund.lourdes;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +19,7 @@ public class ActorTest {
     @Test
     public void testActorConstructor() {
         Actor actor = new Actor();
-        assertEquals(actor.getName(), "");
+        assertEquals("", actor.getName());
     }
 
     /**
@@ -30,7 +30,7 @@ public class ActorTest {
         final Actor actor = new Actor(ACTOR_NAME);
         Movie movie = new Movie("Iron Man I");
         actor.addMovie(movie);
-        assertEquals(actor.getMovies().get(0), movie);
+        assertEquals(movie, actor.getMovies().get(0));
     }
 
     /**
@@ -48,7 +48,7 @@ public class ActorTest {
         movie2.setRating(ratingMovie2);
         actor.addMovie(movie2);
         double expectedAverage = (ratingMovie1 + ratingMovie2) / 2;
-        assertEquals(actor.averageRating(), expectedAverage, 0);
+        assertEquals(expectedAverage, actor.averageRating(), 0);
     }
 
     /**
@@ -58,12 +58,9 @@ public class ActorTest {
     public void testSetMovies() {
         final String movieName = "Iron Man II";
         Actor actor = new Actor(ACTOR_NAME);
-        List<Movie> movieList = new ArrayList<>();
-        Movie movie = new Movie(movieName);
-        movieList.add(movie);
+        List<Movie> movieList = Arrays.asList(new Movie(movieName));
         actor.setMovies(movieList);
-        assertEquals(actor.getMovies().get(0).getName(), movieName);
-
+        assertEquals(movieName, actor.getMovies().get(0).getName());
     }
 
     /**
@@ -73,7 +70,6 @@ public class ActorTest {
     public void testSetName() {
         Actor actor = new Actor();
         actor.setName(ACTOR_NAME);
-        assertEquals(actor.getName(), ACTOR_NAME);
-
+        assertEquals(ACTOR_NAME, actor.getName());
     }
 }
