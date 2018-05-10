@@ -13,7 +13,7 @@ public class Destroyer extends Ship {
     public Destroyer() {
         final int shipLength = 4;
         setLength(shipLength);
-        setHit(new Boolean[shipLength]);
+        setHit(new boolean[shipLength]);
         Arrays.fill(getHit(), false);
     }
 

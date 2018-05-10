@@ -13,7 +13,7 @@ public class Cruiser extends Ship {
     public Cruiser() {
         final int shipLength = 6;
         setLength(shipLength);
-        setHit(new Boolean[shipLength]);
+        setHit(new boolean[shipLength]);
         Arrays.fill(getHit(), false);
     }
 

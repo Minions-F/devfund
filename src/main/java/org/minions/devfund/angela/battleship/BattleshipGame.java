@@ -24,8 +24,8 @@ public final class BattleshipGame {
         Ocean ocean = new Ocean();
         System.out.println("Welcome to BattleShip Game! \n");
         ocean.placeAllShipsRandomly();
-
-        while (true) {
+        String input = "";
+        while (!input.equals("q") && !ocean.isGameOver()) {
             System.out.println("Shot fired: " + ocean.getShotsFired());
             System.out.println("Hits: " + ocean.getHitCount());
             System.out.println("Ships sunk: " + ocean.getShipsSunk());
@@ -33,11 +33,7 @@ public final class BattleshipGame {
             ocean.print();
 
             System.out.print("5 places to shoot at: ");
-            String input = scanner.nextLine();
-            if (input.equals("q")) {
-                System.out.println("Game over!");
-                break;
-            }
+            input = scanner.nextLine();
             String[] pairs = input.split("; ");
             for (String pair : pairs) {
                 String[] locations = pair.split(", ");
@@ -47,18 +43,7 @@ public final class BattleshipGame {
                     System.out.println("miss");
                 }
             }
-
-            if (ocean.isGameOver()) {
-                System.out.print("Game over! Play again? y or n: ");
-                input = scanner.nextLine();
-                if (input.equals("y")) {
-                    ocean = new Ocean();
-                    ocean.placeAllShipsRandomly();
-                } else {
-                    System.out.println("Total shot fired: " + ocean.getShotsFired());
-                    break;
-                }
-            }
         }
+        System.out.print("Game over!");
     }
 }

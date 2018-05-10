@@ -12,7 +12,7 @@ public class BattleShip extends Ship {
     public BattleShip() {
         final int shipLength = 8;
         setLength(shipLength);
-        setHit(new Boolean[shipLength]);
+        setHit(new boolean[shipLength]);
         Arrays.fill(getHit(), false);
     }
     /**

@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Ocean {
     private static final int OCEAN_SIZE = 20;
-    private static final int SHIPS = 13;
+    private static final int SHIPS_QUANTITY = 13;
     private Ship[][] ships;
     private int shotsFired;
     private int hitCount;
@@ -39,8 +39,8 @@ public class Ocean {
         final int sixLengthShip = 6;
         final int nineLengthShip = 9;
         Random random = new Random();
-        Ship[] shipsToPlace = new Ship[SHIPS];
-        for (int i = 0; i < SHIPS; i++) {
+        Ship[] shipsToPlace = new Ship[SHIPS_QUANTITY];
+        for (int i = 0; i < SHIPS_QUANTITY; i++) {
             if (i == 0) {
                 shipsToPlace[i] = new BattleShip();
             } else if (i == 1) {
@@ -133,7 +133,7 @@ public class Ocean {
      * @return true if game over.
      */
     boolean isGameOver() {
-        return shipsSunk == SHIPS;
+        return shipsSunk == SHIPS_QUANTITY;
     }
 
     /**

@@ -12,7 +12,7 @@ public class EmptySea extends Ship {
      */
     public EmptySea() {
         setLength(1);
-        setHit(new Boolean[1]);
+        setHit(new boolean[1]);
         Arrays.fill(getHit(), false);
     }
 
