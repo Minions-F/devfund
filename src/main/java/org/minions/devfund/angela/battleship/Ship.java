@@ -2,12 +2,12 @@ package org.minions.devfund.angela.battleship;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Manages all Ships.
  */
 public abstract class Ship {
+
     private int bowRow;
     private int bowColumn;
     private int length;
@@ -104,7 +104,7 @@ public abstract class Ship {
      * @return tru if the ship was sunk.
      */
     boolean isSunk() {
-       return IntStream.range(0, hit.length)
+        return IntStream.range(0, hit.length)
                 .mapToObj(idx -> hit[idx]).allMatch(element -> element);
     }
 
@@ -194,7 +194,7 @@ public abstract class Ship {
      * @return the hit.
      */
     public boolean[] getHit() {
-        return hit;
+        return Arrays.copyOf(hit, length);
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract class Ship {
      * @param finalHit new hit.
      */
     public void setHit(final boolean[] finalHit) {
-        hit = finalHit;
+        hit = Arrays.copyOf(finalHit, length);
     }
 
     /**
