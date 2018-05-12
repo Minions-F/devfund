@@ -98,7 +98,6 @@ public class WhackAMole {
      * Gets the moles left.
      *
      * @return int the moles left value.
-     * String with the matrix.
      */
     public int getMolesLeft() {
         return molesLeft;
