@@ -1,9 +1,9 @@
-package org.minions.devfund.yuri;
+package org.minions.devfund.yuri.wackamole;
 
 import java.util.Random;
 
 /**
- * This class represents the WackAMole game.
+ * This class represents the wackamole game.
  */
 public final class WhackAMole {
 

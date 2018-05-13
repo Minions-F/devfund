@@ -1,4 +1,4 @@
-package org.minions.devfund.yuri.movieDataBase;
+package org.minions.devfund.yuri.moviedatabase;
 
 import org.junit.Test;
 

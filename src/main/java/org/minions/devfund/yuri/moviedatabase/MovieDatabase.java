@@ -1,13 +1,14 @@
-package org.minions.devfund.yuri.movieDataBase;
+package org.minions.devfund.yuri.moviedatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a  movie database with attributes and behavior.
  */
 public class MovieDatabase {
-    private ArrayList<Movie> movieList;
-    private ArrayList<Actor> actorList;
+    private List<Movie> movieList;
+    private List<Actor> actorList;
 
     /**
      * Constructor Method..
@@ -96,7 +97,7 @@ public class MovieDatabase {
      *
      * @return movie list.
      */
-    public ArrayList<Movie> getMovieList() {
+    public List<Movie> getMovieList() {
         return movieList;
     }
 
@@ -105,7 +106,7 @@ public class MovieDatabase {
      *
      * @return actor list.
      */
-    public ArrayList<Actor> getActorList() {
+    public List<Actor> getActorList() {
         return actorList;
     }
 
