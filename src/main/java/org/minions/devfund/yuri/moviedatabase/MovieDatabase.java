@@ -69,7 +69,7 @@ public class MovieDatabase {
      * @return best actor.
      */
     public String getBestActor() {
-        return actorList.stream().max(Comparator.comparing(Actor::getAverage)).get().getName();
+        return actorList.stream().max(Comparator.comparing(Actor::getAverage)).orElse(new Actor()).getName();
     }
 
     /**
@@ -78,7 +78,7 @@ public class MovieDatabase {
      * @return best movie.
      */
     public String getBestMovie() {
-        return movieList.stream().max(Comparator.comparing(Movie::getRating)).get().getName();
+        return movieList.stream().max(Comparator.comparing(Movie::getRating)).orElse(new Movie()).getName();
     }
 
 
