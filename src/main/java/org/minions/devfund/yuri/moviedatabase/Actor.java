@@ -1,5 +1,6 @@
 package org.minions.devfund.yuri.moviedatabase;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +70,6 @@ public class Actor {
      * @return actor average.
      */
     public double getAverage() {
-        double result = 0;
-        for (Movie movie : movies) {
-            result = result + movie.getRating();
-        }
-        return movies.isEmpty() ? 0 : result / movies.size();
+        return movies.stream().mapToDouble(Movie::getRating).average().orElse(0);
     }
 }

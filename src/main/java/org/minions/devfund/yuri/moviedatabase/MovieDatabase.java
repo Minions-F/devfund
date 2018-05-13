@@ -1,6 +1,8 @@
 package org.minions.devfund.yuri.moviedatabase;
 
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -67,13 +69,7 @@ public class MovieDatabase {
      * @return best actor.
      */
     public String getBestActor() {
-        Actor bestActor = new Actor();
-        for (Actor actor : actorList) {
-            if (actor.getAverage() > bestActor.getAverage()) {
-                bestActor = actor;
-            }
-        }
-        return bestActor.getName();
+        return actorList.stream().max(Comparator.comparing(Actor::getAverage)).get().getName();
     }
 
     /**
@@ -82,13 +78,7 @@ public class MovieDatabase {
      * @return best movie.
      */
     public String getBestMovie() {
-        Movie bestMovie = new Movie();
-        for (Movie movie : movieList) {
-            if (movie.getRating() > bestMovie.getRating()) {
-                bestMovie = movie;
-            }
-        }
-        return bestMovie.getName();
+        return movieList.stream().max(Comparator.comparing(Movie::getRating)).get().getName();
     }
 
 
@@ -118,13 +108,7 @@ public class MovieDatabase {
      * <CODE>false</CODE> if the movie is new.
      */
     private boolean existentMovie(final String movieName) {
-        boolean flag = false;
-        for (Movie movie : movieList) {
-            if (movie.getName().equalsIgnoreCase(movieName)) {
-                flag = true;
-            }
-        }
-        return flag;
+        return movieList.stream().anyMatch(movie -> movie.getName().equalsIgnoreCase(movieName));
     }
 
     /**
@@ -135,28 +119,18 @@ public class MovieDatabase {
      * <CODE>false</CODE> if the actor is new.
      */
     private boolean existentActor(final String actorName) {
-        boolean flag = false;
-        for (Actor actor : actorList) {
-            if (actor.getName().equalsIgnoreCase(actorName)) {
-                flag = true;
-            }
-        }
-        return flag;
+        return actorList.stream().anyMatch(actor -> actor.getName().equalsIgnoreCase(actorName));
     }
 
     /**
-     * Gets the an specific movie by name of movie list.
+     * Gets an specific movie by name of movie list.
      *
      * @param movieName movie name.
      * @return movie searched.
      */
     private Movie getMovieByName(final String movieName) {
-        Movie movieResult = new Movie();
-        for (Movie movie : movieList) {
-            if (movie.getName().equalsIgnoreCase(movieName)) {
-                movieResult = movie;
-            }
-        }
-        return movieResult;
+        return movieList.stream().filter(movie -> movie.getName().equalsIgnoreCase(movieName))
+                .findAny()
+                .orElse(new Movie());
     }
 }

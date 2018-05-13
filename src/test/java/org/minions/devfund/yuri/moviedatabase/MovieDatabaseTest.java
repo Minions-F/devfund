@@ -54,6 +54,24 @@ public class MovieDatabaseTest {
   }
 
   /**
+   * Add duplicated movie object to database.
+   */
+  @Test
+  public void testAddMovieWithExistentActorToDatabase() {
+    final MovieDatabase movieDatabase = new MovieDatabase();
+    final String movieOneTitle = "Avengers";
+    final String[] movieOneActors = new String[] {"Steve Rogers", "Tony Stark"};
+    final String movieTwoTitle = "Avenengers Infinity War";
+    final String[] movieTwoActors = new String[] {"Hulk", "Tony Stark"};
+    final int expectedMovieListSize = 2;
+    final int expectedActorsListSize = 3;
+    movieDatabase.addMovie(movieOneTitle, movieOneActors);
+    movieDatabase.addMovie(movieTwoTitle, movieTwoActors);
+    assertEquals(expectedMovieListSize, movieDatabase.getMovieList().size());
+    assertEquals(expectedActorsListSize, movieDatabase.getActorList().size());
+  }
+
+  /**
    * Add new movie rating to existing movie object in database.
    */
   @Test
