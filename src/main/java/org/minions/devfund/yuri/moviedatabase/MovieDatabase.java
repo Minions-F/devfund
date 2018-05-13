@@ -48,8 +48,7 @@ public class MovieDatabase {
      * @param rating movie rating.
      */
     public void addRating(final String name, final double rating) {
-        Movie movie = getMovieByName(name);
-        movie.setRating(movie.getRating() + rating);
+        operationAddRating(getMovieByName(name), rating, getMovieByName(name).getRating());
     }
 
     /**
@@ -59,8 +58,18 @@ public class MovieDatabase {
      * @param rating movie rating.
      */
     public void updateRating(final String name, final double rating) {
-        Movie movie = getMovieByName(name);
-        movie.setRating(rating);
+        operationAddRating(getMovieByName(name), rating, 0);
+    }
+
+    /**
+     * Adds rating to movie.
+     *
+     * @param movie        movie.
+     * @param newRating    value to add rating.
+     * @param actualRating actual movie rating.
+     */
+    private void operationAddRating(final Movie movie, final double newRating, final double actualRating) {
+        movie.setRating(newRating + actualRating);
     }
 
     /**

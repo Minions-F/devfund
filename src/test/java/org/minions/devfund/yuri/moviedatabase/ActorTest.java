@@ -2,7 +2,8 @@ package org.minions.devfund.yuri.moviedatabase;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,9 +49,7 @@ public class ActorTest {
   @Test
   public void testSetActorsMovies() {
     final Actor actor = new Actor("Anne Hathaway");
-    final ArrayList<Movie> newMovies = new ArrayList<>();
-    newMovies.add(new Movie("Interstellar"));
-    newMovies.add(new Movie("Passengers"));
+    final List<Movie> newMovies = Arrays.asList(new Movie("Interstellar"), new Movie("Passengers"));
     actor.setMovies(newMovies);
     assertEquals(newMovies, actor.getMovies());
   }
