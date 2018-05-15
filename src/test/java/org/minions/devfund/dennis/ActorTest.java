@@ -9,6 +9,11 @@ import static org.junit.Assert.assertEquals;
  * Unit Test class for Actor with all methods.
  */
 public class ActorTest {
+    private static final String ACTOR_ONE = "Robert De Niro";
+    private static final String ACTOR_TWO = "Leonardo DiCaprios";
+    private static final String MOVIE_ONE = "Titanic";
+    private static final String MOVIE_TWO = "The Wolf of Wall Street";
+
     /**
      * Unit test for New Actor with empty name.
      */
@@ -24,9 +29,8 @@ public class ActorTest {
      */
     @Test
     public void testNewActorWithAName() {
-        final Actor actor = new Actor("Robert De Niro");
-        final String actorName = "Robert De Niro";
-        assertEquals(actorName, actor.getName());
+        final Actor actor = new Actor(ACTOR_ONE);
+        assertEquals(ACTOR_ONE, actor.getName());
     }
 
     /**
@@ -34,10 +38,9 @@ public class ActorTest {
      */
     @Test
     public void testSetActorName() {
-        final Actor actor = new Actor("Tom Hanks");
-        final String actorName = "Tom Hanks II";
-        actor.setName(actorName);
-        assertEquals(actorName, actor.getName());
+        final Actor actor = new Actor(ACTOR_ONE);
+        actor.setName(ACTOR_TWO);
+        assertEquals(ACTOR_TWO, actor.getName());
     }
 
     /**
@@ -45,9 +48,8 @@ public class ActorTest {
      */
     @Test
     public void testSetActorWithMovies() {
-        final Actor actor = new Actor("Leonardo DiCaprio");
-        final List<Movie> movies = Arrays.asList(new Movie("Titanic"),
-                new Movie("The Wolf of Wall Street"));
+        final Actor actor = new Actor(ACTOR_TWO);
+        final List<Movie> movies = Arrays.asList(new Movie(MOVIE_ONE), new Movie(MOVIE_TWO));
         actor.setMovies(movies);
         assertEquals(movies, actor.getMovies());
     }
@@ -57,17 +59,17 @@ public class ActorTest {
      */
     @Test
     public void testActorWithMovieGettingTheRating() {
-        final Actor actor = new Actor("Robert De Niro");
+        final Actor actor = new Actor(ACTOR_TWO);
         final double ratingMovieOne = 8;
         final double ratingMovieTwo = 4;
         final double getRating = (ratingMovieOne + ratingMovieTwo) / 2;
         final double delta = 0;
-        final Movie movieOne = new Movie("Black Swan");
-        movieOne.setRating(ratingMovieOne);
-        final Movie movieTwo = new Movie("Jane Got a Gun");
-        movieTwo.setRating(ratingMovieTwo);
-        actor.getMovies().add(movieOne);
-        actor.getMovies().add(movieTwo);
+        final Movie movieOneR = new Movie(MOVIE_ONE);
+        movieOneR.setRating(ratingMovieOne);
+        final Movie movieTwoR = new Movie(MOVIE_TWO);
+        movieTwoR.setRating(ratingMovieTwo);
+        actor.getMovies().add(movieOneR);
+        actor.getMovies().add(movieTwoR);
         assertEquals(getRating, actor.getActorRating(), delta);
     }
 }
