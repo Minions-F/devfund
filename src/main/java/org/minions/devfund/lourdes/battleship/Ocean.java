@@ -3,6 +3,7 @@ package org.minions.devfund.lourdes.battleship;
 import javax.sound.midi.Soundbank;
 import java.sql.SQLOutput;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Ocean {
     private Ship[][] ship;
@@ -15,9 +16,17 @@ public class Ocean {
         this.shotsFired = 0;
         this.hitCount = 0;
         this.shipsSunk = 0;
-        for (Ship[] row : ship) {
-            Arrays.fill(row, new EmptySea());
+        for (int i = 0; i < ship.length; i++) {
+            for (int j = 0; j < ship[i].length; j++) {
+                ship[i][j] = new EmptySea();
+            }
         }
+    }
+    public void placeAllShipsRandomly(){
+        Random r = new Random();
+        int row = r.nextInt((0 - ship.length) + 1);
+        int column = r.nextInt((0 - ship.length) + 1);
+
     }
 
     public boolean isOccupied(int row, int column) {
@@ -30,9 +39,10 @@ public class Ocean {
                 getShipArray()[row][column].shootAt(row, column)) {
             hitCount++;
             if (getShipArray()[row][column].isSunk()) shipsSunk++;
-            shotsFired++;
             return true;
         }
+        getShipArray()[row][column].shootAt(row, column);
+        shotsFired++;
         return false;
     }
 
@@ -42,8 +52,14 @@ public class Ocean {
             System.out.println("");
             System.out.print(i);
             for (int j = 0; j < ship.length; j++) {
+                if(ship[i][j].toString().equals("S") && ! ship[i][j].hit[ship[i][j].getHitIndex(i, j)]){
+                    System.out.print(" . " );
+                }
+                else{
+                    System.out.print(" "+ship[i][j]+" " );
 
-                System.out.print(" "+ship[i][j]+" " );
+                }
+
             }
             System.out.println("");
         }
@@ -67,6 +83,10 @@ public class Ocean {
         Ocean ocean = new Ocean();
         Ship a = new Submarine();
         a.placeShipAt(3,3, true, ocean);
+//        ocean.shootAt(3,4);
+        ocean.shootAt(3,5);
+        ocean.shootAt(3,3);
+        ocean.shootAt(0,6);
         ocean.print();
     }
 

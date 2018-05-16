@@ -78,11 +78,11 @@ public abstract class Ship {
         return false;
     }
     public int getHitIndex(int row, int column){
-        int index = 0;
+        int index;
         if (horizontal) {
-            index = row - bowRow;
-        } else {
             index = column - bowColumn;
+        } else {
+            index = row - bowRow;
         }
         return index;
     }
