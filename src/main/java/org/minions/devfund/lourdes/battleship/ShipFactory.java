@@ -6,13 +6,13 @@ public class ShipFactory {
         if (sheepType.equals("Battleship")) {
             return new Battleship();
 
-        } else if (sheepType.equalsIgnoreCase("BattleCruiser")) {
+        } else if (sheepType.equals("BattleCruiser")){
             return new Battlecruiser();
 
-        } else if (sheepType.equalsIgnoreCase("Cruiser")) {
+        } else if (sheepType.equals("Cruiser")){
             return new Cruiser();
 
-        } else if (sheepType.equalsIgnoreCase("LightCruiser")) {
+        } else if (sheepType.equals("LightCruiser")){
             return new LightCruiser();
 
         } else if (sheepType.equals("Destroyer")) {

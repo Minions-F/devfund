@@ -1,13 +1,22 @@
 package org.minions.devfund.lourdes.battleship;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class Ocean {
+    private static final HashMap<String, Integer> shipType = new HashMap<>();
+    static{
+        shipType.put("Battleship", 1);
+        shipType.put("BattleCruiser", 1);
+        shipType.put("Cruiser", 2);
+        shipType.put("LightCruiser", 2);
+        shipType.put("Destroyer", 3);
+        shipType.put("Submarine", 4);
+    }
     private Ship[][] ship;
     private int shotsFired;
     private int hitCount;
     private int shipsSunk;
-    private String[] shipType = {"Battleship", "BattleCruiser", "Cruiser", "LightCruiser", "Submarine"};
 
     public Ocean() {
         this.ship = new Ship[20][20];
@@ -27,8 +36,8 @@ public class Ocean {
         int column = r.nextInt((0 - ship.length) + 1);
         boolean horizontal = r.nextBoolean();
         ShipFactory shipFactory = new ShipFactory();
-        Ship newShep = shipFactory.createShip("Battleship");
-        newShep.placeShipAt(row, column, horizontal, this);
+        Ship newShip = shipFactory.createShip("Battleship");
+        newShip.placeShipAt(row, column, horizontal, this);
     }
 
     public boolean isOccupied(int row, int column) {
