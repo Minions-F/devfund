@@ -34,14 +34,14 @@ public abstract class Ship {
         try {
             if (horizontal) {
                 for (int i = row; i < row + length; i++) {
-                    if (ocean.isOccupied(i, column)) {
+                    if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
                         return false;
                     }
                 }
 
             } else {
                 for (int j = column; j < column + length; j++) {
-                    if (ocean.isOccupied(row, j)) {
+                    if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
                         return false;
                     }
                 }

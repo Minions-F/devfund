@@ -174,4 +174,33 @@ public class Ocean {
         }
         System.out.println(sb.toString());
     }
+
+    /**
+     * Verifies if the position at the border is occupied.
+     *
+     * @param row    int row position.
+     * @param column int column position.
+     * @return true if border of the position is occupied.
+     */
+    boolean isBorderOccupied(final int row, final int column) {
+        int rowPlus = row;
+        int rowLess = row;
+        int columnPlus = column;
+        int columnLess = column;
+        if (row + 1 < OCEAN_SIZE) {
+            rowPlus += 1;
+        }
+        if (row - 1 >= 0) {
+            rowLess -= 1;
+        }
+        if (column + 1 < OCEAN_SIZE) {
+            columnPlus += 1;
+        }
+        if (column - 1 >= 0) {
+            columnLess -= 1;
+        }
+        return isOccupied(rowPlus, column) || isOccupied(rowPlus, columnPlus) || isOccupied(rowPlus, columnLess)
+                || isOccupied(rowLess, column) || isOccupied(rowLess, columnPlus) || isOccupied(rowLess, columnLess)
+                || isOccupied(row, columnLess) || isOccupied(row, columnPlus);
+    }
 }
