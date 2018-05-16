@@ -1,8 +1,5 @@
 package org.minions.devfund.lourdes.battleship;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Ocean {
@@ -10,6 +7,7 @@ public class Ocean {
     private int shotsFired;
     private int hitCount;
     private int shipsSunk;
+    private String[] shipType = {"Battleship", "BattleCruiser", "Cruiser", "LightCruiser", "Submarine"};
 
     public Ocean() {
         this.ship = new Ship[20][20];
@@ -22,11 +20,15 @@ public class Ocean {
             }
         }
     }
-    public void placeAllShipsRandomly(){
+
+    public void placeAllShipsRandomly() {
         Random r = new Random();
         int row = r.nextInt((0 - ship.length) + 1);
         int column = r.nextInt((0 - ship.length) + 1);
-
+        boolean horizontal = r.nextBoolean();
+        ShipFactory shipFactory = new ShipFactory();
+        Ship newShep = shipFactory.createShip("Battleship");
+        newShep.placeShipAt(row, column, horizontal, this);
     }
 
     public boolean isOccupied(int row, int column) {
@@ -52,11 +54,10 @@ public class Ocean {
             System.out.println("");
             System.out.print(i);
             for (int j = 0; j < ship.length; j++) {
-                if(ship[i][j].toString().equals("S") && ! ship[i][j].hit[ship[i][j].getHitIndex(i, j)]){
-                    System.out.print(" . " );
-                }
-                else{
-                    System.out.print(" "+ship[i][j]+" " );
+                if (ship[i][j].toString().equals("S") && !ship[i][j].hit[ship[i][j].getHitIndex(i, j)]) {
+                    System.out.print(" . ");
+                } else {
+                    System.out.print(" " + ship[i][j] + " ");
 
                 }
 
@@ -66,10 +67,11 @@ public class Ocean {
         System.out.println("");
 
     }
-    public void printColumnPosition(){
+
+    public void printColumnPosition() {
         StringBuilder arrayPosition = new StringBuilder(" ");
         for (int i = 0; i < ship.length; i++) {
-            if(i<10){
+            if (i < 10) {
                 arrayPosition.append("0");
             }
             arrayPosition.append(i);
@@ -82,11 +84,11 @@ public class Ocean {
     public static void main(String arg[]) {
         Ocean ocean = new Ocean();
         Ship a = new Submarine();
-        a.placeShipAt(3,3, true, ocean);
+        a.placeShipAt(3, 3, true, ocean);
 //        ocean.shootAt(3,4);
-        ocean.shootAt(3,5);
-        ocean.shootAt(3,3);
-        ocean.shootAt(0,6);
+        ocean.shootAt(3, 5);
+        ocean.shootAt(3, 3);
+        ocean.shootAt(0, 6);
         ocean.print();
     }
 
