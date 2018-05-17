@@ -52,7 +52,7 @@ public class ShipTest {
         final int thirdRow = 3;
         assertTrue(errorMessage, ship.shootAt(thirdRow, 1));
         assertEquals("x", ship.toString());
-        assertFalse("The ship isn't sunk", ship.shootAt(2, 0));
+        assertFalse("The ship isn't sunk", ship.shootAt(1, 1));
     }
 
     /**
@@ -71,7 +71,7 @@ public class ShipTest {
         final int thirdColumn = 3;
         assertTrue(errorMessage, ship.shootAt(1, thirdColumn));
         assertEquals("x", ship.toString());
-        assertFalse("The ship isn't sunk", ship.shootAt(2, 0));
+        assertFalse("The ship isn't sunk", ship.shootAt(1, 1));
 
     }
 
@@ -84,11 +84,11 @@ public class ShipTest {
         ship.setHorizontal(false);
         ship.setBowColumn(1);
         ship.setBowRow(1);
-        final int forthColumn = 4;
+        final int forthRow= 4;
 
-        assertFalse(MESSAGE, ship.shootAt(1, 0));
-        assertFalse(MESSAGE, ship.shootAt(1, forthColumn));
         assertFalse(MESSAGE, ship.shootAt(0, 1));
+        assertFalse(MESSAGE, ship.shootAt(forthRow, 1));
+        assertFalse(MESSAGE, ship.shootAt(1, 0));
         assertFalse(MESSAGE, ship.shootAt(2, 2));
     }
 
