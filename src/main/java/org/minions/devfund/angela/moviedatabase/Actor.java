@@ -56,4 +56,15 @@ public class Actor {
     public void setMovies(final List<Movie> movies) {
         this.movies = movies;
     }
+
+    /**
+     * Gets the actor rating based on their movies.
+     *
+     * @return double the rating average points.
+     */
+    public double getRating() {
+        return getMovies().stream()
+                .mapToDouble(Movie::getRating).sum() / getMovies().size();
+
+    }
 }

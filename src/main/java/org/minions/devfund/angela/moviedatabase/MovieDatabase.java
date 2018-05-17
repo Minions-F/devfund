@@ -49,7 +49,8 @@ public class MovieDatabase {
      */
     void addMovie(final String name, final String[] actors) {
         if (movieList.stream().noneMatch(movie -> movie.getName().equalsIgnoreCase(name))) {
-            final Movie newMovie = new Movie(name, Arrays.stream(actors).map(Actor::new).collect(Collectors.toList()));
+            final Movie newMovie = new Movie(name);
+            newMovie.setActors(Arrays.stream(actors).map(Actor::new).collect(Collectors.toList()));
             Arrays.stream(actors)
                     .filter(actor -> actorList.stream()
                             .noneMatch(actorInDatabase -> actorInDatabase.getName().equalsIgnoreCase(actor)))
@@ -70,9 +71,7 @@ public class MovieDatabase {
      * @param rating double the rating to add to movie.
      */
     void addRating(final String name, final double rating) {
-        movieList.stream()
-                .filter(movie -> movie.getName().equalsIgnoreCase(name))
-                .findAny().ifPresent(movie -> movie.setRating(movie.getRating() + rating));
+        updateRating(name, getMovieByName(name).getRating() + rating);
     }
 
     /**
@@ -82,9 +81,7 @@ public class MovieDatabase {
      * @param newRating double new rating.
      */
     void updateRating(final String name, final double newRating) {
-        movieList.stream()
-                .filter(movie -> movie.getName().equalsIgnoreCase(name))
-                .findAny().ifPresent(movie -> movie.setRating(newRating));
+        getMovieByName(name).setRating(newRating);
     }
 
     /**
@@ -94,10 +91,10 @@ public class MovieDatabase {
      */
     String getBestActor() {
         return actorList.stream()
-                .max(Comparator.comparing(actor -> actor.getMovies().stream()
-                        .mapToDouble(Movie::getRating).sum() / actor.getMovies().size()))
+                .max(Comparator.comparing(Actor::getRating))
                 .orElse(new Actor("")).getName();
     }
+
 
     /**
      * Gets the name of the movie with the best rating.
@@ -107,7 +104,18 @@ public class MovieDatabase {
     String getBestMovie() {
         return movieList.stream()
                 .max(Comparator.comparing(Movie::getRating))
-                .orElse(new Movie("", null)).getName();
+                .orElse(new Movie("")).getName();
 
+    }
+
+    /**
+     * Gets a movie by its name.
+     *
+     * @param name string movie name.
+     * @return {@link Movie}.
+     */
+    private Movie getMovieByName(final String name) {
+        return movieList.stream()
+                .filter(movie -> movie.getName().equalsIgnoreCase(name)).findAny().orElse(new Movie(""));
     }
 }

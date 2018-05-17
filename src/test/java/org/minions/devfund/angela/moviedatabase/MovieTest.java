@@ -20,7 +20,7 @@ public class MovieTest {
      */
     @Before
     public void setup() {
-        movie = new Movie(MOVIE_NAME, new ArrayList<>());
+        movie = new Movie(MOVIE_NAME);
     }
 
     /**

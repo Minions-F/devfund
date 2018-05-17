@@ -40,7 +40,7 @@ public class ActorTest {
     @Test
     public void testSetMovies() {
         final List<Movie> newMovies = new ArrayList<>();
-        newMovies.add(new Movie("Infinity War", new ArrayList<>()));
+        newMovies.add(new Movie("Infinity War"));
         actor.setMovies(newMovies);
         assertEquals(newMovies.get(0).getName(), actor.getMovies().get(0).getName());
     }

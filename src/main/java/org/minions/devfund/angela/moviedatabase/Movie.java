@@ -1,5 +1,6 @@
 package org.minions.devfund.angela.moviedatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,10 @@ public class Movie {
      * Constructor of {@link Movie}.
      *
      * @param newName   String the movie name.
-     * @param newActors List with the actors in the movie.
      */
-    public Movie(final String newName, final List<Actor> newActors) {
+    public Movie(final String newName) {
         name = newName;
-        actors = newActors;
+        actors =  new ArrayList<>();
     }
 
     /**
