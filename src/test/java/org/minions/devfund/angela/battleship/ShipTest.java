@@ -44,10 +44,45 @@ public class ShipTest {
         ship.setHorizontal(false);
         ship.setBowColumn(0);
         ship.setBowRow(0);
-        assertTrue("There isn't a ship in that position", ship.shootAt(0, 0));
-        assertTrue("There isn't a ship in that position", ship.shootAt(1, 0));
-        assertTrue("There isn't a ship in that position", ship.shootAt(2, 0));
+        final String errorMessage = "There isn't a ship in that position";
+        assertTrue(errorMessage, ship.shootAt(0, 0));
+        assertTrue(errorMessage, ship.shootAt(1, 0));
+        assertEquals("S", ship.toString());
+        assertTrue(errorMessage, ship.shootAt(2, 0));
+        assertEquals("x", ship.toString());
         assertFalse("The ship isn't sunk", ship.shootAt(2, 0));
+    }
+
+    /**
+     * Verifies a shoot was missed in a vertical ship.
+     */
+    @Test
+    public void testVerticalMissingShoot() {
+        ship = new Submarine();
+        ship.setHorizontal(false);
+        ship.setBowColumn(0);
+        ship.setBowRow(1);
+        final String errorMessage = "There is a ship in that position";
+        final int forthColumn = 4;
+
+        assertFalse(errorMessage, ship.shootAt(0, 0));
+        assertFalse(errorMessage, ship.shootAt(0, forthColumn));
+    }
+
+    /**
+     * Verifies a shoot was missed in a horizontal ship.
+     */
+    @Test
+    public void testHorizontalMissingShoot() {
+        ship = new Submarine();
+        ship.setHorizontal(true);
+        ship.setBowColumn(1);
+        ship.setBowRow(0);
+        final String errorMessage = "There is a ship in that position";
+        final int forthColumn = 4;
+
+        assertFalse(errorMessage, ship.shootAt(0, 0));
+        assertFalse(errorMessage, ship.shootAt(0, forthColumn));
     }
 
     /**
