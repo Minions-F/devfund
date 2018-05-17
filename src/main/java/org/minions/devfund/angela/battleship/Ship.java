@@ -33,15 +33,14 @@ public abstract class Ship {
     boolean okToPlaceShipAt(final int row, final int column, final boolean horizontal, final Ocean ocean) {
         try {
             if (horizontal) {
-                for (int i = row; i < row + length; i++) {
-                    if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
+                for (int j = column; j < column + length; j++) {
+                    if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
                         return false;
                     }
                 }
-
             } else {
-                for (int j = column; j < column + length; j++) {
-                    if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
+                for (int i = row; i < row + length; i++) {
+                    if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
                         return false;
                     }
                 }
@@ -62,18 +61,16 @@ public abstract class Ship {
      * @param ocean      {@link Ocean}.
      */
     void placeShipAt(final int row, final int column, final boolean horizontal, final Ocean ocean) {
+        bowColumn = column;
+        bowRow = row;
+        setHorizontal(horizontal);
         if (horizontal) {
-            for (int i = row; i < row + length; i++) {
-                bowColumn = column;
-                bowRow = row;
-                ocean.getShipArray()[i][column] = this;
-            }
-
-        } else {
             for (int j = column; j < column + length; j++) {
-                bowColumn = column;
-                bowRow = row;
                 ocean.getShipArray()[row][j] = this;
+            }
+        } else {
+            for (int i = row; i < row + length; i++) {
+                ocean.getShipArray()[i][column] = this;
             }
         }
     }
@@ -87,10 +84,10 @@ public abstract class Ship {
      */
     boolean shootAt(final int row, final int column) {
         if (!isSunk()) {
-            if (horizontal && column == bowColumn && row >= bowRow && row < bowRow + length) {
+            if (!horizontal && column == bowColumn && row >= bowRow && row < bowRow + length) {
                 hit[row - bowRow] = true;
                 return true;
-            } else if (!horizontal && row == bowRow && column >= bowColumn && column < bowColumn + length) {
+            } else if (horizontal && row == bowRow && column >= bowColumn && column < bowColumn + length) {
                 hit[column - bowColumn] = true;
                 return true;
             }
@@ -215,9 +212,9 @@ public abstract class Ship {
      */
     public boolean wasShootAt(final int row, final int column) {
         if (horizontal) {
-            return hit[row - bowRow];
-        } else {
             return hit[column - bowColumn];
+        } else {
+            return hit[row - bowRow];
         }
     }
 }

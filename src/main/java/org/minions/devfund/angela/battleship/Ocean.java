@@ -31,7 +31,7 @@ public class Ocean {
     }
 
     /**
-     * Paces 13 ships randomly.
+     * Places 13 ships randomly.
      */
     void placeAllShipsRandomly() {
 
@@ -160,7 +160,7 @@ public class Ocean {
             sb.append(String.format("%2d ", i));
             for (int j = 0; j < OCEAN_SIZE; j++) {
                 if (!ships[i][j].wasShootAt(i, j)) {
-                    if (!ships[i][j].getShipType().equals("")) {
+                    if (!ships[i][j].getShipType().equals("empty")) {
                         sb.append("a");
                     } else {
                         sb.append(".");

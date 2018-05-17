@@ -21,7 +21,7 @@ public class EmptySea extends Ship {
      */
     @Override
     boolean shootAt(int row, int column) {
-        this.getHit()[0] = true;
+        setHit(new boolean[]{true});
         return false;
     }
 
@@ -38,7 +38,7 @@ public class EmptySea extends Ship {
      */
     @Override
     String getShipType() {
-        return "";
+        return "empty";
     }
 
     /**
@@ -46,6 +46,6 @@ public class EmptySea extends Ship {
      */
     @Override
     public String toString() {
-        return this.getHit()[0] ? "-" : ".";
+        return getHit()[0] ? "-" : ".";
     }
 }
