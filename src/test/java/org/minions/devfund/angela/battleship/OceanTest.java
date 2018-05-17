@@ -83,10 +83,9 @@ public class OceanTest {
      */
     @Test
     public void testBorderOccupied() {
-        final Ship ship = new Submarine();
-        ship.placeShipAt(0, 0, true, ocean);
-        ship.placeShipAt(1, 0, true, ocean);
-        ship.placeShipAt(2, 0, true, ocean);
+        new Submarine().placeShipAt(0, 0, true, ocean);
+        new Submarine().placeShipAt(1, 0, true, ocean);
+        new Submarine().placeShipAt(2, 0, true, ocean);
         final String errorMessage = "Border is not occupied";
         final int thirdColumn = 3;
         assertTrue(errorMessage, ocean.isBorderOccupied(1, thirdColumn));
@@ -97,5 +96,14 @@ public class OceanTest {
         assertTrue(errorMessage, ocean.isBorderOccupied(2, 1));
         assertTrue(errorMessage, ocean.isBorderOccupied(2, thirdColumn));
         assertTrue(errorMessage, ocean.isBorderOccupied(2, 2));
+
+        final int eighteenthRow = 18;
+        final int tenthColumn = 10;
+        new Submarine().placeShipAt(eighteenthRow, tenthColumn, true, ocean);
+
+        final int nineColumn = 9;
+        assertTrue(errorMessage, ocean.isBorderOccupied(eighteenthRow, nineColumn));
+        final int thirteenColumn = 13;
+        assertTrue(errorMessage, ocean.isBorderOccupied(eighteenthRow, thirteenColumn));
     }
 }

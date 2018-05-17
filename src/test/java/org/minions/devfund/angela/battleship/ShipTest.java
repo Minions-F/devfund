@@ -43,15 +43,36 @@ public class ShipTest {
     public void testShootASunkShip() {
         ship = new Submarine();
         ship.setHorizontal(false);
-        ship.setBowColumn(0);
-        ship.setBowRow(0);
+        ship.setBowColumn(1);
+        ship.setBowRow(1);
         final String errorMessage = "There isn't a ship in that position";
-        assertTrue(errorMessage, ship.shootAt(0, 0));
-        assertTrue(errorMessage, ship.shootAt(1, 0));
+        assertTrue(errorMessage, ship.shootAt(1, 1));
+        assertTrue(errorMessage, ship.shootAt(2, 1));
         assertEquals("S", ship.toString());
-        assertTrue(errorMessage, ship.shootAt(2, 0));
+        final int thirdRow = 3;
+        assertTrue(errorMessage, ship.shootAt(thirdRow, 1));
         assertEquals("x", ship.toString());
         assertFalse("The ship isn't sunk", ship.shootAt(2, 0));
+    }
+
+    /**
+     * Verifies shoot an horizontal ship.
+     */
+    @Test
+    public void testShootAHorizontalShip() {
+        ship = new Submarine();
+        ship.setHorizontal(true);
+        ship.setBowColumn(1);
+        ship.setBowRow(1);
+        final String errorMessage = "There isn't a ship in that position";
+        assertTrue(errorMessage, ship.shootAt(1, 1));
+        assertTrue(errorMessage, ship.shootAt(1, 2));
+        assertEquals("S", ship.toString());
+        final int thirdColumn = 3;
+        assertTrue(errorMessage, ship.shootAt(1, thirdColumn));
+        assertEquals("x", ship.toString());
+        assertFalse("The ship isn't sunk", ship.shootAt(2, 0));
+
     }
 
     /**
@@ -61,12 +82,14 @@ public class ShipTest {
     public void testVerticalMissingShoot() {
         ship = new Submarine();
         ship.setHorizontal(false);
-        ship.setBowColumn(0);
+        ship.setBowColumn(1);
         ship.setBowRow(1);
         final int forthColumn = 4;
 
-        assertFalse(MESSAGE, ship.shootAt(0, 0));
-        assertFalse(MESSAGE, ship.shootAt(0, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(1, 0));
+        assertFalse(MESSAGE, ship.shootAt(1, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(0, 1));
+        assertFalse(MESSAGE, ship.shootAt(2, 2));
     }
 
     /**
@@ -77,11 +100,13 @@ public class ShipTest {
         ship = new Submarine();
         ship.setHorizontal(true);
         ship.setBowColumn(1);
-        ship.setBowRow(0);
+        ship.setBowRow(1);
         final int forthColumn = 4;
 
-        assertFalse(MESSAGE, ship.shootAt(0, 0));
-        assertFalse(MESSAGE, ship.shootAt(0, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(1, 0));
+        assertFalse(MESSAGE, ship.shootAt(1, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(0, 1));
+        assertFalse(MESSAGE, ship.shootAt(2, 1));
     }
 
     /**
