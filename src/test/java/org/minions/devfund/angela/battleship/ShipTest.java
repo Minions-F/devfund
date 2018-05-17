@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class ShipTest {
 
+    private static final String MESSAGE = "There is a ship in that position";
     private Ship ship;
 
     /**
@@ -21,7 +22,7 @@ public class ShipTest {
         ship = new EmptySea();
         ship.setBowColumn(0);
         ship.setBowRow(0);
-        assertFalse("There is a ship in that position", ship.shootAt(0, 0));
+        assertFalse(MESSAGE, ship.shootAt(0, 0));
         assertFalse("The empty sea was sunk", ship.isSunk());
     }
 
@@ -62,11 +63,10 @@ public class ShipTest {
         ship.setHorizontal(false);
         ship.setBowColumn(0);
         ship.setBowRow(1);
-        final String errorMessage = "There is a ship in that position";
         final int forthColumn = 4;
 
-        assertFalse(errorMessage, ship.shootAt(0, 0));
-        assertFalse(errorMessage, ship.shootAt(0, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(0, 0));
+        assertFalse(MESSAGE, ship.shootAt(0, forthColumn));
     }
 
     /**
@@ -78,11 +78,10 @@ public class ShipTest {
         ship.setHorizontal(true);
         ship.setBowColumn(1);
         ship.setBowRow(0);
-        final String errorMessage = "There is a ship in that position";
         final int forthColumn = 4;
 
-        assertFalse(errorMessage, ship.shootAt(0, 0));
-        assertFalse(errorMessage, ship.shootAt(0, forthColumn));
+        assertFalse(MESSAGE, ship.shootAt(0, 0));
+        assertFalse(MESSAGE, ship.shootAt(0, forthColumn));
     }
 
     /**
