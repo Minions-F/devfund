@@ -54,12 +54,30 @@ public class OceanTest {
     public void testShootAtOcean2() {
         Ocean ocean = new Ocean();
         Ship submarine = new Submarine();
+        Ship submarine2 = new Submarine();
+        Ship submarine3 = new Submarine();
         submarine.placeShipAt(3, 2, true, ocean);
+        submarine2.placeShipAt(5, 2, false, ocean);
+        submarine3.placeShipAt(12, 2, false, ocean);
+        ocean.shootAt(5,2);
+        ocean.shootAt(6,2);
+        ocean.shootAt(6,2);
+        ocean.shootAt(0,0);
+        ocean.shootAt(7,2);
+
+        ocean.shootAt(5,2);
+
+
         assertTrue(ocean.shootAt(3,2));
         assertTrue(ocean.shootAt(3,3));
-        assertFalse(ocean.shootAt(3,4));
+        assertTrue(ocean.shootAt(3,4));
         assertFalse(ocean.shootAt(3,5));
         assertFalse(ocean.shootAt(3,4));
+        ocean.shootAt(0,0);
+        assertEquals(ocean.getShipsSunk(), 2);
+        assertFalse(ocean.isGameOver());
+        assertEquals(ocean.getShotsFired(), 12);
+        assertEquals(ocean.getHitCount(), 9);
 
     }
 

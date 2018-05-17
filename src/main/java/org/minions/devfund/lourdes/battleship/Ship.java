@@ -76,9 +76,9 @@ public abstract class Ship {
         int index = getHitIndex(row, column);
         if (!hit[index]) {
             hit[index] = true;
-            return true;
+
         }
-        return false;
+        return true;
     }
     public int getHitIndex(int row, int column){
         int index;

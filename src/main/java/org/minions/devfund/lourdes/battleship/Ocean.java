@@ -16,18 +16,18 @@ public class Ocean {
         SHIP_TYPE.put("Submarine", 4);
     }
 
-    private Ship[][] ship;
+    private Ship[][] ships;
     private int shotsFired;
     private int hitCount;
     private int shipsSunk;
 
     public Ocean() {
-        this.ship = new Ship[20][20];
+        this.ships = new Ship[20][20];
         this.shotsFired = 0;
         this.hitCount = 0;
         this.shipsSunk = 0;
-        for (int i = 0; i < ship.length; i++) {
-            for (int j = 0; j < ship.length; j++) {
+        for (int i = 0; i < ships.length; i++) {
+            for (int j = 0; j < ships.length; j++) {
                 EmptySea emptySea = new EmptySea();
                 emptySea.placeShipAt(i, j, true, this);
             }
@@ -47,8 +47,8 @@ public class Ocean {
         for (int i = 0; i < shipQuantity; i++) {
             boolean var = false;
             while (!var) {
-                int row = r.nextInt(ship.length - 1);
-                int column = r.nextInt(ship.length - 1);
+                int row = r.nextInt(ships.length - 1);
+                int column = r.nextInt(ships.length - 1);
                 boolean horizontal = r.nextBoolean();
                 Ship newShip = shipFactory.createShip(shipType);
                 if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
@@ -63,37 +63,40 @@ public class Ocean {
 
 
     public boolean isOccupied(int row, int column) {
-        return ship[row][column] != null && !ship[row][column].getShipType().equals("empty");
+        return ships[row][column] != null && !ships[row][column].getShipType().equals("empty");
     }
 
     public boolean shootAt(int row, int column) {
-        boolean sunk = getShipArray()[row][column].isSunk();
         shotsFired++;
-        getShipArray()[row][column].shootAt(row, column);
-
-        if (isOccupied(row, column) && !getShipArray()[row][column].shootAt(row, column)) {
+        if(ships[row][column].isSunk()){
             hitCount++;
-            if (getShipArray()[row][column].isSunk()){
-                shipsSunk += (getShipArray()[row][column].isSunk() != sunk)?1:0;
-
-            } else {
+            return false;
+        }
+        if (isOccupied(row, column)) {
+            hitCount++;
+            if(ships[row][column].shootAt(row, column)){
+                if (ships[row][column].isSunk()){
+                    shipsSunk++;
+                }
                 return true;
             }
-        }
 
+            return false;
+        }
+        ships[row][column].shootAt(row, column);
         return false;
     }
 
     public void print() {
         printColumnPosition();
-        for (int i = 0; i < ship.length; i++) {
+        for (int i = 0; i < ships.length; i++) {
             System.out.println("");
             System.out.print(i);
-            for (int j = 0; j < ship.length; j++) {
-                if (ship[i][j].toString().equals("S") && !ship[i][j].hit[ship[i][j].getHitIndex(i, j)]) {
+            for (int j = 0; j < ships.length; j++) {
+                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
                     System.out.print(" . ");
                 } else {
-                    System.out.print(" " + ship[i][j] + " ");
+                    System.out.print(" " + ships[i][j] + " ");
 
                 }
 
@@ -106,7 +109,7 @@ public class Ocean {
 
     public void printColumnPosition() {
         StringBuilder arrayPosition = new StringBuilder(" ");
-        for (int i = 0; i < ship.length; i++) {
+        for (int i = 0; i < ships.length; i++) {
             if (i < 10) {
                 arrayPosition.append("0");
             }
@@ -146,7 +149,7 @@ public class Ocean {
     }
 
     public Ship[][] getShipArray() {
-        return ship;
+        return ships;
     }
 
 }
