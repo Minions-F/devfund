@@ -84,7 +84,7 @@ public class ShipTest {
         ship.setHorizontal(false);
         ship.setBowColumn(1);
         ship.setBowRow(1);
-        final int forthRow= 4;
+        final int forthRow = 4;
 
         assertFalse(MESSAGE, ship.shootAt(0, 1));
         assertFalse(MESSAGE, ship.shootAt(forthRow, 1));
