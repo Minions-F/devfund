@@ -2,11 +2,11 @@ package org.minions.devfund.lourdes.battleship;
 
 public class Destroyer extends Ship {
     public Destroyer(){
-        lenght = 4;
-        hit = new boolean[lenght];
+        length = 4;
+        hit = new boolean[length];
     }
     @Override
     String getShipType() {
-        return "Destroyer";
+        return "destroyer";
     }
 }

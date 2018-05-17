@@ -1,13 +1,13 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class Submarine extends Ship {
-
-    public Submarine(){
-        length = 3;
+public class BattleCruiser extends Ship {
+    public BattleCruiser() {
+        length = 7;
         hit = new boolean[length];
     }
+
     @Override
     String getShipType() {
-        return "submarine";
+        return "battlecruiser";
     }
 }

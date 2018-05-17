@@ -3,7 +3,7 @@ package org.minions.devfund.lourdes.battleship;
 public abstract class Ship {
     private int bowRow;
     private int bowColumn;
-    protected int lenght;
+    protected int length;
     private boolean horizontal;
     protected boolean[] hit;
 
@@ -13,20 +13,20 @@ public abstract class Ship {
         if (row < 0 || row > ocean.getShipArray().length || column < 0 || column > ocean.getShipArray().length) {
             return false;
         }
-        return (verifyShipSpaceFree(row, column, horizontal, ocean, lenght) && verifySheepHorizontallyFree(row, column, horizontal, ocean));
+        return (verifyShipSpaceFree(row, column, horizontal, ocean, length) && verifyShipBorderFree(row, column, horizontal, ocean));
     }
 
-    private boolean verifySheepHorizontallyFree(int row, int column, boolean horizontal, Ocean ocean) {
+    private boolean verifyShipBorderFree(int row, int column, boolean horizontal, Ocean ocean) {
         boolean topRow = true;
         boolean bottomRow = true;
         boolean rightRow = true;
         boolean leftRow = true;
         if (row > 0 && row < ocean.getShipArray().length) {
-            topRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, lenght + 2);
-            bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, lenght + 2);
+            topRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, length + 2);
+            bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, length + 2);
         }
         if (column > 0 && column < ocean.getShipArray().length) {
-            rightRow = !ocean.isOccupied(row, lenght + 2);
+            rightRow = !ocean.isOccupied(row, length + 1);
             leftRow = !ocean.isOccupied(row, column - 1);
         }
 
@@ -52,11 +52,16 @@ public abstract class Ship {
     }
 
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        if (okToPlaceShipAt(row, column, horizontal, ocean)) {
+        if (length == 1){
+            bowRow = row;
+            bowColumn = column;
+            ocean.getShipArray()[row][column] = this;
+
+        } else if (okToPlaceShipAt(row, column, horizontal, ocean)) {
             bowRow = row;
             bowColumn = column;
             this.horizontal = horizontal;
-            for (int i = 0; i < lenght; i++) {
+            for (int i = 0; i < length; i++) {
                 if (horizontal) {
                     ocean.getShipArray()[bowRow][bowColumn + i] = this;
 
@@ -64,8 +69,6 @@ public abstract class Ship {
                     ocean.getShipArray()[bowRow + i][bowColumn] = this;
                 }
             }
-
-
         }
     }
 
@@ -90,7 +93,6 @@ public abstract class Ship {
     public boolean isSunk() {
         for (boolean element : hit) if (!element) return false;
         return true;
-
     }
 
     public int getBowRow() {
@@ -109,12 +111,12 @@ public abstract class Ship {
         this.bowColumn = bowColumn;
     }
 
-    public int getLenght() {
-        return lenght;
+    public int getLength() {
+        return length;
     }
 
-    public void setLenght(int lenght) {
-        this.lenght = lenght;
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public boolean isHorizontal() {

@@ -3,11 +3,11 @@ package org.minions.devfund.lourdes.battleship;
 public class ShipFactory {
 
     public Ship createShip(String sheepType) {
-        if (sheepType.equals("Battleship")) {
-            return new Battleship();
+        if (sheepType.equals("BattleShip")) {
+            return new BattleShip();
 
         } else if (sheepType.equals("BattleCruiser")){
-            return new Battlecruiser();
+            return new BattleCruiser();
 
         } else if (sheepType.equals("Cruiser")){
             return new Cruiser();

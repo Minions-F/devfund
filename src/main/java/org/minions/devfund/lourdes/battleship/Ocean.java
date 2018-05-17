@@ -1,18 +1,21 @@
 package org.minions.devfund.lourdes.battleship;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Ocean {
-    private static final HashMap<String, Integer> shipType = new HashMap<>();
-    static{
-        shipType.put("Battleship", 1);
-        shipType.put("BattleCruiser", 1);
-        shipType.put("Cruiser", 2);
-        shipType.put("LightCruiser", 2);
-        shipType.put("Destroyer", 3);
-        shipType.put("Submarine", 4);
+    private static final Map<String, Integer> SHIP_TYPE = new HashMap<>();
+
+    static {
+        SHIP_TYPE.put("BattleShip", 1);
+        SHIP_TYPE.put("BattleCruiser", 1);
+        SHIP_TYPE.put("Cruiser", 2);
+        SHIP_TYPE.put("LightCruiser", 2);
+        SHIP_TYPE.put("Destroyer", 3);
+        SHIP_TYPE.put("Submarine", 4);
     }
+
     private Ship[][] ship;
     private int shotsFired;
     private int hitCount;
@@ -24,36 +27,60 @@ public class Ocean {
         this.hitCount = 0;
         this.shipsSunk = 0;
         for (int i = 0; i < ship.length; i++) {
-            for (int j = 0; j < ship[i].length; j++) {
-                ship[i][j] = new EmptySea();
+            for (int j = 0; j < ship.length; j++) {
+                EmptySea emptySea = new EmptySea();
+                emptySea.placeShipAt(i, j, true, this);
             }
         }
     }
 
     public void placeAllShipsRandomly() {
-        Random r = new Random();
-        int row = r.nextInt((0 - ship.length) + 1);
-        int column = r.nextInt((0 - ship.length) + 1);
-        boolean horizontal = r.nextBoolean();
         ShipFactory shipFactory = new ShipFactory();
-        Ship newShip = shipFactory.createShip("Battleship");
-        newShip.placeShipAt(row, column, horizontal, this);
+        SHIP_TYPE.forEach((key, value) -> {
+            positionShip(key, value, shipFactory);
+
+        });
     }
 
+    public void positionShip(String shipType, Integer shipQuantity, ShipFactory shipFactory) {
+        Random r = new Random();
+        for (int i = 0; i < shipQuantity; i++) {
+            boolean var = false;
+            while (!var) {
+                int row = r.nextInt(ship.length - 1);
+                int column = r.nextInt(ship.length - 1);
+                boolean horizontal = r.nextBoolean();
+                Ship newShip = shipFactory.createShip(shipType);
+                if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
+                    newShip.placeShipAt(row, column, horizontal, this);
+                    var = true;
+                }
+            }
+
+
+        }
+    }
+
+
     public boolean isOccupied(int row, int column) {
-        return !ship[row][column].getShipType().equals("empty");
+        return ship[row][column] != null && !ship[row][column].getShipType().equals("empty");
     }
 
     public boolean shootAt(int row, int column) {
-        if (isOccupied(row, column) &&
-                getShipArray()[row][column].toString().equals("S") &&
-                getShipArray()[row][column].shootAt(row, column)) {
-            hitCount++;
-            if (getShipArray()[row][column].isSunk()) shipsSunk++;
-            return true;
-        }
-        getShipArray()[row][column].shootAt(row, column);
+        boolean sunk = getShipArray()[row][column].isSunk();
         shotsFired++;
+        getShipArray()[row][column].shootAt(row, column);
+
+        if (isOccupied(row, column) && !getShipArray()[row][column].shootAt(row, column)) {
+            hitCount++;
+            if (getShipArray()[row][column].isSunk()){
+                shipsSunk += (getShipArray()[row][column].isSunk() != sunk)?1:0;
+
+            } else {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -88,17 +115,6 @@ public class Ocean {
 
         }
         System.out.print(arrayPosition);
-    }
-
-    public static void main(String arg[]) {
-        Ocean ocean = new Ocean();
-        Ship a = new Submarine();
-        a.placeShipAt(3, 3, true, ocean);
-//        ocean.shootAt(3,4);
-        ocean.shootAt(3, 5);
-        ocean.shootAt(3, 3);
-        ocean.shootAt(0, 6);
-        ocean.print();
     }
 
     public int getShotsFired() {

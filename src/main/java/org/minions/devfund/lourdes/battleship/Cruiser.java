@@ -2,12 +2,12 @@ package org.minions.devfund.lourdes.battleship;
 
 public class Cruiser extends Ship {
     public Cruiser() {
-        lenght = 6;
-        hit = new boolean[lenght];
+        length = 6;
+        hit = new boolean[length];
     }
 
     @Override
     String getShipType() {
-        return "Cruiser";
+        return "cruiser";
     }
 }

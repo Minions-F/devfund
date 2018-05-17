@@ -4,8 +4,8 @@ public class EmptySea extends Ship {
 
 
     public EmptySea() {
-        lenght = 1;
-        hit = new boolean[lenght];
+        length = 1;
+        hit = new boolean[length];
     }
 
     @Override

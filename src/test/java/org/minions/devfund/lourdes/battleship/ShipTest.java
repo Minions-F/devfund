@@ -48,7 +48,34 @@ public class ShipTest {
         assertEquals(submarine.getShipType(),ocean.getShipArray()[1][0].getShipType());
         assertEquals(submarine.getShipType(),ocean.getShipArray()[2][0].getShipType());
     }
+    @Test
+    public void testPlaceShipAt170() {
+        final int row = 0;
+        final int column = 17;
+        final boolean horizontal = true;
+        Ocean ocean = new Ocean();
+        Ship submarine = new Submarine();
+        assertEquals(submarine.getLength(),3);
+        assertTrue(submarine.okToPlaceShipAt(row, column, horizontal, ocean));
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertEquals(submarine.getShipType(),ocean.getShipArray()[0][17].getShipType());
+        assertEquals(submarine.getShipType(),ocean.getShipArray()[0][18].getShipType());
+        assertEquals(submarine.getShipType(),ocean.getShipArray()[0][19].getShipType());
+    }
+    @Test
+    public void testOkPlaceShipAt() {
+        final int row = 3;
+        final int column = 3;
+        final boolean horizontal = true;
+        Ocean ocean = new Ocean();
+        Ship submarine1 = new Submarine();
+        Ship submarine2 = new Submarine();
 
+        submarine1.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(submarine2.okToPlaceShipAt(2, 1, horizontal, ocean));
+
+
+    }
     @Test
     public void testPlaceTwoHorizontalShipAtTwoOneAndThreeFour() {
         final int rowShip1 = 2;
@@ -63,5 +90,32 @@ public class ShipTest {
         assertEquals("empty",ocean.getShipArray()[3][4].getShipType());
         assertEquals("empty",ocean.getShipArray()[3][5].getShipType());
         assertEquals("empty",ocean.getShipArray()[3][6].getShipType());
+    }
+
+
+    @Test
+    public void testIsSunk() {
+        final int row = 2;
+        final int column = 1;
+        final boolean horizontal = true;
+        Ocean ocean = new Ocean();
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        submarine.shootAt(row,column);
+        submarine.shootAt(row,2);
+        submarine.shootAt(row,3);
+        assertTrue(submarine.isSunk());
+    }
+    @Test
+    public void testIsNotSunk() {
+        final int row = 2;
+        final int column = 1;
+        final boolean horizontal = true;
+        Ocean ocean = new Ocean();
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        submarine.shootAt(row,column);
+        submarine.shootAt(row,2);
+        assertFalse(submarine.isSunk());
     }
 }
