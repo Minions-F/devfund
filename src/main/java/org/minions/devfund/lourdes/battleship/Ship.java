@@ -21,22 +21,29 @@ public abstract class Ship {
         boolean bottomRow = true;
         boolean rightRow = true;
         boolean leftRow = true;
-        if (row > 0 && row < ocean.getShipArray().length) {
-            topRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, length + 2);
-            bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, length + 2);
-        }
-        if (column > 0 && column < ocean.getShipArray().length) {
-            rightRow = !ocean.isOccupied(row, length + 2);
-            leftRow = !ocean.isOccupied(row, column - 1);
+        int sizeBorder = horizontal? length + 2 : row + length;
+        if (row > 0 && row < ocean.getShipArray().length && column > 0 && column < ocean.getShipArray().length) {
+            if (horizontal) {
+                topRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, sizeBorder);
+                bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, sizeBorder);
+                rightRow = !ocean.isOccupied(row, length + 2);
+                leftRow = !ocean.isOccupied(row, column - 1);
+            } else {
+                topRow = !ocean.isOccupied(row - 1, column);
+                bottomRow = !ocean.isOccupied(row + length, column);
+                rightRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, sizeBorder);
+                leftRow = verifyShipSpaceFree(row - 1, column + 1, horizontal, ocean, sizeBorder);
+            }
+
         }
 
         return topRow && bottomRow && rightRow && leftRow;
 
     }
 
-    private boolean verifyShipSpaceFree(int row, int column, boolean horizontal, Ocean ocean, int lenght) {
+    private boolean verifyShipSpaceFree(int row, int column, boolean horizontal, Ocean ocean, int sizeShip) {
         try {
-            for (int i = 0; i < lenght; i++) {
+            for (int i = 0; i < sizeShip; i++) {
                 if (horizontal && ocean.isOccupied(row, column + i)) {
                     return false;
 
@@ -51,7 +58,7 @@ public abstract class Ship {
     }
 
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        if (length == 1){
+        if (length == 1) {
             bowRow = row;
             bowColumn = column;
             ocean.getShipArray()[row][column] = this;
@@ -79,7 +86,8 @@ public abstract class Ship {
         }
         return true;
     }
-    public int getHitIndex(int row, int column){
+
+    public int getHitIndex(int row, int column) {
         int index;
         if (horizontal) {
             index = column - bowColumn;
@@ -136,7 +144,7 @@ public abstract class Ship {
 
     @Override
     public String toString() {
-       return isSunk() ? "x" : "S";
+        return isSunk() ? "x" : "S";
     }
 
 }

@@ -23,6 +23,17 @@ public class ShipTest {
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertFalse(submarine.okToPlaceShipAt(1, 1, false, ocean));
     }
+
+    @Test
+    public void testOkPlaceShipAtVerticalPlace() {
+        final int row = 2;
+        final int column = 3;
+        final boolean horizontal = false;
+        Ocean ocean = new Ocean();
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(submarine.okToPlaceShipAt(3, 4, false, ocean));
+    }
     @Test
     public void testOkPlaceTwoHorizontalShipAtTwoOneAndThreeFour() {
         final int rowShip1 = 2;
@@ -97,13 +108,13 @@ public class ShipTest {
     public void testIsSunk() {
         final int row = 2;
         final int column = 1;
-        final boolean horizontal = true;
+        final boolean horizontal = false;
         Ocean ocean = new Ocean();
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         submarine.shootAt(row,column);
-        submarine.shootAt(row,2);
-        submarine.shootAt(row,3);
+        submarine.shootAt(3,column);
+        submarine.shootAt(4,column);
         assertTrue(submarine.isSunk());
     }
     @Test
