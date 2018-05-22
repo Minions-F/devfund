@@ -93,12 +93,12 @@ public class Ocean {
             System.out.println("");
             System.out.print(i);
             for (int j = 0; j < ships.length; j++) {
-                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
-                    System.out.print(" . ");
-                } else {
+//                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
+//                    System.out.print(" . ");
+//                } else {
                     System.out.print(" " + ships[i][j] + " ");
 
-                }
+//                }
 
             }
             System.out.println("");

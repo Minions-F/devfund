@@ -26,12 +26,11 @@ public abstract class Ship {
             bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, length + 2);
         }
         if (column > 0 && column < ocean.getShipArray().length) {
-            rightRow = !ocean.isOccupied(row, length + 1);
+            rightRow = !ocean.isOccupied(row, length + 2);
             leftRow = !ocean.isOccupied(row, column - 1);
         }
 
         return topRow && bottomRow && rightRow && leftRow;
-
 
     }
 
