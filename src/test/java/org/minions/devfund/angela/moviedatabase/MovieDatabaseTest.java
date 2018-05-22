@@ -3,7 +3,7 @@ package org.minions.devfund.angela.moviedatabase;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +17,7 @@ public class MovieDatabaseTest {
     private MovieDatabase movieDatabase;
     private static final String MOVIE_NAME = "Infinity War";
     private static final String BEST_ACTOR = "Robert Downey";
+
     /**
      * Preconditions.
      */
@@ -31,13 +32,10 @@ public class MovieDatabaseTest {
      */
     @Test
     public void testActorsAdded() {
-        final List<Actor> actors = new ArrayList<>();
-        actors.add(new Actor(BEST_ACTOR));
-        actors.add(new Actor("Chris Hemsworth"));
-        actors.add(new Actor("Chris Evans"));
-        for (Actor actor : actors) {
+        final List<String> actors = Arrays.asList(BEST_ACTOR, "Chris Hemsworth", "Chris Evans");
+        for (String actor : actors) {
             assertTrue("The list doesn't contain the actor", movieDatabase.getActorList()
-                    .stream().anyMatch(actor1 -> actor.getName().equalsIgnoreCase(actor1.getName())));
+                    .stream().anyMatch(actor1 -> actor.equalsIgnoreCase(actor1.getName())));
         }
     }
 

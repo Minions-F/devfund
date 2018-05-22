@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -38,8 +39,7 @@ public class MovieTest {
      */
     @Test
     public void testSetActors() {
-        final List<Actor> newActors = new ArrayList<>();
-        newActors.add(new Actor("Tom Holland"));
+        final List<Actor> newActors = Collections.singletonList(new Actor("Tom Holland"));
         movie.setActors(newActors);
         assertEquals(newActors.get(0).getName(), movie.getActors().get(0).getName());
     }
