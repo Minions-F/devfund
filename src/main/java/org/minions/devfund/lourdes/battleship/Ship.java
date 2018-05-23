@@ -13,36 +13,52 @@ public abstract class Ship {
         if (row < 0 || row > ocean.getShipArray().length || column < 0 || column > ocean.getShipArray().length) {
             return false;
         }
-        return (verifyShipSpaceFree(row, column, horizontal, ocean, length) && verifyShipBorderFree(row, column, horizontal, ocean));
+        return verifyShipBorderFree(row, column, horizontal, ocean);
     }
 
     private boolean verifyShipBorderFree(int row, int column, boolean horizontal, Ocean ocean) {
-        boolean topRow = true;
-        boolean bottomRow = true;
-        boolean rightRow = true;
-        boolean leftRow = true;
-        int sizeBorder = horizontal? length + 2 : row + length;
-        if (row > 0 && row < ocean.getShipArray().length && column > 0 && column < ocean.getShipArray().length) {
-            if (horizontal) {
-                topRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, sizeBorder);
-                bottomRow = verifyShipSpaceFree(row + 1, column - 1, horizontal, ocean, sizeBorder);
-                rightRow = !ocean.isOccupied(row, length + 2);
-                leftRow = !ocean.isOccupied(row, column - 1);
-            } else {
-                topRow = !ocean.isOccupied(row - 1, column);
-                bottomRow = !ocean.isOccupied(row + length, column);
-                rightRow = verifyShipSpaceFree(row - 1, column - 1, horizontal, ocean, sizeBorder);
-                leftRow = verifyShipSpaceFree(row - 1, column + 1, horizontal, ocean, sizeBorder);
-            }
-
+        int startRow = row > 0 ? row - 1 : row;
+        int startColumn = column > 0 ? column - 1 : column;
+        int endRow = horizontal ? row - 1 : row + length;
+        int endColumn = horizontal ? column + length : column;
+        if (checkFreeSpaceForShip(row, column, horizontal, ocean)) {
+            return checkHorizontalSide(startRow, startColumn, ocean, endColumn) &&
+                    checkHorizontalSide(endRow, endColumn, ocean, endColumn) &&
+                    checkVerticalSide(startRow, startColumn, ocean, endRow) &&
+                    checkVerticalSide(endRow, endColumn, ocean, endRow);
         }
+        return false;
 
-        return topRow && bottomRow && rightRow && leftRow;
     }
 
-    private boolean verifyShipSpaceFree(int row, int column, boolean horizontal, Ocean ocean, int sizeShip) {
+    private boolean checkHorizontalSide(int row, int column, Ocean ocean, int borderLimit) {
+        for (int i = column; i < borderLimit; i++) {
+            if (row > ocean.getShipArray().length) {
+                break;
+            }
+
+            if (ocean.isOccupied(row, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkVerticalSide(int row, int column, Ocean ocean, int borderLimit) {
+        for (int i = row; i < borderLimit; i++) {
+            if (column > ocean.getShipArray().length) {
+                break;
+            }
+            if (ocean.isOccupied(i, column)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkFreeSpaceForShip(int row, int column, boolean horizontal, Ocean ocean) {
         try {
-            for (int i = 0; i < sizeShip; i++) {
+            for (int i = 0; i < length; i++) {
                 if (horizontal && ocean.isOccupied(row, column + i)) {
                     return false;
 

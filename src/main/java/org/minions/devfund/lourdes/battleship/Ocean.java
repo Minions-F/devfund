@@ -1,11 +1,12 @@
 package org.minions.devfund.lourdes.battleship;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class Ocean {
-    private static final Map<String, Integer> SHIP_TYPE = new HashMap<>();
+    private static final Map<String, Integer> SHIP_TYPE = new LinkedHashMap<>();
 
     static {
         SHIP_TYPE.put("BattleShip", 1);
@@ -51,6 +52,7 @@ public class Ocean {
                 int column = r.nextInt(ships.length - 1);
                 boolean horizontal = r.nextBoolean();
                 Ship newShip = shipFactory.createShip(shipType);
+                System.out.println("Ship " + newShip.getShipType()+" ROW "+row+" COLUMN "+ column+" HORIZONTAL "+horizontal);
                 if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
                     newShip.placeShipAt(row, column, horizontal, this);
                     var = true;
@@ -93,12 +95,12 @@ public class Ocean {
             System.out.println("");
             System.out.print(i);
             for (int j = 0; j < ships.length; j++) {
-                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
-                    System.out.print(" . ");
-                } else {
+//                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
+//                    System.out.print(" . ");
+//                } else {
                     System.out.print(" " + ships[i][j] + " ");
 
-                }
+//                }
 
             }
             System.out.println("");
