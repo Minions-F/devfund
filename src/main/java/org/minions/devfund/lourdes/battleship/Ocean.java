@@ -1,11 +1,12 @@
 package org.minions.devfund.lourdes.battleship;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class Ocean {
-    private static final Map<String, Integer> SHIP_TYPE = new HashMap<>();
+    private static final Map<String, Integer> SHIP_TYPE = new LinkedHashMap<>();
 
     static {
         SHIP_TYPE.put("BattleShip", 1);
@@ -51,6 +52,7 @@ public class Ocean {
                 int column = r.nextInt(ships.length - 1);
                 boolean horizontal = r.nextBoolean();
                 Ship newShip = shipFactory.createShip(shipType);
+                System.out.println("Ship "+newShip.getShipType()+" ROW "+ row+ " Column " + column + " horizontal "+ horizontal);
                 if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
                     newShip.placeShipAt(row, column, horizontal, this);
                     var = true;

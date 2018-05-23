@@ -26,13 +26,13 @@ public class ShipTest {
 
     @Test
     public void testOkPlaceShipAtVerticalPlace() {
-        final int row = 2;
-        final int column = 3;
+        final int row = 18;
+        final int column = 8;
         final boolean horizontal = false;
         Ocean ocean = new Ocean();
-        Ship submarine = new Submarine();
+        Ship submarine = new BattleShip();
         submarine.placeShipAt(row, column, horizontal, ocean);
-        assertFalse(submarine.okToPlaceShipAt(3, 4, false, ocean));
+        assertFalse(submarine.okToPlaceShipAt(18, 8, false, ocean));
     }
     @Test
     public void testOkPlaceTwoHorizontalShipAtTwoOneAndThreeFour() {
