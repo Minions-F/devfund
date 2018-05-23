@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class BattleshipGame {
+
     public static void main(String[] args){
         Scanner shootsInput = new Scanner(System.in);
         Ocean ocean = new Ocean();
