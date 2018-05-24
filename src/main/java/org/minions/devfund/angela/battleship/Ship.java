@@ -32,22 +32,29 @@ public abstract class Ship {
      */
     boolean okToPlaceShipAt(final int row, final int column, final boolean horizontal, final Ocean ocean) {
         if (horizontal && column + length - 1 < Ocean.OCEAN_SIZE) {
-            for (int j = column; j < column + length; j++) {
-                if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
-                    return false;
-                }
-            }
-            return true;
+            return isLineOccupied(row, column, ocean);
         } else if (!horizontal && row + length - 1 < Ocean.OCEAN_SIZE) {
-            for (int i = row; i < row + length; i++) {
-                if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
-                    return false;
-                }
-            }
-            return true;
+            return isLineOccupied(column, row, ocean);
         }
 
         return false;
+    }
+
+    /**
+     * Verifies if line is occupied in the ocean.
+     *
+     * @param row    int ro position.
+     * @param column int column position.
+     * @param ocean  {@link Ocean}.
+     * @return true if line is occupied.
+     */
+    private boolean isLineOccupied(final int row, final int column, final Ocean ocean) {
+        for (int j = column; j < column + length; j++) {
+            if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
