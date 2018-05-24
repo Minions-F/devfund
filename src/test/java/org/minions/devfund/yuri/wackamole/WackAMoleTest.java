@@ -1,4 +1,4 @@
-package org.minions.devfund.yuri;
+package org.minions.devfund.yuri.wackamole;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * It is in charge to test the WackAMole class functionality.
+ * It is in charge to test the wackamole class functionality.
  */
 public class WackAMoleTest {
     public static final int POS_X = 1;

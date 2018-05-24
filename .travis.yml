@@ -22,8 +22,9 @@ addons:
     branches:
     - develop
 script:
-- gradle check
+- gradle test
 - sonar-scanner
+- gradle check
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

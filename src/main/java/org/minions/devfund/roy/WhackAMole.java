@@ -36,8 +36,7 @@ public class WhackAMole {
      * @return true if the place is empty otherwise false.
      */
     public boolean place(int x, int y) {
-        if (x >= 0 && y >= 0 && x < moleGrid.length && y < moleGrid.length
-                && moleGrid[x][y] == EMPTY_PLACE) {
+        if (x >= 0 && y >= 0 && x < moleGrid.length && y < moleGrid.length) {
             moleGrid[x][y] = MOLE;
             molesLeft++;
             return true;
@@ -53,28 +52,15 @@ public class WhackAMole {
      */
     public void whack(int x, int y) {
         if (rules() && !giveUp(x, y)) {
-            try {
-                if (moleGrid[x][y] == MOLE) {
-                    moleGrid[x][y] = WHACKED_MOLE;
-                    score++;
-                    attemptsLeft--;
-                    molesLeft--;
-                } else {
-                    attemptsLeft--;
-                }
-            } catch (IndexOutOfBoundsException e) {
-                attemptsLeft--;
-                System.out.println("Wrong position");
+            if (moleGrid[x][y] == MOLE) {
+                moleGrid[x][y] = WHACKED_MOLE;
+                score++;
+                molesLeft--;
             }
-        } else {
-            printGrid();
-            System.out.println(String.format("Score: %d", score));
-        }
-
-        if (!rules()) {
-            printGrid();
+            attemptsLeft--;
         }
     }
+
 
     /**
      * Verifies if the player gives up.
@@ -90,7 +76,7 @@ public class WhackAMole {
     /**
      * Starts the moleGrid with the moles.
      */
-    public void initializeGrid() {
+    private void initializeGrid() {
         for (int i = 0; i < moleGrid.length; i++) {
             for (int j = 0; j < moleGrid.length; j++) {
                 moleGrid[i][j] = EMPTY_PLACE;
@@ -107,20 +93,6 @@ public class WhackAMole {
             int yRandomValue = new Random().nextInt(moleGrid.length);
             place(xRandomValue, yRandomValue);
         }
-    }
-
-    /**
-     * Prints in console the moleGrid without showing the moles but the 'whacked moles'.
-     */
-    public void printGridForUser() {
-        System.out.println(gridBuilderForUser());
-    }
-
-    /**
-     * Prints in console the moleGrid.
-     */
-    public void printGrid() {
-        System.out.println(gridBuilder());
     }
 
     /**
@@ -169,6 +141,24 @@ public class WhackAMole {
      * @return true if the rules are applied otherwise false.
      */
     public boolean rules() {
-        return attemptsLeft > 0 && molesLeft >= 0;
+        return attemptsLeft > 0;
+    }
+
+    /**
+     * Gets score.
+     *
+     * @return actual score.
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Gets attempts left.
+     *
+     * @return number of attempts left.
+     */
+    public int getAttemptsLeft() {
+        return attemptsLeft;
     }
 }

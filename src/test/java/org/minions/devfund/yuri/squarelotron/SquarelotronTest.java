@@ -1,4 +1,4 @@
-package org.minions.devfund.yuri;
+package org.minions.devfund.yuri.squarelotron;
 
 import org.junit.Test;
 
