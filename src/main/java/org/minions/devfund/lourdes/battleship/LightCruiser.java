@@ -1,7 +1,13 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class LightCruiser extends Ship {
-    public LightCruiser() {
+/**
+ * Class that defines the Light Cruiser ship.
+ */
+class LightCruiser extends Ship {
+    /**
+     * Constructor.
+     */
+    LightCruiser() {
         length = 5;
         hit = new boolean[length];
     }

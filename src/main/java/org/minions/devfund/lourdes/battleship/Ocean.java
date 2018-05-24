@@ -1,6 +1,5 @@
 package org.minions.devfund.lourdes.battleship;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -31,6 +30,8 @@ public class Ocean {
             for (int j = 0; j < ships.length; j++) {
                 EmptySea emptySea = new EmptySea();
                 emptySea.placeShipAt(i, j, true, this);
+//                ships[i][j] = new EmptySea();
+//                ships[i][j].placeShipAt(i, j, true, this);
             }
         }
     }
@@ -52,7 +53,7 @@ public class Ocean {
                 int column = r.nextInt(ships.length - 1);
                 boolean horizontal = r.nextBoolean();
                 Ship newShip = shipFactory.createShip(shipType);
-                System.out.println("Ship "+newShip.getShipType()+" ROW "+ row+ " Column " + column + " horizontal "+ horizontal);
+                System.out.println("Ship " + newShip.getShipType() + " ROW " + row + " Column " + column + " horizontal " + horizontal);
                 if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
                     newShip.placeShipAt(row, column, horizontal, this);
                     var = true;
@@ -65,19 +66,15 @@ public class Ocean {
 
 
     public boolean isOccupied(int row, int column) {
-        return ships[row][column] != null && !(ships[row][column] instanceof EmptySea);
+        return !(ships[row][column] instanceof EmptySea);
     }
 
     public boolean shootAt(int row, int column) {
         shotsFired++;
-        if(ships[row][column].isSunk()){
+        if (isOccupied(row, column) && !ships[row][column].isSunk()) {
             hitCount++;
-            return false;
-        }
-        if (isOccupied(row, column)) {
-            hitCount++;
-            if(ships[row][column].shootAt(row, column)){
-                if (ships[row][column].isSunk()){
+            if (ships[row][column].shootAt(row, column)) {
+                if (ships[row][column].isSunk()) {
                     shipsSunk++;
                 }
                 return true;
@@ -98,7 +95,7 @@ public class Ocean {
 //                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
 //                    System.out.print(" . ");
 //                } else {
-                    System.out.print(" " + ships[i][j] + " ");
+                System.out.print(" " + ships[i][j] + " ");
 
 //                }
 

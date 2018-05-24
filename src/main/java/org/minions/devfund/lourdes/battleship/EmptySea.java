@@ -1,9 +1,14 @@
 package org.minions.devfund.lourdes.battleship;
 
+/**
+ * Class that define an empty ship.
+ */
 public class EmptySea extends Ship {
 
-
-    public EmptySea() {
+    /**
+     * Constructor.
+     */
+    EmptySea() {
         length = 1;
         hit = new boolean[length];
     }

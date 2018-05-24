@@ -1,23 +1,34 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class ShipFactory {
+/**
+ * Class that in charge to create the Ships.
+ */
+class ShipFactory {
 
-    public Ship createShip(String sheepType) {
-        if (sheepType.equals("BattleShip")) {
-            return new BattleShip();
+    /**
+     * Method that given the ship type create the same.
+     *
+     * @param shipType represents the ship type.
+     * @return a new Ship according the ship type.
+     */
+    Ship createShip(String shipType) {
+        switch (shipType) {
+            case "BattleShip":
+                return new BattleShip();
 
-        } else if (sheepType.equals("BattleCruiser")){
-            return new BattleCruiser();
+            case "BattleCruiser":
+                return new BattleCruiser();
 
-        } else if (sheepType.equals("Cruiser")){
-            return new Cruiser();
+            case "Cruiser":
+                return new Cruiser();
 
-        } else if (sheepType.equals("LightCruiser")){
-            return new LightCruiser();
+            case "LightCruiser":
+                return new LightCruiser();
 
-        } else if (sheepType.equals("Destroyer")) {
-            return new Destroyer();
+            case "Destroyer":
+                return new Destroyer();
+            default:
+                return new Submarine();
         }
-        return new Submarine();
     }
 }

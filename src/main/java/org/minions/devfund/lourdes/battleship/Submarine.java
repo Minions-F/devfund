@@ -1,8 +1,13 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class Submarine extends Ship {
-
-    public Submarine(){
+/**
+ * Class that defines the Submarine Ship.
+ */
+class Submarine extends Ship {
+    /**
+     * Constructor.
+     */
+    Submarine(){
         length = 3;
         hit = new boolean[length];
     }

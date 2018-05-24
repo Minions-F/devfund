@@ -1,7 +1,13 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class Cruiser extends Ship {
-    public Cruiser() {
+/**
+ * Class that defines the Cruiser ship.
+ */
+class Cruiser extends Ship {
+    /**
+     * Constructor.
+     */
+    Cruiser() {
         length = 6;
         hit = new boolean[length];
     }

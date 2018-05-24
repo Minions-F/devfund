@@ -1,7 +1,13 @@
 package org.minions.devfund.lourdes.battleship;
 
-public class BattleCruiser extends Ship {
-    public BattleCruiser() {
+/**
+ * Class to manage BattleCruiser ship.
+ */
+class BattleCruiser extends Ship {
+    /**
+     * Constructor.
+     */
+    BattleCruiser() {
         length = 7;
         hit = new boolean[length];
     }
