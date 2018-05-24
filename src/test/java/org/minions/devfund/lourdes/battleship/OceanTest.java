@@ -1,32 +1,57 @@
 package org.minions.devfund.lourdes.battleship;
-
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
+/**
+ * Implemented tests for {@link Ocean}.
+ */
 public class OceanTest {
+    private Ocean ocean;
 
+    /**
+     * Method that setup initial values.
+     */
+    @Before
+    public void setup() {
+        ocean = new Ocean();
+    }
+
+    /**
+     * Verify the Ocean constructor.
+     */
     @Test
     public void testOceanInitialization() {
-        Ocean ocean = new Ocean();
+        final String emptySea = "empty";
         Ship[][] shipMatrix = ocean.getShipArray();
         for (Ship[] row : shipMatrix) {
             for (Ship cellValue : row) {
-                assertEquals(cellValue.getShipType(), "empty");
+                assertEquals(emptySea, cellValue.getShipType());
             }
         }
     }
 
+    /**
+     * Verify if a given position is occupied.
+     */
     @Test
     public void testIsOccupied() {
-        Ocean ocean = new Ocean();
+        final int row = 3;
+        final int column = 5;
+        final boolean horizontal = true;
         Ship submarine = new Submarine();
-        submarine.placeShipAt(0, 0, true, ocean);
-        for (int i = 0; i < submarine.length; i++) {
-            assertTrue(ocean.isOccupied(0, i));
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        for (int i = column; i < submarine.length; i++) {
+            assertTrue(ocean.isOccupied(row, i));
         }
     }
 
+    /**
+     * Verify if a place is not occupied.
+     */
     @Test
     public void testIsNotOccupied() {
         Ocean ocean = new Ocean();
@@ -35,58 +60,33 @@ public class OceanTest {
         assertFalse(ocean.isOccupied(1, 0));
     }
 
+    /**
+     * Verify shoot at position in the ocean where exists a ship.
+     */
     @Test
     public void testShootAt() {
-        Ocean ocean = new Ocean();
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 10;
+        final int shootColumn = 6;
+        final boolean horizontal = true;
         Ship submarine = new Submarine();
-        submarine.placeShipAt(3, 2, true, ocean);
-        assertTrue(ocean.shootAt(3,3));
-    }
-    @Test
-    public void testShootAtOcean() {
-        Ocean ocean = new Ocean();
-        Ship submarine = new BattleCruiser();
-        submarine.placeShipAt(3, 2, true, ocean);
-        assertTrue(ocean.shootAt(3,3));
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertTrue(ocean.shootAt(shootRow, shootColumn));
     }
 
-    @Test
-    public void testShootAtOcean2() {
-        Ocean ocean = new Ocean();
-        Ship submarine = new Submarine();
-        Ship submarine2 = new Submarine();
-        Ship submarine3 = new Submarine();
-        submarine.placeShipAt(3, 2, true, ocean);
-        submarine2.placeShipAt(5, 2, false, ocean);
-        submarine3.placeShipAt(12, 2, false, ocean);
-        ocean.shootAt(5,2);
-        ocean.shootAt(6,2);
-        ocean.shootAt(6,2);
-        ocean.shootAt(0,0);
-        ocean.shootAt(7,2);
-
-        ocean.shootAt(5,2);
-
-
-        assertTrue(ocean.shootAt(3,2));
-        assertTrue(ocean.shootAt(3,3));
-        assertTrue(ocean.shootAt(3,4));
-        assertFalse(ocean.shootAt(3,5));
-        assertFalse(ocean.shootAt(3,4));
-        ocean.shootAt(0,0);
-        assertEquals(ocean.getShipsSunk(), 2);
-        assertFalse(ocean.isGameOver());
-        assertEquals(ocean.getShotsFired(), 12);
-        assertEquals(ocean.getHitCount(), 9);
-
-    }
-
+    /**
+     * Verify shoot in a empty place.
+     */
     @Test
     public void testShootAtEmptyPosition() {
-        Ocean ocean = new Ocean();
+        final int row = 3;
+        final int column = 2;
+        final int shootRow = 10;
+        final int shootColumn = 6;
+        final boolean horizontal = true;
         Ship submarine = new Submarine();
-        assertTrue(submarine.getLength() == 3);
-        submarine.placeShipAt(3, 2, true, ocean);
-        assertFalse(ocean.shootAt(2,3));
-}
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(ocean.shootAt(shootRow, shootColumn));
+    }
 }

@@ -11,7 +11,7 @@ class ShipFactory {
      * @param shipType represents the ship type.
      * @return a new Ship according the ship type.
      */
-    Ship createShip(String shipType) {
+    Ship createShip(final String shipType) {
         switch (shipType) {
             case "BattleShip":
                 return new BattleShip();

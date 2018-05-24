@@ -4,11 +4,12 @@ package org.minions.devfund.lourdes.battleship;
  * Class that defines the Cruiser ship.
  */
 class Cruiser extends Ship {
+    private static final int SIZE_CRUISER = 6;
     /**
      * Constructor.
      */
     Cruiser() {
-        length = 6;
+        length = SIZE_CRUISER;
         hit = new boolean[length];
     }
 

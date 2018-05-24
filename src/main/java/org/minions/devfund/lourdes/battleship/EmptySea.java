@@ -4,12 +4,13 @@ package org.minions.devfund.lourdes.battleship;
  * Class that define an empty ship.
  */
 public class EmptySea extends Ship {
+    private static final int SIZE_EMPTY_SEA = 1;
 
     /**
      * Constructor.
      */
     EmptySea() {
-        length = 1;
+        length = SIZE_EMPTY_SEA;
         hit = new boolean[length];
     }
 

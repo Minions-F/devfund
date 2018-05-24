@@ -4,39 +4,49 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Class that define Ocean entity.
+ */
 public class Ocean {
+    private static final int TOTAL_CRUISER = 2;
+    private static final int TOTAL_DESTROYER = 3;
+    private static final int TOTAL_SUBMARINE = 4;
+    private static final int TOTAL_SHIPS = 13;
     private static final Map<String, Integer> SHIP_TYPE = new LinkedHashMap<>();
 
     static {
         SHIP_TYPE.put("BattleShip", 1);
         SHIP_TYPE.put("BattleCruiser", 1);
-        SHIP_TYPE.put("Cruiser", 2);
-        SHIP_TYPE.put("LightCruiser", 2);
-        SHIP_TYPE.put("Destroyer", 3);
-        SHIP_TYPE.put("Submarine", 4);
+        SHIP_TYPE.put("Cruiser", TOTAL_CRUISER);
+        SHIP_TYPE.put("LightCruiser", TOTAL_CRUISER);
+        SHIP_TYPE.put("Destroyer", TOTAL_DESTROYER);
+        SHIP_TYPE.put("Submarine", TOTAL_SUBMARINE);
     }
+
+    private static final int SIZE_SHIP = 20;
 
     private Ship[][] ships;
     private int shotsFired;
     private int hitCount;
     private int shipsSunk;
 
-    public Ocean() {
-        this.ships = new Ship[20][20];
-        this.shotsFired = 0;
-        this.hitCount = 0;
-        this.shipsSunk = 0;
+    /**
+     * Constructor.
+     */
+    Ocean() {
+        this.ships = new Ship[SIZE_SHIP][SIZE_SHIP];
         for (int i = 0; i < ships.length; i++) {
             for (int j = 0; j < ships.length; j++) {
                 EmptySea emptySea = new EmptySea();
                 emptySea.placeShipAt(i, j, true, this);
-//                ships[i][j] = new EmptySea();
-//                ships[i][j].placeShipAt(i, j, true, this);
             }
         }
     }
 
-    public void placeAllShipsRandomly() {
+    /**
+     * Method that place randomly all ships in the ocean.
+     */
+    void placeAllShipsRandomly() {
         ShipFactory shipFactory = new ShipFactory();
         SHIP_TYPE.forEach((key, value) -> {
             positionShip(key, value, shipFactory);
@@ -44,32 +54,49 @@ public class Ocean {
         });
     }
 
-    public void positionShip(String shipType, Integer shipQuantity, ShipFactory shipFactory) {
-        Random r = new Random();
+    /**
+     * Method that position a ship in the ocean.
+     *
+     * @param shipType     represents the ship type.
+     * @param shipQuantity represents the ship quantity.
+     * @param shipFactory  ship factory.
+     */
+    private void positionShip(final String shipType, final Integer shipQuantity, final ShipFactory shipFactory) {
+        Random random = new Random();
         for (int i = 0; i < shipQuantity; i++) {
-            boolean var = false;
-            while (!var) {
-                int row = r.nextInt(ships.length - 1);
-                int column = r.nextInt(ships.length - 1);
-                boolean horizontal = r.nextBoolean();
+            boolean placeShip = false;
+            while (!placeShip) {
+                int row = random.nextInt(ships.length - 1);
+                int column = random.nextInt(ships.length - 1);
+                boolean horizontal = random.nextBoolean();
                 Ship newShip = shipFactory.createShip(shipType);
-                System.out.println("Ship " + newShip.getShipType() + " ROW " + row + " Column " + column + " horizontal " + horizontal);
                 if (newShip.okToPlaceShipAt(row, column, horizontal, this)) {
                     newShip.placeShipAt(row, column, horizontal, this);
-                    var = true;
+                    placeShip = true;
                 }
             }
-
-
         }
     }
 
-
-    public boolean isOccupied(int row, int column) {
+    /**
+     * Method that verify if a position is occupied.
+     *
+     * @param row    row position.
+     * @param column column position.
+     * @return True if the given position is occupied, false otherwise.
+     */
+    boolean isOccupied(int row, int column) {
         return !(ships[row][column] instanceof EmptySea);
     }
 
-    public boolean shootAt(int row, int column) {
+    /**
+     * Method that shoot in a position.
+     *
+     * @param row    row position.
+     * @param column column position.
+     * @return True if the shoot was accurate, False otherwise.
+     */
+    boolean shootAt(int row, int column) {
         shotsFired++;
         if (isOccupied(row, column) && !ships[row][column].isSunk()) {
             hitCount++;
@@ -86,30 +113,34 @@ public class Ocean {
         return false;
     }
 
+    /**
+     * Method that print the ocean.
+     */
     public void print() {
         printColumnPosition();
         for (int i = 0; i < ships.length; i++) {
             System.out.println("");
             System.out.print(i);
             for (int j = 0; j < ships.length; j++) {
-//                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
-//                    System.out.print(" . ");
-//                } else {
-                System.out.print(" " + ships[i][j] + " ");
-
-//                }
-
+                if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
+                    System.out.print(" . ");
+                } else {
+                    System.out.print(" " + ships[i][j] + " ");
+                }
             }
             System.out.println("");
         }
         System.out.println("");
-
     }
 
-    public void printColumnPosition() {
+    /**
+     * Method tha print column numbers in the ocean.
+     */
+    private void printColumnPosition() {
+        final int maxNumberAddCero = 10;
         StringBuilder arrayPosition = new StringBuilder(" ");
         for (int i = 0; i < ships.length; i++) {
-            if (i < 10) {
+            if (i < maxNumberAddCero) {
                 arrayPosition.append("0");
             }
             arrayPosition.append(i);
@@ -119,36 +150,76 @@ public class Ocean {
         System.out.print(arrayPosition);
     }
 
+    /**
+     * Method that return shots fired.
+     *
+     * @return shot fires.
+     */
     public int getShotsFired() {
         return shotsFired;
     }
 
+    /**
+     * method that set shots fired.
+     *
+     * @param shotsFired shot fired.
+     */
     public void setShotsFired(int shotsFired) {
         this.shotsFired = shotsFired;
     }
 
+    /**
+     * Method that return the hit counts.
+     *
+     * @return the total hit count.
+     */
     public int getHitCount() {
         return hitCount;
     }
 
+    /**
+     * Method that set hit count.
+     *
+     * @param hitCount hit count.
+     */
     public void setHitCount(int hitCount) {
         this.hitCount = hitCount;
     }
 
+    /**
+     * Method that return ships sunk.
+     *
+     * @return the total of ships sunk.
+     */
     public int getShipsSunk() {
         return shipsSunk;
     }
 
+    /**
+     * Method that set the ships sunk.
+     *
+     * @param shipsSunk ships sunk.
+     */
     public void setShipsSunk(int shipsSunk) {
         this.shipsSunk = shipsSunk;
     }
 
+    /**
+     * Method verify if the gave is over.
+     *
+     * @return True if the game is over, false otherwise.
+     */
     public boolean isGameOver() {
-        return shipsSunk == 13;
+        return shipsSunk == TOTAL_SHIPS;
     }
 
+    /**
+     * Method that return the ship Array.
+     *
+     * @return ship.
+     */
     public Ship[][] getShipArray() {
-        return ships;
+        return ships.clone();
     }
 
 }
