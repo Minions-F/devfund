@@ -31,25 +31,23 @@ public abstract class Ship {
      * @return true if is possible to place a ship in the position.
      */
     boolean okToPlaceShipAt(final int row, final int column, final boolean horizontal, final Ocean ocean) {
-        try {
-            if (horizontal) {
-                for (int j = column; j < column + length; j++) {
-                    if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
-                        return false;
-                    }
-                }
-            } else {
-                for (int i = row; i < row + length; i++) {
-                    if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
-                        return false;
-                    }
+        if (horizontal && column + length - 1 < Ocean.OCEAN_SIZE) {
+            for (int j = column; j < column + length; j++) {
+                if (ocean.isOccupied(row, j) || ocean.isBorderOccupied(row, j)) {
+                    return false;
                 }
             }
-
-        } catch (IndexOutOfBoundsException e) {
-            return false;
+            return true;
+        } else if (!horizontal && row + length - 1 < Ocean.OCEAN_SIZE) {
+            for (int i = row; i < row + length; i++) {
+                if (ocean.isOccupied(i, column) || ocean.isBorderOccupied(i, column)) {
+                    return false;
+                }
+            }
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     /**

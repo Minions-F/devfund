@@ -1,17 +1,20 @@
 package org.minions.devfund.angela.battleship;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Manages ship's ocean.
  */
 public class Ocean {
-    private static final int OCEAN_SIZE = 20;
+
     private static final int SHIPS_QUANTITY = 13;
     private Ship[][] ships;
     private int shotsFired;
     private int hitCount;
     private int shipsSunk;
+    static final int OCEAN_SIZE = 20;
 
     /**
      * Initializes an instance of {@link Ocean}.
@@ -34,27 +37,10 @@ public class Ocean {
      * Places 13 ships randomly.
      */
     void placeAllShipsRandomly() {
-
-        final int fourLengthShip = 4;
-        final int sixLengthShip = 6;
-        final int nineLengthShip = 9;
         Random random = new Random();
-        Ship[] shipsToPlace = new Ship[SHIPS_QUANTITY];
-        for (int i = 0; i < SHIPS_QUANTITY; i++) {
-            if (i == 0) {
-                shipsToPlace[i] = new BattleShip();
-            } else if (i == 1) {
-                shipsToPlace[i] = new BattleCruiser();
-            } else if (i < fourLengthShip) {
-                shipsToPlace[i] = new Cruiser();
-            } else if (i < sixLengthShip) {
-                shipsToPlace[i] = new LightCruiser();
-            } else if (i < nineLengthShip) {
-                shipsToPlace[i] = new Destroyer();
-            } else {
-                shipsToPlace[i] = new Submarine();
-            }
-        }
+        List<Ship> shipsToPlace = Arrays.asList(new BattleShip(), new BattleCruiser(), new Cruiser(), new Cruiser(),
+                new LightCruiser(), new LightCruiser(), new Destroyer(), new Destroyer(), new Destroyer(),
+                new Submarine(), new Submarine(), new Submarine(), new Submarine());
 
         for (Ship ship : shipsToPlace) {
             boolean located = false;
