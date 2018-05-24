@@ -2,7 +2,6 @@ package org.minions.devfund.marcos.battleship;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -11,7 +10,7 @@ import java.util.Random;
  */
 public class Ocean {
 
-    private static final Map<ShipType, Integer> OCEAN_SHIPS = new HashMap<>();
+    private static final Map<ShipType, Integer> OCEAN_SHIPS = new EnumMap<>(ShipType.class);
     private static final int SHIPS_NUMBER = 13;
     private static final int BATTLESHIP_NUMBER = 1;
     private static final int BATTLE_CRUISER_NUMBER = 1;
