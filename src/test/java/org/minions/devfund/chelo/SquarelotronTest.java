@@ -1,10 +1,7 @@
-package org.minios.devfund.chelo;
+package org.minions.devfund.chelo;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.minions.devfund.chelo.Squarelotron;
-
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Test Class Squarelotron.
@@ -23,7 +20,7 @@ public class SquarelotronTest {
                 {1, 2}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
     }
 
     /**
@@ -41,7 +38,7 @@ public class SquarelotronTest {
                 {21, 22, 23, 24, 25}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
     }
 
     /**
@@ -59,7 +56,7 @@ public class SquarelotronTest {
                 {21, 22, 23, 24, 25}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
     }
 
     /**
@@ -77,7 +74,7 @@ public class SquarelotronTest {
                 {5, 10, 15, 20, 25}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
     }
 
     /**
@@ -95,7 +92,7 @@ public class SquarelotronTest {
                 {1, 2, 3, 4, 5}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
     }
 
     /**
@@ -111,7 +108,7 @@ public class SquarelotronTest {
                 {1, 2, 3}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
     }
 
     /**
@@ -127,7 +124,7 @@ public class SquarelotronTest {
                 {1, 2, 3}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertNotEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
+        Assert.assertNotEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());
     }
 
     /**
@@ -143,7 +140,7 @@ public class SquarelotronTest {
                 {3, 6, 9}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
     }
 
     /**
@@ -159,7 +156,7 @@ public class SquarelotronTest {
                 {9, 6, 3}};
 
         Squarelotron squarelotron = new Squarelotron(size);
-        assertNotEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
+        Assert.assertNotEquals(expectedArray, squarelotron.mainDiagonalFlip(ring).getSquarelotron());
     }
 
     /**
@@ -177,7 +174,7 @@ public class SquarelotronTest {
 
         Squarelotron squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(rotate);
-        assertEquals(expectedArray, squarelotron.getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.getSquarelotron());
     }
 
     /**
@@ -194,7 +191,7 @@ public class SquarelotronTest {
 
         Squarelotron squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(rotate);
-        assertEquals(expectedArray, squarelotron.getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.getSquarelotron());
     }
 
     /**
@@ -212,7 +209,7 @@ public class SquarelotronTest {
 
         Squarelotron squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(rotate);
-        assertEquals(expectedArray, squarelotron.getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.getSquarelotron());
     }
 
     /**
@@ -229,6 +226,6 @@ public class SquarelotronTest {
 
         Squarelotron squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(rotate);
-        assertEquals(expectedArray, squarelotron.getSquarelotron());
+        Assert.assertEquals(expectedArray, squarelotron.getSquarelotron());
     }
 }
