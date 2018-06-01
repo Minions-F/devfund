@@ -17,7 +17,7 @@ public class WhackAMole {
      * @param numAttempts initial tries for the user.
      * @param gridDimension size of the grid.
      */
-    WhackAMole(int numAttempts, int gridDimension) {
+    public WhackAMole(int numAttempts, int gridDimension) {
         this.moleGrid = new char[gridDimension][gridDimension];
         this.attemptsLeft = numAttempts;
         this.score = 0;
@@ -62,7 +62,7 @@ public class WhackAMole {
      * @param y coordinate
      * @return status of the coordinate
      */
-    boolean place(int x, int y) {
+    public boolean place(int x, int y) {
         if (this.moleGrid[x][y] != 'M') {
             this.moleGrid[x][y] = 'M';
             this.molesLeft++;
@@ -78,7 +78,7 @@ public class WhackAMole {
      * @param x coordinate
      * @param y coordinate
      */
-    void whack(int x, int y) {
+    public void whack(int x, int y) {
         if (moleGrid[x][y] == 'M') {
             moleGrid[x][y] = 'W';
             score++;
@@ -129,15 +129,41 @@ public class WhackAMole {
      * A method to return Attempts Left value.
      * @return remaining attempts
      */
-    int getAttemptsLeft() {
+    public int getAttemptsLeft() {
         return attemptsLeft;
+    }
+
+    /**\
+     * A method to return mole Grid Length value.
+     * @return moleGrid
+     */
+    public int getMoleGridLength() {
+        return moleGrid.length;
+    }
+
+    /**
+     * A method to return mole Grid value given x and y.
+     * @param x row
+     * @param y column
+     * @return value
+     */
+    public int getMoleGridValue(int x, int y) {
+        return moleGrid[x][y];
+    }
+
+    /**\
+     * A method to return score value.
+     * @return score
+     */
+    public int getScore() {
+        return score;
     }
 
     /**
      * A method to return moles left value.
      * @return remaining moles
      */
-    int getMolesLeft() {
+    public int getMolesLeft() {
         return  molesLeft;
     }
 
