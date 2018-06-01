@@ -1,9 +1,11 @@
+package org.minions.devfund.chelo.squarelotron;
+
 /**
  * Class Squarelotron.
  */
 public class Squarelotron {
 
-    protected int[][] squarelotron;
+    public int[][] squarelotron;
     protected int size;
 
     /**
@@ -45,7 +47,7 @@ public class Squarelotron {
      * @param ring given to work on it
      * @return new Squarelotron
      */
-    Squarelotron upsideDownFlip(int ring) {
+    public Squarelotron upsideDownFlip(int ring) {
         Squarelotron squarelotronAux = initializeArray(this.size);
         squarelotronAux = getUpsideDownFlipArray(squarelotronAux, this.squarelotron, ring);
         return squarelotronAux;
@@ -56,7 +58,7 @@ public class Squarelotron {
      * @param ring the ring
      * @return new array
      */
-    Squarelotron mainDiagonalFlip(int ring) {
+    public Squarelotron mainDiagonalFlip(int ring) {
         Squarelotron squarelotronDiagonal = initializeArray(this.size);
 
         int indexX = ring - 1;
@@ -85,7 +87,7 @@ public class Squarelotron {
      * @param numberOfTurns The argument numberOfTurns indicates the number of times the entire
      *                      squarelotron should be rotated 90° clockwise
      */
-    void rotateRight(int numberOfTurns) {
+    public void rotateRight(int numberOfTurns) {
 
         final int majicTurns = 4;
         Squarelotron arrayUpsideDown = new Squarelotron(this.size);

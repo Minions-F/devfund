@@ -1,4 +1,7 @@
+package org.minios.devfund.chelo.Squarelotron;
+
 import org.junit.Test;
+import org.minions.devfund.chelo.squarelotron.Squarelotron;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertEquals;
@@ -82,11 +85,12 @@ public class SquarelotronTest {
      */
     @Test
     public void testUpsideDownFlip() {
-        final int size = 2;
+        final int size = 3;
         final int ring = 1;
         final int[][] expectedArray = new int[][]{
-                {3, 4},
-                {1, 2}};
+                {7, 8, 9},
+                {4, 5, 6},
+                {1, 2, 3}};
 
         Squarelotron squarelotron = new Squarelotron(size);
         assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).squarelotron);
@@ -161,12 +165,13 @@ public class SquarelotronTest {
      */
     @Test
     public void testRotateRight1() {
-        final int size = 3;
+        final int size = 4;
         final int rotate = 1;
         final int[][] expectedArray = new int[][]{
-                {7, 4, 1},
-                {8, 5, 2},
-                {9, 6, 3}};
+                {13, 9, 5, 1},
+                {14, 10, 6, 2},
+                {15, 11, 7, 3},
+                {16, 12, 8, 4}};
 
         Squarelotron squarelotron = new Squarelotron(size);
         squarelotron.rotateRight(rotate);
