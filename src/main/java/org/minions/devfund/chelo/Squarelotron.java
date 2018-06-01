@@ -5,7 +5,7 @@ package org.minions.devfund.chelo;
  */
 public class Squarelotron {
 
-    private int[][] squarelotron;
+    private int[][] sArray;
     protected int size;
 
     /**
@@ -14,11 +14,11 @@ public class Squarelotron {
      */
     public Squarelotron(int n) {
         this.size = n;
-        this.squarelotron = new int[n][n];
+        this.sArray = new int[n][n];
         int counter = 1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                this.squarelotron[i][j] = counter;
+                this.sArray[i][j] = counter;
                 counter++;
             }
         }
@@ -34,7 +34,7 @@ public class Squarelotron {
         int counter = 1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                array.squarelotron[i][j] = counter;
+                array.sArray[i][j] = counter;
                 counter++;
             }
         }
@@ -48,9 +48,9 @@ public class Squarelotron {
      * @return new Squarelotron
      */
     public Squarelotron upsideDownFlip(int ring) {
-        Squarelotron squarelotronAux = initializeArray(this.size);
-        squarelotronAux = getUpsideDownFlipArray(squarelotronAux, this.squarelotron, ring);
-        return squarelotronAux;
+        Squarelotron sAux = initializeArray(this.size);
+        sAux = getUpsideDownFlipArray(sAux, this.sArray, ring);
+        return sAux;
     }
 
     /**
@@ -64,17 +64,17 @@ public class Squarelotron {
         int indexX = ring - 1;
         int aux;
         for (int m = ring - 1; m < this.size - ring + 1; m++) {
-            aux = squarelotronDiagonal.squarelotron[indexX][ring - 1];
-            squarelotronDiagonal.squarelotron[indexX][ring - 1] = this.squarelotron[ring - 1][m];
-            squarelotronDiagonal.squarelotron[ring - 1][m] = aux;
+            aux = squarelotronDiagonal.sArray[indexX][ring - 1];
+            squarelotronDiagonal.sArray[indexX][ring - 1] = this.sArray[ring - 1][m];
+            squarelotronDiagonal.sArray[ring - 1][m] = aux;
             indexX++;
         }
 
         indexX = ring;
         for (int n = ring; n < this.size - ring; n++) {
-            aux = squarelotronDiagonal.squarelotron[indexX][this.size - ring];
-            squarelotronDiagonal.squarelotron[indexX][this.size - ring] = this.squarelotron[this.size - ring][n];
-            squarelotronDiagonal.squarelotron[this.size - ring][n] = aux;
+            aux = squarelotronDiagonal.sArray[indexX][this.size - ring];
+            squarelotronDiagonal.sArray[indexX][this.size - ring] = this.sArray[this.size - ring][n];
+            squarelotronDiagonal.sArray[this.size - ring][n] = aux;
             indexX++;
         }
 
@@ -99,17 +99,17 @@ public class Squarelotron {
 
         for (int turns = 1; turns <= realTurns % magicTurns; turns++) {
             for (int ring = 1; ring <= (this.size / 2) + (this.size % 2); ring++) {
-                arrayUpsideDown = getUpsideDownFlipArray(arrayUpsideDown, squarelotronAux.squarelotron, ring);
+                arrayUpsideDown = getUpsideDownFlipArray(arrayUpsideDown, squarelotronAux.sArray, ring);
             }
 
             for (int i = 0; i < this.size; i++) {
                 for (int j = 0; j < this.size; j++) {
-                    squarelotronRotate.squarelotron[j][i] = arrayUpsideDown.squarelotron[i][j];
+                    squarelotronRotate.sArray[j][i] = arrayUpsideDown.sArray[i][j];
                 }
             }
             squarelotronAux = squarelotronRotate;
         }
-        this.squarelotron = squarelotronRotate.squarelotron;
+        this.sArray = squarelotronRotate.sArray;
     }
 
     /**
@@ -125,28 +125,28 @@ public class Squarelotron {
 
         indexX = ring - 1;
         for (int m = ring - 1; m < this.size - ring + 1; m++) {
-            arrayResult.squarelotron[this.size - ring][indexX] = array[ring - 1][m];
+            arrayResult.sArray[this.size - ring][indexX] = array[ring - 1][m];
             indexX++;
         }
 
         indexX = ring - 1;
         indexY = ring - 1;
         for (int n = ring - 1; n < this.size - ring + 1; n++) {
-            arrayResult.squarelotron[indexX][indexY] = array[this.size - ring][n];
+            arrayResult.sArray[indexX][indexY] = array[this.size - ring][n];
             indexY++;
         }
 
         indexX = this.size - ring - 1;
         indexY = ring - 1;
         for (int j = ring; j < this.size - ring; j++) {
-            arrayResult.squarelotron[indexX][indexY] = array[j][ring - 1];
+            arrayResult.sArray[indexX][indexY] = array[j][ring - 1];
             indexX--;
         }
 
         indexX = this.size - ring - 1;
         indexY = this.size - ring;
         for (int k = ring; k < this.size - ring; k++) {
-            arrayResult.squarelotron[indexX][indexY] = array[k][this.size - ring];
+            arrayResult.sArray[indexX][indexY] = array[k][this.size - ring];
             indexX--;
         }
         return arrayResult;
@@ -157,9 +157,9 @@ public class Squarelotron {
      * @param array squarelotron
      */
     void getArray(final Squarelotron array) {
-        for (int i = 0; i < array.squarelotron.length; i++) {
-            for (int j = 0; j < array.squarelotron.length; j++) {
-                System.out.print("[" + array.squarelotron[i][j] + "]");
+        for (int i = 0; i < array.sArray.length; i++) {
+            for (int j = 0; j < array.sArray.length; j++) {
+                System.out.print("[" + array.sArray[i][j] + "]");
             }
             System.out.println(" ");
         }
@@ -170,7 +170,7 @@ public class Squarelotron {
      * @return array
      */
     public int[][] getSquarelotron() {
-        int[][] aux = squarelotron;
+        int[][] aux = sArray;
         return aux;
     }
 
