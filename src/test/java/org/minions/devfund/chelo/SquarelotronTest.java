@@ -85,12 +85,14 @@ public class SquarelotronTest {
      */
     @Test
     public void testUpsideDownFlip() {
-        final int size = 3;
+        final int size = 5;
         final int ring = 1;
         final int[][] expectedArray = new int[][]{
-                {7, 8, 9},
-                {4, 5, 6},
-                {1, 2, 3}};
+                {21, 22, 23, 24, 25},
+                {16, 7, 8, 9, 20},
+                {11, 12, 13, 14, 15},
+                {6, 17, 18, 19, 10},
+                {1, 2, 3, 4, 5}};
 
         Squarelotron squarelotron = new Squarelotron(size);
         assertEquals(expectedArray, squarelotron.upsideDownFlip(ring).getSquarelotron());

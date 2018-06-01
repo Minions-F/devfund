@@ -89,15 +89,15 @@ public class Squarelotron {
      */
     public void rotateRight(int numberOfTurns) {
 
-        final int majicTurns = 4;
+        final int magicTurns = 4;
         Squarelotron arrayUpsideDown = new Squarelotron(this.size);
         Squarelotron squarelotronRotate = new Squarelotron(this.size);
         Squarelotron squarelotronAux = initializeArray(this.size);
         int realTurns;
 
-        realTurns = numberOfTurns % majicTurns + majicTurns;
+        realTurns = numberOfTurns % magicTurns + magicTurns;
 
-        for (int turns = 1; turns <= realTurns % majicTurns; turns++) {
+        for (int turns = 1; turns <= realTurns % magicTurns; turns++) {
             for (int ring = 1; ring <= (this.size / 2) + (this.size % 2); ring++) {
                 arrayUpsideDown = getUpsideDownFlipArray(arrayUpsideDown, squarelotronAux.squarelotron, ring);
             }
