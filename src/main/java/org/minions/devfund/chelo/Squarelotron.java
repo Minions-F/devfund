@@ -1,11 +1,11 @@
-package org.minions.devfund.chelo.squarelotron;
+package org.minions.devfund.chelo;
 
 /**
  * Class Squarelotron.
  */
 public class Squarelotron {
 
-    public int[][] squarelotron;
+    private int[][] squarelotron;
     protected int size;
 
     /**
@@ -163,6 +163,15 @@ public class Squarelotron {
             }
             System.out.println(" ");
         }
+    }
+
+    /**
+     * Method to return squarelotron array.
+     * @return array
+     */
+    public int[][] getSquarelotron() {
+        int[][] aux = squarelotron;
+        return aux;
     }
 
     /**
