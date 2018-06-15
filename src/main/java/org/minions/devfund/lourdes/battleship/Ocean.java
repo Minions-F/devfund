@@ -115,28 +115,32 @@ public class Ocean {
 
     /**
      * Method that print the ocean.
+     *
+     * @return a String with the representation of the ocean.
      */
-    public void print() {
-        printColumnPosition();
+    public String print() {
+        StringBuilder printOcean = new StringBuilder();
+        printOcean.append(printColumnPosition());
         for (int i = 0; i < ships.length; i++) {
-            System.out.println("");
-            System.out.print(i);
+            printOcean.append("\n");
+            printOcean.append(i);
             for (int j = 0; j < ships.length; j++) {
                 if (ships[i][j].toString().equals("S") && !ships[i][j].hit[ships[i][j].getHitIndex(i, j)]) {
-                    System.out.print(" . ");
+                    printOcean.append(" . ");
                 } else {
-                    System.out.print(" " + ships[i][j] + " ");
+                    printOcean.append(String.format(" %s ", ships[i][j]));
                 }
             }
-            System.out.println("");
         }
-        System.out.println("");
+        return printOcean.toString();
     }
 
     /**
      * Method tha print column numbers in the ocean.
+     *
+     * @return a string with the column numbers.
      */
-    private void printColumnPosition() {
+    private String printColumnPosition() {
         final int maxNumberAddCero = 10;
         StringBuilder arrayPosition = new StringBuilder(" ");
         for (int i = 0; i < ships.length; i++) {
@@ -147,7 +151,7 @@ public class Ocean {
             arrayPosition.append(" ");
 
         }
-        System.out.print(arrayPosition);
+        return arrayPosition.toString();
     }
 
     /**

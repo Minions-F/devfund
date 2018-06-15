@@ -114,10 +114,7 @@ public abstract class Ship {
     private boolean checkFreeSpaceForShip(int row, int column, boolean horizontal, final Ocean ocean) {
         try {
             for (int i = 0; i < length; i++) {
-                if (horizontal && ocean.isOccupied(row, column + i)) {
-                    return false;
-
-                } else if (ocean.isOccupied(row + i, column)) {
+                if (horizontal && ocean.isOccupied(row, column + i) || ocean.isOccupied(row + i, column)) {
                     return false;
                 }
             }
