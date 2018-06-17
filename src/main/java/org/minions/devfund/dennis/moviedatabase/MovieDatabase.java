@@ -1,15 +1,17 @@
-package org.minions.devfund.dennis;
+package org.minions.devfund.dennis.moviedatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This is the methods for MovieDatabase class.
  */
 public class MovieDatabase {
-    private ArrayList<Movie> movieList;
-    private ArrayList<Actor> actorList;
+    private List<Movie> movieList;
+    private List<Actor> actorList;
 
     /**
      * Constructor for MovieDatabase.
@@ -46,20 +48,27 @@ public class MovieDatabase {
      * @param actors save actors
      */
     public void addMovie(final String name, final String[] actors) {
-        Movie newMovie = new Movie(name);
-        if (!movieList.contains(newMovie)) {
+        if (movieList.stream().noneMatch(movie -> movie.getName().equals(name))) {
+            Movie newMovie = new Movie(name);
+            List<Actor> movieActors = Arrays.stream(actors).map(Actor::new).collect(Collectors.toList());
+            movieActors.forEach(actor -> actor.getMovies().add(newMovie));
+            newMovie.setActors(movieActors);
             movieList.add(newMovie);
-            for (String actorName : actors) {
-                Actor actor = new Actor(actorName);
-                if (!actorList.contains(actor)) {
-                    actorList.add(actor);
-                } else {
-                    actor = actorList.get(actorList.indexOf(actor));
-                }
-                newMovie.getActors().add(actor);
-                actor.getMovies().add(newMovie);
-            }
+            movieActors.stream()
+                    .filter(actor -> isNewActor(actor.getName(), actorList))
+                    .forEach(actor -> actorList.add(actor));
         }
+    }
+
+    /**
+     * Checks if an actor exists in a list of actors.
+     *
+     * @param name actor's name to check.
+     * @param list list of {@link Actor}.
+     * @return true if the list not contains the actor's name.
+     */
+    private boolean isNewActor(final String name, final List<Actor> list) {
+        return list.stream().noneMatch(actor -> actor.getName().equals(name));
     }
 
     /**
@@ -69,9 +78,7 @@ public class MovieDatabase {
      * @param rating of the movie
      */
     public void addRating(final String name, final double rating) {
-        if (movieList.indexOf(new Movie(name)) != -1) {
-            movieList.get(movieList.indexOf(new Movie(name))).setRating(rating);
-        }
+        updateRating(name, rating);
     }
 
     /**
@@ -81,7 +88,9 @@ public class MovieDatabase {
      * @param newRating of the movie
      */
     public void updateRating(final String name, final double newRating) {
-        movieList.get(movieList.indexOf(new Movie(name))).setRating(newRating);
+        movieList.stream()
+                .filter(movie -> movie.getName().equals(name))
+                .forEach(movie -> movie.setRating(newRating));
     }
 
     /**
@@ -90,8 +99,9 @@ public class MovieDatabase {
      * @return best actor
      */
     public String getBestActor() {
-        Collections.sort(actorList);
-        return actorList.get(actorList.size() - 1).getName();
+        return actorList.stream()
+                .max(Comparator.comparing(Actor::getActorRating))
+                .orElse(new Actor()).getName();
     }
 
     /**
@@ -100,7 +110,8 @@ public class MovieDatabase {
      * @return best movie
      */
     public String getBestMovie() {
-        Collections.sort(movieList);
-        return movieList.get(movieList.size() - 1).getName();
+        return movieList.stream()
+                .max(Comparator.comparing(Movie::getRating))
+                .orElse(new Movie()).getName();
     }
 }
