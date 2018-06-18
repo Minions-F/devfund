@@ -52,8 +52,8 @@ public class ShipTest {
     public void testOkToPlaceShipAtInvalidPosition() {
         final int row = -1;
         final int column = -1;
-        final int rowBig = 20;
-        final int columnBig = 20;
+        final int rowBig = 21;
+        final int columnBig = 21;
         final boolean horizontal = true;
         Ship submarine = new Submarine();
         assertFalse(submarine.okToPlaceShipAt(row, column, horizontal, ocean));

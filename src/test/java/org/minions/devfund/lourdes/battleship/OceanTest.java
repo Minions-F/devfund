@@ -81,14 +81,29 @@ public class OceanTest {
      */
     @Test
     public void testShootAtEmptyPosition() {
-        final int row = 3;
-        final int column = 2;
         final int shootRow = 10;
         final int shootColumn = 6;
+        assertFalse(ocean.shootAt(shootRow, shootColumn));
+    }
+
+    /**
+     * Verify shoot at sunk ship.
+     */
+    @Test
+    public void testShootAtSunkPlace() {
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 10;
+        final int shootColumn1 = 5;
+        final int shootColumn2 = 6;
+        final int shootColumn3 = 7;
         final boolean horizontal = true;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
-        assertFalse(ocean.shootAt(shootRow, shootColumn));
+        ocean.shootAt(shootRow, shootColumn1);
+        ocean.shootAt(shootRow, shootColumn2);
+        ocean.shootAt(shootRow, shootColumn3);
+        assertFalse(ocean.shootAt(shootRow, shootColumn3));
     }
 
     /**
