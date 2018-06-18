@@ -73,6 +73,7 @@ public class OceanTest {
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertTrue(ocean.shootAt(shootRow, shootColumn));
+        assertTrue(ocean.shootAt(shootRow, shootColumn));
     }
 
     /**
@@ -89,6 +90,64 @@ public class OceanTest {
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertFalse(ocean.shootAt(shootRow, shootColumn));
     }
+
+    /**
+     * Verify shoot at position and sunk a ship.
+     */
+    @Test
+    public void testShootAtAndSunk() {
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 10;
+        final int shootColumn1 = 5;
+        final int shootColumn2 = 6;
+        final int shootColumn3 = 7;
+        final boolean horizontal = true;
+        final int totalShipSunk = 1;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        ocean.shootAt(shootRow, shootColumn1);
+        ocean.shootAt(shootRow, shootColumn2);
+        ocean.shootAt(shootRow, shootColumn3);
+        assertEquals(totalShipSunk, ocean.getShipsSunk());
+    }
+
+    /**
+     * Verify shoot at position and sunk a ship.
+     */
+    @Test
+    public void testShootFired() {
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 10;
+        final int shootColumn1 = 5;
+        final int shootColumn2 = 6;
+        final int shootColumn3 = 7;
+        final boolean horizontal = true;
+        final int totalShipFired = 3;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        ocean.shootAt(shootRow, shootColumn1);
+        ocean.shootAt(shootRow, shootColumn2);
+        ocean.shootAt(shootRow, shootColumn3);
+        assertEquals(totalShipFired, ocean.getShotsFired());
+    }
+
+    /**
+     * Verify if a game is over.
+     */
+    @Test
+    public void testIsGameOver() {
+        ocean.placeAllShipsRandomly();
+        Ship[][] shipMatrix = ocean.getShipArray();
+        for (int i = 0; i < shipMatrix.length; i++) {
+            for (int j = 0; j < shipMatrix.length; j++) {
+                ocean.shootAt(i, j);
+            }
+        }
+        assertTrue(ocean.isGameOver());
+    }
+
 
     /**
      * Verify print method.

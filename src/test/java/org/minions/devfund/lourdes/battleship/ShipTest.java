@@ -22,10 +22,10 @@ public class ShipTest {
     }
 
     /**
-     * Verify if the given position is ok to place.
+     * Verify if the given position is ok to place a vertical ship.
      */
     @Test
-    public void testOkToPlaceShipAt() {
+    public void testVerticalOkToPlaceShipAt() {
         final int row = 0;
         final int column = 12;
         final boolean horizontal = false;
@@ -34,10 +34,34 @@ public class ShipTest {
     }
 
     /**
-     * Verify a new ship is not positioned in an occupied place.
+     * Verify if the given position is ok to place a horizontal ship.
      */
     @Test
-    public void testOkPlaceShipAtOccupiedPlace() {
+    public void testHorizontalOkToPlaceShipAt() {
+        final int row = 4;
+        final int column = 12;
+        final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        assertTrue(submarine.okToPlaceShipAt(row, column, horizontal, ocean));
+    }
+
+    /**
+     * Verify if the given position is an invalid position to place a ship.
+     */
+    @Test
+    public void testOkToPlaceShipAtInvalidPosition() {
+        final int row = -1;
+        final int column = -1;
+        final boolean horizontal = false;
+        Ship submarine = new Submarine();
+        assertFalse(submarine.okToPlaceShipAt(row, column, horizontal, ocean));
+    }
+
+    /**
+     * Verify a new vertical ship is not positioned in an occupied place.
+     */
+    @Test
+    public void testVerticalOkPlaceShipAtOccupiedPlace() {
         final int row = 0;
         final int column = 1;
         final boolean horizontal = false;
@@ -45,6 +69,32 @@ public class ShipTest {
         Destroyer destroyer = new Destroyer();
         cruiser.placeShipAt(row, column, horizontal, ocean);
         assertFalse(destroyer.okToPlaceShipAt(row, column, horizontal, ocean));
+    }
+
+    /**
+     * Verify a new horizontal ship is not positioned in an occupied place.
+     */
+    @Test
+    public void testHorizontalOkPlaceShipAtOccupiedPlace() {
+        final int row = 0;
+        final int column = 1;
+        final boolean horizontal = true;
+        Cruiser cruiser = new Cruiser();
+        Destroyer destroyer = new Destroyer();
+        cruiser.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(destroyer.okToPlaceShipAt(row, column, horizontal, ocean));
+    }
+
+    /**
+     * Verify a new ship is not positioned in an invalid place.
+     */
+    @Test
+    public void testOkPlaceShipAtLimitPlace() {
+        final int row = 10;
+        final int column = 15;
+        final boolean horizontal = true;
+        Cruiser cruiser = new Cruiser();
+        assertFalse(cruiser.okToPlaceShipAt(row, column, horizontal, ocean));
     }
 
     /**
@@ -63,6 +113,22 @@ public class ShipTest {
         submarine.placeShipAt(rowShip1, rowColumn1, horizontal, ocean);
         assertFalse(destroyer.okToPlaceShipAt(rowShip2, rowColumn2, horizontal, ocean));
         assertFalse(cruiser.okToPlaceShipAt(1, 1, horizontal, ocean));
+    }
+
+    /**
+     * Verify a new ship is not able to be placed next to another one.
+     */
+    @Test
+    public void testOkPlaceShipNextToDiagonalPlacedShip() {
+        final int rowShip1 = 2;
+        final int rowColumn1 = 1;
+        final int rowShip2 = 5;
+        final int rowColumn2 = 2;
+        final boolean horizontal = false;
+        Ship submarine = new Submarine();
+        Destroyer destroyer = new Destroyer();
+        submarine.placeShipAt(rowShip1, rowColumn1, horizontal, ocean);
+        assertFalse(destroyer.okToPlaceShipAt(rowShip2, rowColumn2, horizontal, ocean));
     }
 
     /**
@@ -89,6 +155,7 @@ public class ShipTest {
         final int column = 1;
         final int shootRow = 3;
         final int shootColumn = 4;
+        final String isSunk = "x";
         final boolean horizontal = false;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
@@ -96,6 +163,7 @@ public class ShipTest {
         submarine.shootAt(shootRow, column);
         submarine.shootAt(shootColumn, column);
         assertTrue(submarine.isSunk());
+        assertEquals(isSunk, submarine.toString());
     }
 
     /**
@@ -106,10 +174,92 @@ public class ShipTest {
         final int row = 2;
         final int column = 1;
         final boolean horizontal = true;
+        final String expectedValue = "S";
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         submarine.shootAt(row, column);
         submarine.shootAt(row, column);
         assertFalse(submarine.isSunk());
+        assertEquals(expectedValue, submarine.toString());
+    }
+
+    /**
+     * Verify a shoot at empty position.
+     */
+    @Test
+    public void testShootAtEmptySea() {
+        final int row = 2;
+        final int column = 1;
+        final int rowEmpty = 10;
+        final int columnEmpty = 5;
+        final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(submarine.shootAt(rowEmpty, columnEmpty));
+
+    }
+
+    /**
+     * Verify a set bow column and row.
+     */
+    @Test
+    public void testSetHeadShip() {
+        final int row = 2;
+        final int column = 1;
+        Ship submarine = new Submarine();
+        submarine.setBowRow(row);
+        submarine.setBowColumn(column);
+        assertEquals(row, submarine.getBowRow());
+        assertEquals(column, submarine.getBowColumn());
+    }
+
+    /**
+     * Verify set length to a ship.
+     */
+    @Test
+    public void tesShipLength() {
+        final int length = 3;
+        final int expectedLength = 3;
+        Ship submarine = new Submarine();
+        submarine.setLength(length);
+        assertEquals(expectedLength, submarine.getLength());
+    }
+
+    /**
+     * Verify set orientation of a ship.
+     */
+    @Test
+    public void testShipHorizontal() {
+        final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        submarine.setHorizontal(horizontal);
+        assertEquals(horizontal, submarine.isHorizontal());
+    }
+
+    /**
+     * Test toString method for EmptySea that was not shot.
+     */
+    @Test
+    public void testToStringEmptySeaNotShoot() {
+        final String emptySeaNotShoot = ".";
+        Ship[][] shipMatrix = ocean.getShipArray();
+        for (Ship[] row : shipMatrix) {
+            for (Ship cellValue : row) {
+                assertEquals(emptySeaNotShoot, cellValue.toString());
+            }
+        }
+    }
+
+    /**
+     * Test toString method for Empty sea that was shot.
+     */
+    @Test
+    public void testToStringEmptySeaShoot() {
+        final String emptySeaNotShoot = "-";
+        final int row = 3;
+        final int column = 4;
+        Ship[][] shipMatrix = ocean.getShipArray();
+        ocean.shootAt(row, column);
+        assertEquals(emptySeaNotShoot, shipMatrix[row][column].toString());
     }
 }
