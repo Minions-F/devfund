@@ -61,15 +61,31 @@ public class OceanTest {
     }
 
     /**
-     * Verify shoot at position in the ocean where exists a ship.
+     * Verify shoot at position in the ocean where exists a horizontal ship.
      */
     @Test
-    public void testShootAt() {
+    public void testHorizontalShootAt() {
         final int row = 10;
         final int column = 5;
         final int shootRow = 10;
         final int shootColumn = 6;
         final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertTrue(ocean.shootAt(shootRow, shootColumn));
+        assertTrue(ocean.shootAt(shootRow, shootColumn));
+    }
+
+    /**
+     * Verify shoot at position in the ocean where exists a vertical ship .
+     */
+    @Test
+    public void testVerticalShootAt() {
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 11;
+        final int shootColumn = 5;
+        final boolean horizontal = false;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertTrue(ocean.shootAt(shootRow, shootColumn));
@@ -197,7 +213,6 @@ public class OceanTest {
         }
         assertFalse(ocean.isGameOver());
     }
-
 
     /**
      * Verify print method.

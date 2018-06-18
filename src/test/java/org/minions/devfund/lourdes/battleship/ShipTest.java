@@ -46,21 +46,6 @@ public class ShipTest {
     }
 
     /**
-     * Verify if the given position is an invalid position to place a ship.
-     */
-    @Test
-    public void testOkToPlaceShipAtInvalidPosition() {
-        final int row = -1;
-        final int column = -1;
-        final int rowBig = 21;
-        final int columnBig = 21;
-        final boolean horizontal = true;
-        Ship submarine = new Submarine();
-        assertFalse(submarine.okToPlaceShipAt(row, column, horizontal, ocean));
-        assertFalse(submarine.okToPlaceShipAt(rowBig, columnBig, horizontal, ocean));
-    }
-
-    /**
      * Verify a new vertical ship is not positioned in an occupied place.
      */
     @Test

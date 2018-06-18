@@ -27,9 +27,6 @@ public abstract class Ship {
      * @return a boolean, true if the given position is free and false otherwise.
      */
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, final Ocean ocean) {
-        if (row < 0 || row > ocean.getShipArray().length || column < 0 || column > ocean.getShipArray().length) {
-            return false;
-        }
         return verifyShipBorderFree(row, column, horizontal, ocean);
     }
 
