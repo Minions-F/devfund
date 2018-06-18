@@ -52,9 +52,12 @@ public class ShipTest {
     public void testOkToPlaceShipAtInvalidPosition() {
         final int row = -1;
         final int column = -1;
-        final boolean horizontal = false;
+        final int rowBig = 20;
+        final int columnBig = 20;
+        final boolean horizontal = true;
         Ship submarine = new Submarine();
         assertFalse(submarine.okToPlaceShipAt(row, column, horizontal, ocean));
+        assertFalse(submarine.okToPlaceShipAt(rowBig, columnBig, horizontal, ocean));
     }
 
     /**
@@ -153,15 +156,16 @@ public class ShipTest {
     public void testIsSunk() {
         final int row = 2;
         final int column = 1;
-        final int shootRow = 3;
-        final int shootColumn = 4;
+        final int shootRow1 = 2;
+        final int shootRow2 = 3;
+        final int shootRow3 = 4;
         final String isSunk = "x";
         final boolean horizontal = false;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
-        submarine.shootAt(row, column);
-        submarine.shootAt(shootRow, column);
-        submarine.shootAt(shootColumn, column);
+        submarine.shootAt(shootRow1, column);
+        submarine.shootAt(shootRow2, column);
+        submarine.shootAt(shootRow3, column);
         assertTrue(submarine.isSunk());
         assertEquals(isSunk, submarine.toString());
     }
@@ -196,7 +200,22 @@ public class ShipTest {
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertFalse(submarine.shootAt(rowEmpty, columnEmpty));
+    }
 
+    /**
+     * Verify shoots in valid position of a ship.
+     */
+    @Test
+    public void testShootAtValidPosition() {
+        final int row = 2;
+        final int column = 1;
+        final int shootColumn1 = 2;
+        final int shootColumn2 = 3;
+        final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        submarine.shootAt(row, shootColumn1);
+        assertTrue(submarine.shootAt(row, shootColumn2));
     }
 
     /**

@@ -151,7 +151,7 @@ public class OceanTest {
         ocean.shootAt(shootRow, shootColumn1);
         ocean.shootAt(shootRow, shootColumn2);
         ocean.shootAt(shootRow, shootColumn3);
-        assertEquals(totalHitCount, ocean.getShotsFired());
+        assertEquals(totalHitCount, ocean.getHitCount());
     }
 
 
