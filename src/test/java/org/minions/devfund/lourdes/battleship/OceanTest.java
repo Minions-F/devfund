@@ -134,6 +134,28 @@ public class OceanTest {
     }
 
     /**
+     * Verify shoot at position and sunk a ship.
+     */
+    @Test
+    public void testHitCount() {
+        final int row = 10;
+        final int column = 5;
+        final int shootRow = 10;
+        final int shootColumn1 = 5;
+        final int shootColumn2 = 6;
+        final int shootColumn3 = 7;
+        final boolean horizontal = true;
+        final int totalHitCount = 3;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        ocean.shootAt(shootRow, shootColumn1);
+        ocean.shootAt(shootRow, shootColumn2);
+        ocean.shootAt(shootRow, shootColumn3);
+        assertEquals(totalHitCount, ocean.getShotsFired());
+    }
+
+
+    /**
      * Verify if a game is over.
      */
     @Test
@@ -148,6 +170,19 @@ public class OceanTest {
         assertTrue(ocean.isGameOver());
     }
 
+    /**
+     * Verify if a game is not over.
+     */
+    @Test
+    public void testIsGameNotOver() {
+        ocean.placeAllShipsRandomly();
+        Ship[][] shipMatrix = ocean.getShipArray();
+        for (int i = 0; i < shipMatrix.length; i++) {
+            ocean.shootAt(i, i);
+        }
+        assertFalse(ocean.isGameOver());
+    }
+
 
     /**
      * Verify print method.
@@ -159,8 +194,8 @@ public class OceanTest {
         expectedPrint.append("0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("1 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("2 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
-        expectedPrint.append("3 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
-        expectedPrint.append("4 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
+        expectedPrint.append("3 .  .  .  .  S  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
+        expectedPrint.append("4 .  .  .  .  -  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("5 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("7 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
@@ -176,6 +211,15 @@ public class OceanTest {
         expectedPrint.append("17 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("18 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . \n");
         expectedPrint.append("19 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ");
+        final int row = 3;
+        final int column = 4;
+        final int shootRow = 4;
+        final int shootColumn = 4;
+        final boolean horizontal = true;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        ocean.shootAt(row, column);
+        ocean.shootAt(shootRow, shootColumn);
         assertEquals(expectedPrint.toString(), ocean.print());
     }
 }
