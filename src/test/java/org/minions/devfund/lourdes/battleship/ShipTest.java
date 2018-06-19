@@ -188,6 +188,21 @@ public class ShipTest {
     }
 
     /**
+     * Verify a shoot at in an empty position.
+     */
+    @Test
+    public void testShootAtEmptySeaVerticalShip() {
+        final int row = 2;
+        final int column = 1;
+        final int rowEmpty = 10;
+        final int columnEmpty = 5;
+        final boolean horizontal = false;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertFalse(submarine.shootAt(rowEmpty, columnEmpty));
+    }
+
+    /**
      * Verify shoots in valid horizontal position of a ship.
      */
     @Test
