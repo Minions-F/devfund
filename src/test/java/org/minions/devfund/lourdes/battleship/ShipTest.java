@@ -173,18 +173,21 @@ public class ShipTest {
     }
 
     /**
-     * Verify a shoot at empty position.
+     * Verify a shoot at empty position positions.
      */
     @Test
-    public void testShootAtEmptySea() {
+    public void testShootAtEmptySeaPositions() {
         final int row = 2;
         final int column = 1;
-        final int rowEmpty = 10;
-        final int columnEmpty = 5;
+        final int rowEmpty1 = 10;
+        final int columnEmpty1 = 5;
+        final int rowEmpty2 = 0;
+        final int columnEmpty2 = 0;
         final boolean horizontal = true;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
-        assertFalse(submarine.shootAt(rowEmpty, columnEmpty));
+        assertFalse(submarine.shootAt(rowEmpty1, columnEmpty1));
+        assertFalse(submarine.shootAt(rowEmpty2, columnEmpty2));
     }
 
     /**
