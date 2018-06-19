@@ -95,14 +95,12 @@ public class Ocean {
      */
     boolean shootAt(int row, int column) {
         shotsFired++;
-        if (isOccupied(row, column) && !ships[row][column].isSunk()) {
+        if (isOccupied(row, column) && ships[row][column].shootAt(row, column)) {
             hitCount++;
-            if (ships[row][column].shootAt(row, column)) {
-                if (ships[row][column].isSunk()) {
-                    shipsSunk++;
-                }
-                return true;
+            if (ships[row][column].isSunk()) {
+                shipsSunk++;
             }
+            return true;
         }
         ships[row][column].shootAt(row, column);
         return false;
@@ -159,15 +157,6 @@ public class Ocean {
     }
 
     /**
-     * method that set shots fired.
-     *
-     * @param shotsFired shot fired.
-     */
-    public void setShotsFired(int shotsFired) {
-        this.shotsFired = shotsFired;
-    }
-
-    /**
      * Method that return the hit counts.
      *
      * @return the total hit count.
@@ -177,30 +166,12 @@ public class Ocean {
     }
 
     /**
-     * Method that set hit count.
-     *
-     * @param hitCount hit count.
-     */
-    public void setHitCount(int hitCount) {
-        this.hitCount = hitCount;
-    }
-
-    /**
      * Method that return ships sunk.
      *
      * @return the total of ships sunk.
      */
     public int getShipsSunk() {
         return shipsSunk;
-    }
-
-    /**
-     * Method that set the ships sunk.
-     *
-     * @param shipsSunk ships sunk.
-     */
-    public void setShipsSunk(int shipsSunk) {
-        this.shipsSunk = shipsSunk;
     }
 
     /**
