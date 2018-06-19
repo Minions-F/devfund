@@ -133,6 +133,8 @@ public class Ocean {
 
     /**
      * Prints the ocean.
+     *
+     * @return String with the ocean matrix.
      */
     String print() {
         StringBuilder sb = new StringBuilder();
