@@ -103,7 +103,6 @@ public class WhackAMole {
             score++;
         }
         attemptsLeft--;
-        System.out.println(getUserGrid());
     }
 
     /**
