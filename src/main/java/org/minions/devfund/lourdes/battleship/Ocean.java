@@ -48,10 +48,7 @@ public class Ocean {
      */
     void placeAllShipsRandomly() {
         ShipFactory shipFactory = new ShipFactory();
-        SHIP_TYPE.forEach((key, value) -> {
-            positionShip(key, value, shipFactory);
-
-        });
+        SHIP_TYPE.forEach((key, value) -> positionShip(key, value, shipFactory));
     }
 
     /**
@@ -106,6 +103,7 @@ public class Ocean {
                 }
                 return true;
             }
+            return false;
         }
         ships[row][column].shootAt(row, column);
         return false;
@@ -161,6 +159,14 @@ public class Ocean {
         return shotsFired;
     }
 
+    /**
+     * method that set shots fired.
+     *
+     * @param shotsFired shot fired.
+     */
+    public void setShotsFired(int shotsFired) {
+        this.shotsFired = shotsFired;
+    }
 
     /**
      * Method that return the hit counts.
@@ -172,12 +178,30 @@ public class Ocean {
     }
 
     /**
+     * Method that set hit count.
+     *
+     * @param hitCount hit count.
+     */
+    public void setHitCount(int hitCount) {
+        this.hitCount = hitCount;
+    }
+
+    /**
      * Method that return ships sunk.
      *
      * @return the total of ships sunk.
      */
     public int getShipsSunk() {
         return shipsSunk;
+    }
+
+    /**
+     * Method that set the ships sunk.
+     *
+     * @param shipsSunk ships sunk.
+     */
+    public void setShipsSunk(int shipsSunk) {
+        this.shipsSunk = shipsSunk;
     }
 
     /**

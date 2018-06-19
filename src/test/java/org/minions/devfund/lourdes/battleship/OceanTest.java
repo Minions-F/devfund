@@ -73,7 +73,7 @@ public class OceanTest {
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         assertTrue(ocean.shootAt(shootRow, shootColumn));
-        assertTrue(ocean.shootAt(shootRow, shootColumn));
+        assertTrue(ocean.shootAt(row, column));
     }
 
     /**
@@ -88,7 +88,7 @@ public class OceanTest {
         final boolean horizontal = false;
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
-        assertTrue(ocean.shootAt(shootRow, shootColumn));
+        assertTrue(ocean.shootAt(row, column));
         assertTrue(ocean.shootAt(shootRow, shootColumn));
     }
 
