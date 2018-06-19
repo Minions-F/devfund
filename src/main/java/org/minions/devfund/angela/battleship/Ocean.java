@@ -134,7 +134,7 @@ public class Ocean {
     /**
      * Prints the ocean.
      */
-    void print() {
+    String print() {
         StringBuilder sb = new StringBuilder();
         sb.append(" ");
         for (int i = 0; i < OCEAN_SIZE; i++) {
@@ -158,7 +158,7 @@ public class Ocean {
             }
             sb.append("\n");
         }
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     /**
