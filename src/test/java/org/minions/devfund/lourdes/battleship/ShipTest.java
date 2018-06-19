@@ -188,10 +188,10 @@ public class ShipTest {
     }
 
     /**
-     * Verify shoots in valid position of a ship.
+     * Verify shoots in valid horizontal position of a ship.
      */
     @Test
-    public void testShootAtValidPosition() {
+    public void testHorizontalShootAtValidPosition() {
         final int row = 2;
         final int column = 1;
         final int shootColumn1 = 2;
@@ -200,7 +200,26 @@ public class ShipTest {
         Ship submarine = new Submarine();
         submarine.placeShipAt(row, column, horizontal, ocean);
         submarine.shootAt(row, shootColumn1);
+        assertTrue(submarine.shootAt(row, shootColumn1));
         assertTrue(submarine.shootAt(row, shootColumn2));
+    }
+
+    /**
+     * Verify shoots in valid Vertical position of a ship.
+     */
+    @Test
+    public void testVerticalShootAtValidPosition() {
+        final int row = 2;
+        final int column = 1;
+        final int shootRow1 = 2;
+        final int shootRow2 = 3;
+        final int shootRow3 = 4;
+        final boolean horizontal = false;
+        Ship submarine = new Submarine();
+        submarine.placeShipAt(row, column, horizontal, ocean);
+        assertTrue(submarine.shootAt(shootRow1, column));
+        assertTrue(submarine.shootAt(shootRow2, column));
+        assertTrue(submarine.shootAt(shootRow3, column));
     }
 
     /**
