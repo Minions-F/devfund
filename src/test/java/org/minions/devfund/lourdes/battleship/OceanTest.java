@@ -121,6 +121,8 @@ public class OceanTest {
         ocean.shootAt(shootRow, shootColumn1);
         ocean.shootAt(shootRow, shootColumn2);
         ocean.shootAt(shootRow, shootColumn3);
+        assertFalse(ocean.shootAt(shootRow, shootColumn1));
+        assertFalse(ocean.shootAt(shootRow, shootColumn2));
         assertFalse(ocean.shootAt(shootRow, shootColumn3));
     }
 

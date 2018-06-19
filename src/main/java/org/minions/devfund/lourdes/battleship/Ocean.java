@@ -103,7 +103,6 @@ public class Ocean {
                 }
                 return true;
             }
-            return false;
         }
         ships[row][column].shootAt(row, column);
         return false;
