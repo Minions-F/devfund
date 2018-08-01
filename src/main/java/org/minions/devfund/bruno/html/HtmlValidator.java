@@ -3,8 +3,26 @@ package org.minions.devfund.bruno.html;
 import java.util.Queue;
 import java.util.Stack;
 
-public class HtmlValidator {
-    public static Stack<HtmlTag> isValidHtml(Queue<HtmlTag> tags) {
+/**
+ * Represents the validate the information about a single HTML tags.
+ */
+public final class HtmlValidator {
+
+    /**
+     * Constructor private.
+     */
+    private HtmlValidator() {
+        // Default Constructor.
+    }
+
+    /**
+     * Takes as input a Queue of HtmlTags and return a Stack of HtmlTags that verifies the correctness
+     * of the tag structure.
+     *
+     * @param tags queue tags.
+     * @return a Stack.
+     */
+    public static Stack<HtmlTag> isValidHtml(final Queue<HtmlTag> tags) {
         Stack<HtmlTag> stack = new Stack<>();
         for (HtmlTag tag : tags) {
             if (tag.isOpenTag()) {

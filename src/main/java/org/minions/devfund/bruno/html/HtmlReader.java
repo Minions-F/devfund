@@ -1,29 +1,44 @@
 package org.minions.devfund.bruno.html;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Queue;
 
-/*
- * SD2x Homework #2
+/**
  * This class contains a method that will read an HTML file and convert it to a Queue of HtmlTags.
- * It is simply provided as a convenience class for you to use during your testing.
- * You do not need to submit this code.
  */
+public final class HtmlReader {
 
-public class HtmlReader {
+    /**
+     * Constructor private.
+     */
+    private HtmlReader() {
+        // Default Constructor.
+    }
 
-    public static Queue<HtmlTag> getTagsFromHtmlFile(String filename) throws IOException {
-        InputStream stream = new FileInputStream(filename);
+    /**
+     * Reads in the path to an HTML file and separates it into tokens.
+     *
+     * @param filename path with the file.
+     * @return a queue.
+     */
+    public static Queue<HtmlTag> getTagsFromHtmlFile(final String filename) {
         StringBuilder buffer = new StringBuilder();
-        int ch;
-        while ((ch = stream.read()) > 0) {
-            buffer.append((char) ch);
+        try (InputStream stream = new FileInputStream(filename)) {
+            int ch;
+            while ((ch = stream.read()) > 0) {
+                buffer.append((char) ch);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        stream.close();
         String htmlFileString = buffer.toString();
         return HtmlTag.tokenize(htmlFileString);
     }
-
 }

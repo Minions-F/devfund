@@ -19,7 +19,7 @@ dependencies {
 
 // Checkstyle configuration
 checkstyle {
-    toolVersion = '8.9'
+    toolVersion = '8.11'
 }
 
 // FindBugs configuration
@@ -35,7 +35,7 @@ tasks.withType(FindBugs) {
 
 // PMD configuration
 pmd {
-    ruleSets = ["java-basic", "java-braces", "java-unnecessary", "java-unusedcode", "java-strictexception"]
+    ruleSets = ["java-basic", "java-braces", "java-unnecessary", "java-unusedcode"]
     toolVersion = '6.0.0'
 }
 tasks.withType(Pmd) {

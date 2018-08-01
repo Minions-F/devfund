@@ -11,6 +11,9 @@ import java.util.Set;
  */
 public class HtmlTag {
 
+    private static final Set<String> SELF_CLOSING_TAGS = new HashSet<>(Arrays.asList("!doctype", "!--", "?xml",
+            "xml", "area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param"));
+    protected static final String WHITESPACE = " \f\n\r\t";
     protected final String element;
     protected final boolean openTag;
 
@@ -18,20 +21,11 @@ public class HtmlTag {
      * Initializes an instance of {@link HtmlTag}.
      *
      * @param element   element name.
-     * @param isOpenTag
+     * @param isOpenTag boolean value.
      */
     public HtmlTag(final String element, final boolean isOpenTag) {
         this.element = element.toLowerCase();
         openTag = isOpenTag;
-    }
-
-    /**
-     * Gets the element name (String) specified in this tag.
-     *
-     * @return the element name.
-     */
-    public String getElement() {
-        return element;
     }
 
     /**
@@ -46,8 +40,8 @@ public class HtmlTag {
     /**
      * Checks whether an HtmlTag other is the matching open/close tag to itself.
      *
-     * @param other Html tag
-     * @return
+     * @param other Htmltag object.
+     * @return boolean.
      */
     public boolean matches(final HtmlTag other) {
         return other != null
@@ -64,7 +58,14 @@ public class HtmlTag {
         return SELF_CLOSING_TAGS.contains(element);
     }
 
-    public boolean equals(Object obj) {
+    /**
+     * Checks if the Html tag object are equals.
+     *
+     * @param obj Html tag Object.
+     * @return a boolean value.
+     */
+    @Override
+    public boolean equals(final Object obj) {
         if (obj instanceof HtmlTag) {
             HtmlTag other = (HtmlTag) obj;
             return element.equals(other.element)
@@ -73,28 +74,35 @@ public class HtmlTag {
         return false;
     }
 
+    /**
+     * Overrides hash code.
+     *
+     * @return element.
+     */
+    @Override
+    public int hashCode() {
+        return element.hashCode();
+    }
+
+    /**
+     * Builds tag according the element.
+     *
+     * @return a string.
+     */
     public String toString() {
         return "<".concat(openTag ? "" : "/")
                 .concat(element.equals("!--") ? "!-- --" : element).concat(">");
     }
 
     /**
-     * The remaining fields and functions are related to HTML file parsing.
+     * Checks the text parameter is a tag and put in queue.
+     *
+     * @param text text from html file.
+     * @return a queue.
      */
-
-    // a set of tags that don't need to be matched (self-closing)
-    protected static final Set<String> SELF_CLOSING_TAGS = new HashSet<String>(
-            Arrays.asList("!doctype", "!--", "?xml", "xml", "area", "base",
-                    "basefont", "br", "col", "frame", "hr", "img",
-                    "input", "link", "meta", "param"));
-
-
-    protected static final String WHITESPACE = " \f\n\r\t";
-
-    public static Queue<HtmlTag> tokenize(String text) {
+    public static Queue<HtmlTag> tokenize(final String text) {
         StringBuffer buf = new StringBuffer(text);
-        Queue<HtmlTag> queue = new LinkedList<HtmlTag>();
-
+        Queue<HtmlTag> queue = new LinkedList<>();
         HtmlTag nextTag = nextTag(buf);
         while (nextTag != null) {
             queue.add(nextTag);
@@ -103,14 +111,19 @@ public class HtmlTag {
         return queue;
     }
 
-    protected static HtmlTag nextTag(StringBuffer buf) {
+    /**
+     * Checks the buf parameter.
+     *
+     * @param buf text from html file.
+     * @return a html tag.
+     */
+    protected static HtmlTag nextTag(final StringBuffer buf) {
         int openBracket = buf.indexOf("<");
         int closeBracket = buf.indexOf(">");
         if (openBracket >= 0 && closeBracket > openBracket) {
             // check for HTML comments: <!-- -->
             int commentIndex = openBracket + 4;
-            if (commentIndex <= buf.length()
-                    && buf.substring(openBracket + 1, commentIndex).equals("!--")) {
+            if (commentIndex <= buf.length() && buf.substring(openBracket + 1, commentIndex).equals("!--")) {
                 // look for closing comment tag -->
                 closeBracket = buf.indexOf("-->", commentIndex);
                 if (closeBracket < 0) {
@@ -120,8 +133,8 @@ public class HtmlTag {
                     closeBracket += 3;    // advance to the closing bracket >
                 }
             }
-
             String element = buf.substring(openBracket + 1, closeBracket).trim();
+
             // remove attributes
             for (int i = 0; i < WHITESPACE.length(); i++) {
                 int attributeIndex = element.indexOf(WHITESPACE.charAt(i));
