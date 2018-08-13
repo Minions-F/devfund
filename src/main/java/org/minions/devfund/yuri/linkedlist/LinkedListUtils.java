@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * SD2x Homework #1
  * Implement the methods below according to the specification in the assignment description.
- * Please be sure not to change the signature of any of the methods!
+ * Please be sure not to change the signature of any of the methods!.
  */
 public final class LinkedListUtils {
     /**

@@ -1,9 +1,9 @@
 package org.minions.devfund.yuri.linkedlist;
 
-import java.util.LinkedList;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.LinkedList;
 
 /**
  * // Source code recreated from a .class file by IntelliJ IDEA.
@@ -22,6 +22,14 @@ public class InsertSortedTest {
     private static final int LISTNEWVALUE3 = 1;
 
     private static final int LISTPOSITION3 = 3;
+    public static final String VALUE_ALREADY_IN_LIST = "to value already in list";
+    public static final String INSERT_SORTED_THROWS = "insertSorted throws ";
+    public static final String INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF = "insertSorted does not correctly "
+            + "insert element when placing value at front of ";
+    public static final String INSERT_ELEMENT_WHEN_PLACING_VALUE_AT_END_OF_LIST = "insertSorted does not correctly "
+            + "insert element when placing value at end of list";
+    public static final String INSERT_SORTED_DOES_NOT_CORRECTLY_IN_MIDDLE_OF = "insertSorted does not correctly "
+            + "insert element when placing value in middle of ";
 
     /**
      * test.
@@ -36,18 +44,18 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted(var1, LISTNEWVALUE1);
         } catch (Exception var3) {
-            Assert.fail("insertSorted throws " + var3 + " when placing value in middle of list");
+            Assert.fail(INSERT_SORTED_THROWS + var3 + " when placing value in middle of list");
         }
 
         Assert.assertTrue("insertSorted creates LinkedList of incorrect size when placing value in middle "
                 + "of list", var1.size() == LISTSIZE1);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value in middle of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_MIDDLE_OF
                 + "list", (Integer) var1.get(0) == LISTFIRSTVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value in middle of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_MIDDLE_OF
                 + "list", (Integer) var1.get(1) == LISTSECONDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value in middle of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_MIDDLE_OF
                 + "list", (Integer) var1.get(2) == LISTNEWVALUE1);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value in middle of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_MIDDLE_OF
                 + "list", (Integer) var1.get(LISTPOSITION3) == LISTTHIRDVALUE);
     }
 
@@ -64,18 +72,18 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted(var1, LISTNEWVALUE2);
         } catch (Exception var3) {
-            Assert.fail("insertSorted throws " + var3 + " when placing value at end of list");
+            Assert.fail(INSERT_SORTED_THROWS + var3 + " when placing value at end of list");
         }
 
         Assert.assertTrue("insertSorted creates LinkedList of incorrect size when placing value at end of "
                 + "list", var1.size() == LISTSIZE1);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at end of list",
+        Assert.assertTrue(INSERT_ELEMENT_WHEN_PLACING_VALUE_AT_END_OF_LIST,
                 (Integer) var1.get(0) == LISTFIRSTVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at end of list",
+        Assert.assertTrue(INSERT_ELEMENT_WHEN_PLACING_VALUE_AT_END_OF_LIST,
                 (Integer) var1.get(1) == LISTSECONDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at end of list",
+        Assert.assertTrue(INSERT_ELEMENT_WHEN_PLACING_VALUE_AT_END_OF_LIST,
                 (Integer) var1.get(2) == LISTTHIRDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at end of list",
+        Assert.assertTrue(INSERT_ELEMENT_WHEN_PLACING_VALUE_AT_END_OF_LIST,
                 (Integer) var1.get(LISTFIRSTVALUE) == LISTNEWVALUE2);
     }
 
@@ -92,18 +100,18 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted(var1, LISTNEWVALUE3);
         } catch (Exception var3) {
-            Assert.fail("insertSorted throws " + var3 + " when placing value at front of list");
+            Assert.fail(INSERT_SORTED_THROWS + var3 + " when placing value at front of list");
         }
 
         Assert.assertTrue("insertSorted creates LinkedList of incorrect size when placing value at front of "
                 + "list", var1.size() == LISTSIZE1);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at front of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
                 + "list", (Integer) var1.get(0) == LISTNEWVALUE3);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at front of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
                 + "list", (Integer) var1.get(1) == LISTFIRSTVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at front of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
                 + "list", (Integer) var1.get(2) == LISTSECONDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value at front of "
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
                 + "list", (Integer) var1.get(LISTSIZE2) == LISTTHIRDVALUE);
     }
 
@@ -120,19 +128,19 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted(var1, LISTSECONDVALUE);
         } catch (Exception var3) {
-            Assert.fail("insertSorted throws " + var3 + " when placing value that is equal to value already in list");
+            Assert.fail(INSERT_SORTED_THROWS + var3 + " when placing value that is equal to value already in list");
         }
 
         Assert.assertTrue("insertSorted creates LinkedList of incorrect size when placing value that is "
                 + "equal to value already in list", var1.size() == LISTSIZE1);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value that is equal "
-                + "to value already in list", (Integer) var1.get(0) == LISTFIRSTVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value that is equal "
-                + "to value already in list", (Integer) var1.get(1) == LISTSECONDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value that is equal "
-                + "to value already in list", (Integer) var1.get(2) == LISTSECONDVALUE);
-        Assert.assertTrue("insertSorted does not correctly insert element when placing value that is equal "
-                + "to value already in list", (Integer) var1.get(LISTSIZE2) == LISTTHIRDVALUE);
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
+                + VALUE_ALREADY_IN_LIST, (Integer) var1.get(0) == LISTFIRSTVALUE);
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
+                + VALUE_ALREADY_IN_LIST, (Integer) var1.get(1) == LISTSECONDVALUE);
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
+                + VALUE_ALREADY_IN_LIST, (Integer) var1.get(2) == LISTSECONDVALUE);
+        Assert.assertTrue(INSERT_SORTED_DOES_NOT_CORRECTLY_IN_FRONT_OF
+                + VALUE_ALREADY_IN_LIST, (Integer) var1.get(LISTSIZE2) == LISTTHIRDVALUE);
     }
 
     /**
@@ -143,7 +151,7 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted((LinkedList) null, 0);
         } catch (Exception var2) {
-            Assert.fail("insertSorted throws " + var2 + " when input LinkedList is null");
+            Assert.fail(INSERT_SORTED_THROWS + var2 + " when input LinkedList is null");
         }
 
     }
@@ -158,7 +166,7 @@ public class InsertSortedTest {
         try {
             LinkedListUtils.insertSorted(var1, LISTNEWVALUE1);
         } catch (Exception var3) {
-            Assert.fail("insertSorted throws " + var3 + " when inserting into empty list");
+            Assert.fail(INSERT_SORTED_THROWS + var3 + " when inserting into empty list");
         }
 
         Assert.assertTrue("insertSorted creates LinkedList of incorrect size when inserting into empty list",

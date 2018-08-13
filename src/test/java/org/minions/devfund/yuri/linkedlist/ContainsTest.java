@@ -4,9 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
+
 /**
- Source code recreated from a .class file by IntelliJ IDEA.
- (powered by Fernflower decompiler)
+ * Source code recreated from a .class file by IntelliJ IDEA.
+ * (powered by Fernflower decompiler)
  */
 public class ContainsTest {
     private static final int LIST1FIRSTVALUE = 4;
@@ -21,6 +22,7 @@ public class ContainsTest {
     private static final String MSG1 = "containsSubsequence returns true when first LinkedList contains all elements";
     private static final String MSG2 = "when first LinkedList contains second";
     private static final String MSG3 = "containsSubsequence throws";
+    public static final String CONTAINS_SUBSEQUENCE = "containsSubsequence returns false ";
 
     /**
      * test.
@@ -40,7 +42,7 @@ public class ContainsTest {
 
         try {
             boolean var3 = LinkedListUtils.containsSubsequence(var1, var2);
-            Assert.assertTrue("containsSubsequence returns false " + MSG2 + " in "
+            Assert.assertTrue(CONTAINS_SUBSEQUENCE + MSG2 + " in "
                     + "middle of list", var3);
         } catch (Exception var4) {
             Assert.fail(MSG3 + var4 + MSG2 + " in middle of list");
