@@ -45,6 +45,4 @@ public class Sentence implements Comparable<Sentence> {
 	public int compareTo(Sentence o) {
 		return this.score - o.score;
 	}
-	
-	
 }

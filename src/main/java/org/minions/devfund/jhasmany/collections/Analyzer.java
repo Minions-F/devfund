@@ -2,21 +2,29 @@ package org.minions.devfund.jhasmany.collections;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-/*
+/**
  * SD2x Homework #3
  * Implement the methods below according to the specification in the assignment description.
  * Please be sure not to change the method signatures!
  */
-public class Analyzer {
-	
-	/*
-	 * Implement this method in Part 1
-	 */
-	public static List<Sentence> readFile(String filename) {
-		List<Sentence> sentences = new ArrayList<>();
+class Analyzer {
+    /**
+     * Implement this method in Part 1.
+     *
+     * @param filename is ta file name.
+     * @return a list.
+     */
+    public static List<Sentence> readFile(final String filename) {
+	    List<Sentence> sentences = new ArrayList<>();
 		List<String> lines = new ArrayList<>();
 
 		try {
@@ -35,7 +43,7 @@ public class Analyzer {
 				if (score <= 2 && score >= -2 && !text.isEmpty()) { // well formatted
 					sentences.add(new Sentence(score, text));
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				continue;
 			}
 
@@ -44,7 +52,7 @@ public class Analyzer {
 		return sentences;
 	}
 	
-	/*
+	/**
 	 * Implement this method in Part 2
 	 */
 	public static Set<Word> allWords(List<Sentence> sentences) {
@@ -73,7 +81,7 @@ public class Analyzer {
 		return new HashSet<Word>(wordList);
 	}
 	
-	/*
+	/**
 	 * Implement this method in Part 3
 	 */
 	public static Map<String, Double> calculateScores(Set<Word> words) {
@@ -90,7 +98,7 @@ public class Analyzer {
 		return map;
 	}
 	
-	/*
+	/**
 	 * Implement this method in Part 4
 	 */
 	public static double calculateSentenceScore(Map<String, Double> wordScores, String sentence) {
@@ -113,8 +121,8 @@ public class Analyzer {
 		return count == 0 ? 0 : score / count;
 	}
 	
-	/*
-	 * This method is here to help you run your program. Y
+	/**
+	 * This method is here to help you run your program.
 	 * You may modify it as needed.
 	 */
 	public static void main(String[] args) {
