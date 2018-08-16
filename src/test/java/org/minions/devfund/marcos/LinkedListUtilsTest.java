@@ -2,6 +2,9 @@ package org.minions.devfund.marcos;
 
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,6 +31,23 @@ public class LinkedListUtilsTest {
     private static final int THREE_NUM = 3;
     private static final int FOUR_NUM = 4;
     private static final int TEN_NUM = 10;
+
+    /**
+     * This test assert the modifier of the Linked List Utils private constructor class.
+     *
+     * @throws NoSuchMethodException     throw when no private constructor is defined.
+     * @throws IllegalAccessException    throw when can not access to the constructor.
+     * @throws InvocationTargetException throw when can not be perform a invocation.
+     * @throws InstantiationException    throw when a instantiation can not be performed.
+     */
+    @Test
+    public void privateConstructorTest() throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException {
+        Constructor<LinkedListUtils> constructor = LinkedListUtils.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
     /**
      * Checks expected result for Add Inner Sorted At The End Of Sequence test.
@@ -129,8 +149,8 @@ public class LinkedListUtilsTest {
      */
     @Test
     public void testContainsSubsequence() {
-        final Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
-        final Integer[] secondArray = new Integer[]{TWO_NUM, THREE_NUM};
+        Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
+        Integer[] secondArray = new Integer[]{TWO_NUM, THREE_NUM};
         LinkedList<Integer> mainSeq = Stream.of(mainArray).collect(Collectors.toCollection(LinkedList::new));
         LinkedList<Integer> secondSeq = Stream.of(secondArray).collect(Collectors.toCollection(LinkedList::new));
         assertTrue(LinkedListUtils.containsSubsequence(mainSeq, secondSeq));
@@ -141,7 +161,7 @@ public class LinkedListUtilsTest {
      */
     @Test
     public void testContainsSubsequenceNullSecondSequence() {
-        final Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
+        Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
         LinkedList<Integer> mainSeq = Stream.of(mainArray).collect(Collectors.toCollection(LinkedList::new));
         LinkedList<Integer> secondSeq = null;
         assertFalse(LinkedListUtils.containsSubsequence(mainSeq, secondSeq));
@@ -152,7 +172,7 @@ public class LinkedListUtilsTest {
      */
     @Test
     public void testContainsSubsequenceNullMainSequence() {
-        final Integer[] expectedSequence = new Integer[]{TWO_NUM, THREE_NUM};
+        Integer[] expectedSequence = new Integer[]{TWO_NUM, THREE_NUM};
         LinkedList<Integer> mainSeq = null;
         LinkedList<Integer> secondSeq = Stream.of(expectedSequence).collect(Collectors.toCollection(LinkedList::new));
         assertFalse(LinkedListUtils.containsSubsequence(mainSeq, secondSeq));
@@ -173,7 +193,7 @@ public class LinkedListUtilsTest {
      */
     @Test
     public void testContainsSubsequenceEmptySecondSequence() {
-        final Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
+        Integer[] mainArray = new Integer[]{ONE_NUM, TWO_NUM, THREE_NUM, FOUR_NUM};
         LinkedList<Integer> mainSeq = Stream.of(mainArray).collect(Collectors.toCollection(LinkedList::new));
         LinkedList<Integer> secondSeq = new LinkedList<>();
         assertFalse(LinkedListUtils.containsSubsequence(mainSeq, secondSeq));
@@ -184,7 +204,7 @@ public class LinkedListUtilsTest {
      */
     @Test
     public void testContainsSubsequenceEmptyMainSequence() {
-        final Integer[] secondArray = new Integer[]{TWO_NUM, THREE_NUM};
+        Integer[] secondArray = new Integer[]{TWO_NUM, THREE_NUM};
         LinkedList<Integer> mainSeq = new LinkedList<>();
         LinkedList<Integer> secondSeq = Stream.of(secondArray).collect(Collectors.toCollection(LinkedList::new));
         assertFalse(LinkedListUtils.containsSubsequence(mainSeq, secondSeq));
