@@ -3,7 +3,7 @@ package org.minions.devfund.marcos.uml;
 /**
  * It is in charged to represent a Door object.
  */
-public class Door extends MapSite {
+public class Door implements MapSite {
 
     private boolean isOpen;
     private Room room1;
@@ -17,8 +17,9 @@ public class Door extends MapSite {
     }
 
     /**
-     * Enters to room.
+     * {@inheritDoc}
      */
+    @Override
     public void enter() {
         // Default implementation.
     }

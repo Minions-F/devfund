@@ -3,7 +3,7 @@ package org.minions.devfund.marcos.uml;
 /**
  * It is in charged to represent a Room object.
  */
-public class Room extends MapSite {
+public class Room implements MapSite {
 
     private int roomNumber;
     private MapSite[] mapsites;
@@ -14,6 +14,14 @@ public class Room extends MapSite {
      */
     public Room() {
         // Default constructor.
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void enter() {
+        // Default implementation.
     }
 
     /**

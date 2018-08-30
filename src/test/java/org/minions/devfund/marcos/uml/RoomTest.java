@@ -39,7 +39,7 @@ public class RoomTest {
     @Test
     public void testSetRoomNumber() {
         room.setRoomNumber(FIRST_SIDE_INDEX);
-        assertEquals(room.getRoomNumber(), FIRST_SIDE_INDEX);
+        assertEquals(FIRST_SIDE_INDEX, room.getRoomNumber());
     }
 
     /**
